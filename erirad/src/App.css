@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  
 }
 
 .App-logo {
@@ -27,6 +27,27 @@
 .App-link {
   color: #61dafb;
 }
+
+
+.column-layout{
+  max-width: 1300 px;
+  background-color: #FFF;
+  margin: 40px auto 0 auto;
+  line-height: 1.65;
+  padding: 20px 50px;
+  display: flex;
+}
+
+.main-column{
+  flex: 4;
+
+}
+
+.sidebar-two{
+  flex: 1;
+}
+
+
 
 @keyframes App-logo-spin {
   from {

@@ -1,10 +1,19 @@
 import React from 'react';
 import './App.css';
+import Header from './components/Header'
+import ReportSubmit from './components/ReportSubmit';
+import SideView from './components/SideView';
+import MainView from './components/MainView';
+import Footer from './components/Footer';
+
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to ERIRAD</h1>
+      <Header/>
+      <MainView/>
+      <Footer/>
     </div>
   );
 }
