@@ -1,5 +1,5 @@
 <?php 
 
-echo "PHP is working"
+echo "ERIRAD"
 
 ?>
