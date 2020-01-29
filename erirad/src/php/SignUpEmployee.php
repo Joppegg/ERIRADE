@@ -9,18 +9,16 @@ $firstName = mysqli_escape_string($connection, $_POST['firstName']);
 $lastName = mysqli_escape_string($connection, $_POST['lastName']);
 $email = mysqli_escape_string($connection, $_POST['email']);
 $phoneNumber = mysqli_escape_string($connection, $_POST['phoneNumber']);
-$username = mysqli_escape_string($connection, $_POST['username']);
+$username = mysqli_escape_string($connection, $_POST['userName']);
 $password = mysqli_escape_string($connection, $_POST['password']);
 
 
-$sql = "INSERT INTO employee (firstName, lastName, email, phoneNumber) VALUES ('".$firstName."','".$lastName."','".$email."','".$phoneNumber."')";
-mysqli_query($connection, $sql);
 
 if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     echo 'wrong format for email';
 }else{
-    $sql = "SELECT username FROM employee";
-    $result = mysqli_query($connection, $sql);
+    $sqlSignUp1 = "SELECT * FROM employee WHERE username = ´.$username.´";
+    $result = mysqli_query($connection, $sqlSignUp1);
     $resultCheck = mysqli_num_rows($result);
 
     if($resultCheck > 1){
@@ -28,6 +26,7 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     }else{
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $sqlSignUp = "INSERT INTO employee (firstName, lastName, email, phoneNumber, pwd) VALUES ('.$firstName.','.$lastName.','$email.','.$phoneNumber.','.$username.','.$hashedPassword.'";
+        mysqli_query($connection, $sqlSignUp);
         echo 'sign up success';
     }
 }
