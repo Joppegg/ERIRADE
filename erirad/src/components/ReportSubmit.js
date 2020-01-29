@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../css/ReportSubmit.css'
+import axios from 'axios';
 function ReportSubmit(props) {
 
     const [report, setReport] = useState({
@@ -14,9 +15,15 @@ function ReportSubmit(props) {
     }
 
     useEffect(() => {
-        
-
-    )}
+        axios.get('http://localhost/Test/getSeveralTest.php')
+            .then(res => {
+                console.log(res)
+            
+            })
+            .catch(err => {
+                console.log(err)
+            })
+      }, [])
 
 
 
