@@ -1,16 +1,24 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/ReportSubmit.css'
 function ReportSubmit(props) {
 
     const [report, setReport] = useState({
         name: '',
-        text: ''
+        text: '',
+        tags: []
     })
 
     const handleSubmit = () => {
         console.log(report)
         //Axios post här
     }
+
+    useEffect(() => {
+        
+
+    )}
+
+
 
     return (
         <div className="main-column">
@@ -27,17 +35,20 @@ function ReportSubmit(props) {
                 <div className="form-row">
                     <label> Report </label>
                     <textarea
-                        rows="15"
+                        rows="12"
                         placeholder="Write something"
                         value={report.text}
                         onChange={e => setReport({ ...report, text: e.target.value })}
-                    >
+                      >
                     </textarea>
                 </div>
 
+                <div className="form-row">
+                    <label>Tags</label>
+                </div>
 
-                <input type="button" value="submit" onClick={handleSubmit} />
-                <h2>{JSON.stringify(report)}</h2>
+                <input type="button" value="Submit snippet" onClick={handleSubmit} />
+                
             </form>
         </div>
 

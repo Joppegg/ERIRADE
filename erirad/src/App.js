@@ -1,8 +1,6 @@
 import React from 'react';
 import './css/Header.css';
 import Header from './components/Header'
-import ReportSubmit from './components/ReportSubmit';
-import SideView from './components/SideView';
 import MainView from './components/MainView';
 import Footer from './components/Footer';
 

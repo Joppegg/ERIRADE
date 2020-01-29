@@ -67,7 +67,7 @@ function SideView(props) {
 
 
                 <input type="button" value="submit" onClick={handleFormSubmit} />
-                <h2>{JSON.stringify(user)}</h2>
+                
             </form>
         </div>
     );
