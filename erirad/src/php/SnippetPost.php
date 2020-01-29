@@ -1,0 +1,5 @@
+<?php 
+
+require 'DBConnection.php';
+
+?>
