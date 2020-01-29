@@ -10,25 +10,32 @@ function SideView(props) {
         phoneNumber: ''
     })
 
-    const handleSubmit = () => {
-        console.log(user);
 
-        axios.post(`http://localhost/ERIRADAPP/erirad/src/php/SignUpEmployee.php`, { user })
-        .then(res => {
-          console.log(res);
-          console.log(res.data);
+
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        axios({
+          method: 'post',
+          url: `http://localhost/ERIRADAPP/erirad/src/php/SignUpEmployee.php`,
+          headers: { 'content-type': 'application/json' },
+          data: user
         })
-    }
-
+          .then(result => {
+            console.log(result);
+            console.log(result.data)
+          })
+          .catch(error => console.log(error));
+      };
 
     return (
         <div className="sidebar-one">
             <h3>Sidebar one</h3>
-            <form className="report-form" onSubmit={handleSubmit}>
+            <form className="report-form">
 
                 <div className="form-row-sideView">
                     <label>First Name </label>
                     <input type="text"
+                    name="firstName"
                         value={user.firstName}
                         onChange={e => setUser({ ...user, firstName: e.target.value })}
                     />
@@ -59,7 +66,7 @@ function SideView(props) {
                 </div>
 
 
-                <input type="button" value="submit" onClick={handleSubmit} />
+                <input type="button" value="submit" onClick={handleFormSubmit} />
                 <h2>{JSON.stringify(user)}</h2>
             </form>
         </div>
