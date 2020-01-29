@@ -13,7 +13,7 @@ function SideView(props) {
     const handleSubmit = () => {
         console.log(user);
 
-        axios.post(`http://localhost/react-test/addUser.php`, { user })
+        axios.post(`http://localhost/ERIRADAPP/erirad/src/php/SignUpEmployee.php`, { user })
         .then(res => {
           console.log(res);
           console.log(res.data);
