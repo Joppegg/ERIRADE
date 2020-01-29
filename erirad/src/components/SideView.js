@@ -7,7 +7,9 @@ function SideView(props) {
         firstName: '',
         lastName: '',
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        userName: '',
+        password:''
     })
 
 
@@ -58,10 +60,26 @@ function SideView(props) {
                 </div>
 
                 <div className="form-row-sideView">
-                    <label> Phone number </label>
+                    <label> Phone no </label>
                     <input type="text"
                         value={user.phoneNumber}
                         onChange={e => setUser({ ...user, phoneNumber: e.target.value })}
+                    />
+                </div>
+
+                <div className="form-row-sideView">
+                    <label> Username</label>
+                    <input type="text"
+                        value={user.userName}
+                        onChange={e => setUser({ ...user, userName: e.target.value })}
+                    />
+                </div>
+
+                <div className="form-row-sideView">
+                    <label> Password </label>
+                    <input type="text"
+                        value={user.password}
+                        onChange={e => setUser({ ...user, password: e.target.value })}
                     />
                 </div>
 

@@ -9,16 +9,21 @@ function ReportSubmit(props) {
         tags: []
     })
 
+    const [tags, setTags] = useState([])
+
     const handleSubmit = () => {
         console.log(report)
         //Axios post här
     }
 
     useEffect(() => {
-        axios.get('http://localhost/Test/getSeveralTest.php')
+        axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetDataFromDB.php')
             .then(res => {
                 console.log(res)
-            
+                setTags(res.data)
+
+                console.log(tags)
+    
             })
             .catch(err => {
                 console.log(err)
@@ -56,6 +61,12 @@ function ReportSubmit(props) {
 
                 <input type="button" value="Submit snippet" onClick={handleSubmit} />
                 
+                <ul>
+                    {tags.map(tag =>(
+                      <li key={tag.tagId}>{tag.tagName}
+                      </li>
+                    ))}
+                </ul>
             </form>
         </div>
 
