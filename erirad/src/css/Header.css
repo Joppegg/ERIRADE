@@ -26,14 +26,13 @@ h2, h3 {
   text-align: center;
 }
 
-.form-row-sideview{
-  padding: 10px 0;
-  display: flex;
-}
+
 
 .form-row {
-  padding: 10px 0;
+  padding: 5px 0;
   display: flex;
+  flex-direction: column;
+  margin-left: 30px;
 }
 
 .form-row label {
@@ -43,10 +42,13 @@ h2, h3 {
 
 .form-row input {
     flex: 6;
+   
 }
 .form-row textarea{
   flex: 6;
+
 }
+
 
 
 .column-layout{
@@ -65,8 +67,28 @@ h2, h3 {
 }
 
 .sidebar-one{
+  text-align: center;
   flex: 1;
   order: 1;
 
 }
 
+.sidebar-form-row{
+  padding: 5px 0;
+  display: flex;
+}
+
+
+.sidebar-form-row label {
+    padding-right:10px;
+  flex: 1;
+}
+
+.sidebar-form-row input{
+  flex: 2;
+}
+
+
+.form-container{
+  display: flex;
+}
