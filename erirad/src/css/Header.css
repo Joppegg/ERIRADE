@@ -1,16 +1,67 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  font-size: 14px;
+  font-family: Helvetica, sans-serif;
+}
+
 body {
-    background-color: lightblue;
-    text-align: center;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
+  background-color: lightblue;
+  font-family: Helvetica, sans-serif;
+  padding-bottom: 100px;
+}
+
+h2, h3 {
+  margin: 0 0 .75em 0;
+}
+
+.container {
+  max-width: 750px;
+  margin: 20px auto 0 auto;
+  padding: 30px;
+  background-color: #FFF;
+  text-align: center;
+}
+
+.form-row {
+  padding: 10px 0;
+  display: flex;
+}
+
+.form-row label {
+  padding-right: 10px;
+ flex: 1;
+}
+
+.form-row input {
+    flex: 6;
+}
+.form-row textarea{
+  flex: 6;
+}
+
+
+.column-layout{
+  max-width: 1300px;
+  background-color: #FFF;
+  margin: 40px 20px 0 20px;
+  line-height: 1.65;
+  padding: 20px 50px;
+  display: flex;
+}
+
+.main-column{
+  flex: 3;
+  order: 2;
+  text-align: center;
+}
+
+.sidebar-one{
+  flex: 1;
+  order: 1;
+
+}
+
