@@ -4,7 +4,10 @@ import '../css/Header.css'
 function Header(props) {
     return (
         <div>
-            Detta är tänkt att vara header med en meny!
+            <div className="container">
+                <h2>A very nice header!</h2>
+            
+            </div>
         </div>
     );
 }

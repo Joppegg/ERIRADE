@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './css/Header.css';
 import Header from './components/Header'
 import ReportSubmit from './components/ReportSubmit';
 import SideView from './components/SideView';
