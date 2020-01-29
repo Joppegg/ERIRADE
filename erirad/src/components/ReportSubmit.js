@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
     },
     formControl: {
-        margin: theme.spacing(3),
+        margin: theme.spacing(1),
     },
 }));
 
@@ -32,21 +32,59 @@ function ReportSubmit(props) {
 
     });
 
+    const [isLoading, setLoading] = React.useState(true);
+
     const handleChange = name => event => {
         setState({ ...state, [name]: event.target.checked });
     };
+
+
     //CHECKBOX
 
     const { gilad, jason, antoine } = state;
     const error = [gilad, jason, antoine].filter(v => v).length !== 2;
-
     const [report, setReport] = useState({
         name: '',
         text: '',
+        isLoading: true
     })
 
     const [tags, setTags] = useState([])
 
+    const handleCheck = tag => event => {
+        console.log(tag)
+        const stateArray = [];
+
+        tags.map((oldTag) => {
+
+            if (oldTag.tagId === tag.tagId) {
+                stateArray.push({
+                    tagId: oldTag.tagId,
+                    tagName: oldTag.tagName,
+                    isChecked: event.target.checked
+                })
+            }
+            else {
+                stateArray.push({
+                    tagId: oldTag.tagId,
+                    tagName: oldTag.tagName,
+                    isChecked: oldTag.isChecked
+                })
+            }
+
+
+        }
+
+        )
+
+        console.log(tags)
+        console.log(stateArray) 
+        setTags(stateArray);
+
+
+
+    }
+    //Mappa igenom och se om id stämmer överens.   
     const handleSubmit = () => {
         console.log(report)
     }
@@ -54,7 +92,26 @@ function ReportSubmit(props) {
     useEffect(() => {
         axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetDataFromDB.php')
             .then(res => {
-                setTags(res.data)
+
+                //Mappa igenom hela res.data, spara in variablerna i ny array.
+                //  res.data.map(tag => console.log(tag)); //Funkar.¨
+
+                const newArray = [];
+                res.data.map((tag) =>
+                    newArray.push({
+                        tagId: tag.tagId,
+                        tagName: tag.tagName,
+                        isChecked: false
+                    })
+                )
+
+                // newArray.map(tag => console.log(tag));
+
+                setTags(newArray);
+                setLoading(false);
+
+                tags.map(tag => console.log(tag))
+
             })
             .catch(err => {
                 console.log(err)
@@ -86,50 +143,59 @@ function ReportSubmit(props) {
                     <div className={classes.root}>
                         <FormControl component="fieldset" className={classes.formControl}>
                             <FormLabel component="legend">Select Tags</FormLabel>
-                            <FormGroup  aria-label="position" row>
-                                <FormControlLabel
-                                    control={<Checkbox
-                                     color="primary"
-                                     checked={gilad} onChange={handleChange('gilad')} value="gilad" />}
-                                    label="Gilad Gray"
-                                />
-                                <FormControlLabel
-                                    control={<Checkbox 
-                                    color="primary"
-                                    checked={jason}
-                                    onChange={handleChange('jason')} value="jason" />}
-                                    label="Jason Killian"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox 
-                                        checked={antoine} 
-                                        color="primary"
-                                        onChange={handleChange('antoine')}
-                                         value="antoine" />
+                            <FormGroup aria-label="position" row>
+                                <div className="form-row">
+                                    {isLoading ?
+                                        <div> Loading.. please wait!</div>
+                                        :
+                                        <div>
+
+
+
+                                            {tags.map(tag => (
+                                                <FormControlLabel
+                                                    control={<Checkbox
+                                                        color="primary"
+                                                        checked={tag.isChecked}
+                                                        value={tag.tagId}
+                                                        onChange={handleCheck(tag)}
+
+
+                                                    />}
+                                                    label={tag.tagName}
+                                                />
+                                            ))}
+                                        </div>
                                     }
-                                    label="Antoine Llorca"
-                                />
+
+
+
+                                </div>
+
+
+
+
+
                             </FormGroup>
                         </FormControl>
                     </div>
                 </div>
                 <div className="form-row">
-                        <Button variant="contained" color="primary">
-                            Submit
+                    <Button variant="contained" color="primary">
+                        Submit
                        </Button>
-                    
+
                 </div>
 
 
-                <div className="form-row">
-                    <ul>
-                        {tags.map(tag => (
-                            <li key={tag.tagId}>{tag.tagId} - {tag.tagName}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+
+
+
+
+
+
+
+
             </form>
         </div>
 
