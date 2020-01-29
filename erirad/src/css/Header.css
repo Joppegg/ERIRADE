@@ -26,6 +26,11 @@ h2, h3 {
   text-align: center;
 }
 
+.form-row-sideview{
+  padding: 10px 0;
+  display: flex;
+}
+
 .form-row {
   padding: 10px 0;
   display: flex;
