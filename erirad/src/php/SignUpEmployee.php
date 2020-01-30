@@ -17,7 +17,7 @@ $password = mysqli_escape_string($connection, $_POST['password']);
 if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     echo 'wrong format for email';
 }else{
-    $sqlSignUp1 = "SELECT * FROM employee WHERE username = ´.$username.´";
+    $sqlSignUp1 = "SELECT * FROM employee WHERE username = '.$username.'";
     $result = mysqli_query($connection, $sqlSignUp1);
     $resultCheck = mysqli_num_rows($result);
 
