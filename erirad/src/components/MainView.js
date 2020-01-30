@@ -5,7 +5,7 @@ import ReportSubmit from './ReportSubmit';
 function MainView(props) {
     return (
          <div className="column-layout">
-         {/*<SideView/>*/}
+   
          <ReportSubmit/>
         </div>
     );

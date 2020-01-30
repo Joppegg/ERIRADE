@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
+import CreateReport from './CreateReport';
 
 
 function Header(props) {
@@ -54,6 +55,7 @@ function Header(props) {
     return (
         <div>
             <div className="container">
+            <CreateReport/>
                 <h2>A very nice header!</h2>
                 <div>
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -64,7 +66,7 @@ function Header(props) {
                         <DialogContent>
                             <DialogContentText>
                                 Register a user here
-          </DialogContentText>
+                       </DialogContentText>
                             <TextField
                                 autoFocus
                                 margin="dense"
@@ -124,7 +126,11 @@ function Header(props) {
                            </Button>
                         </DialogActions>
                     </Dialog>
+
+                
+
                 </div>
+               
             </div>
 
         </div>
