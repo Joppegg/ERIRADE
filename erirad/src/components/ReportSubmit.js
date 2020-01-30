@@ -133,7 +133,7 @@ function ReportSubmit(props) {
                     <label> Report </label>
                     <textarea
                         rows="12"
-                        placeholder="Write something"
+                      
                         value={report.text}
                         onChange={e => setReport({ ...report, text: e.target.value })}
                     >
