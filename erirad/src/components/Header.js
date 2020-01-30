@@ -61,9 +61,10 @@ function Header(props) {
                         <img className="logoImg" src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ericsson_logo.svg/512px-Ericsson_logo.svg.png' />
                     </a>
                 </div>
-                <CreateReport />
                 <h2>A very nice header!</h2>
-                <div>
+                <CreateReport />
+                
+                <div className="menuButton">
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                         Register user
                    </Button>
