@@ -39,7 +39,6 @@ function ReportSubmit(props) {
         const stateArray = [];
 
         tags.map((oldTag) => {
-
             if (oldTag.tagId === tag.tagId) {
                 stateArray.push({
                     tagId: oldTag.tagId,
