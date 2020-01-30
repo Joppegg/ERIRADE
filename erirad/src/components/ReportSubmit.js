@@ -6,7 +6,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
@@ -25,24 +24,12 @@ const useStyles = makeStyles(theme => ({
 function ReportSubmit(props) {
     //CHECKBOX
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
 
-    });
 
     const [isLoading, setLoading] = React.useState(true);
 
-    const handleChange = name => event => {
-        setState({ ...state, [name]: event.target.checked });
-    };
-
 
     //CHECKBOX
-
-    const { gilad, jason, antoine } = state;
-    const error = [gilad, jason, antoine].filter(v => v).length !== 2;
     const [report, setReport] = useState({
         name: '',
         text: '',
@@ -84,10 +71,7 @@ function ReportSubmit(props) {
 
 
     }
-    //Mappa igenom och se om id stämmer överens.   
-    const handleSubmit = () => {
-        console.log(report)
-    }
+ 
     //This gets all the tags and saves them to state.
     useEffect(() => {
         axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetDataFromDB.php')
