@@ -11,6 +11,7 @@ import axios from 'axios';
 import CreateReport from './CreateReport';
 
 
+
 function Header(props) {
 
     const [open, setOpen] = useState(false)
@@ -38,24 +39,29 @@ function Header(props) {
 
         e.preventDefault();
         axios({
-          method: 'post',
-          url: `http://localhost/ERIRADAPP/erirad/src/php/SignUpEmployee.php`,
-          headers: { 'content-type': 'application/json' },
-          data: user
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/SignUpEmployee.php`,
+            headers: { 'content-type': 'application/json' },
+            data: user
         })
-          .then(result => {
-            console.log(result)
-            console.log(result.data)
-          })
-          .catch(error => console.log(error));
-        
+            .then(result => {
+                console.log(result)
+                console.log(result.data)
+            })
+            .catch(error => console.log(error));
+
     };
 
 
     return (
         <div>
             <div className="container">
-            <CreateReport/>
+                <div className="logo">
+                    <a href="localhost:3000">
+                        <img className="logoImg" src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ericsson_logo.svg/512px-Ericsson_logo.svg.png' />
+                    </a>
+                </div>
+                <CreateReport />
                 <h2>A very nice header!</h2>
                 <div>
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -127,10 +133,10 @@ function Header(props) {
                         </DialogActions>
                     </Dialog>
 
-                
+
 
                 </div>
-               
+
             </div>
 
         </div>

@@ -24,14 +24,10 @@ const useStyles = makeStyles(theme => ({
 function ReportSubmit(props) {
     //CHECKBOX
     const classes = useStyles();
-
-
     const [isLoading, setLoading] = React.useState(true);
-
-
+    
     //CHECKBOX
     const [report, setReport] = useState({
-        name: '',
         text: '',
         isLoading: true
     })
@@ -58,28 +54,16 @@ function ReportSubmit(props) {
                     isChecked: oldTag.isChecked
                 })
             }
-
-
         }
-
         )
-
-        console.log(tags)
-        console.log(stateArray) 
         setTags(stateArray);
-
-
-
     }
- 
+
     //This gets all the tags and saves them to state.
     useEffect(() => {
         axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetDataFromDB.php')
             .then(res => {
-
                 //Mappa igenom hela res.data, spara in variablerna i ny array.
-                //  res.data.map(tag => console.log(tag)); //Funkar.¨
-
                 const newArray = [];
                 res.data.map((tag) =>
                     newArray.push({
@@ -88,12 +72,8 @@ function ReportSubmit(props) {
                         isChecked: false
                     })
                 )
-
-                // newArray.map(tag => console.log(tag));
-
                 setTags(newArray);
                 setLoading(false);
-
                 tags.map(tag => console.log(tag))
 
             })
@@ -105,19 +85,12 @@ function ReportSubmit(props) {
     return (
         <div className="main-column">
             <form className="form-Container">
-                <div className="form-row">
-                    <label>Name</label>
-                    <input type="text"
-                        value={report.name}
-                        onChange={e => setReport({ ...report, name: e.target.value })}
-                    />
-                </div>
 
                 <div className="form-row">
-                    <label> Report </label>
+                    <label> Snippetx </label>
                     <textarea
                         rows="12"
-                      
+
                         value={report.text}
                         onChange={e => setReport({ ...report, text: e.target.value })}
                     >
@@ -151,15 +124,7 @@ function ReportSubmit(props) {
                                             ))}
                                         </div>
                                     }
-
-
-
                                 </div>
-
-
-
-
-
                             </FormGroup>
                         </FormControl>
                     </div>
@@ -168,18 +133,7 @@ function ReportSubmit(props) {
                     <Button variant="contained" color="primary">
                         Submit
                        </Button>
-
                 </div>
-
-
-
-
-
-
-
-
-
-
             </form>
         </div>
 
