@@ -17,7 +17,7 @@ $password = mysqli_escape_string($connection, $_POST['password']);
 if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     echo 'wrong format for email';
 }else{
-    $sqlSignUp1 = "SELECT * FROM employee WHERE username = ´.$username.´";
+    $sqlSignUp1 = "SELECT * FROM employee WHERE username = '.$username.'";
     $result = mysqli_query($connection, $sqlSignUp1);
     $resultCheck = mysqli_num_rows($result);
 
@@ -25,7 +25,10 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         echo 'username already exists';
     }else{
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sqlSignUp = "INSERT INTO employee (firstName, lastName, email, phoneNumber, username, pwd) VALUES ('.$firstName.','.$lastName.','$email.','.$phoneNumber.','.$username.','.$hashedPassword.'";
+
+        $sqlSignUp = "INSERT INTO employee (firstName, lastName, email, phoneNumber, username, pwd) VALUES ('$firstName','$lastName','$email','$phoneNumber','$username','$hashedPassword')";
+        mysqli_query($connection, $sqlSignUp);
+
         echo 'sign up success';
     }
 }

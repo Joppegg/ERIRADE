@@ -64,6 +64,8 @@ h2, h3 {
   flex: 3;
   order: 2;
   text-align: center;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .sidebar-one{
