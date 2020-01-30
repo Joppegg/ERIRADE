@@ -25,8 +25,10 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         echo 'username already exists';
     }else{
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $sqlSignUp = "INSERT INTO employee (firstName, lastName, email, phoneNumber, username, pwd) VALUES ('$firstName','$lastName','$email','$phoneNumber','$username','$hashedPassword')";
         mysqli_query($connection, $sqlSignUp);
+
         echo 'sign up success';
     }
 }
