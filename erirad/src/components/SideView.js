@@ -32,9 +32,9 @@ function SideView(props) {
     return (
         <div className="sidebar-one">
             <h3>Sidebar one</h3>
-            <form className="report-form">
+            <form>
 
-                <div className="form-row-sideView">
+                <div className="sidebar-form-row">
                     <label>First Name </label>
                     <input type="text"
                     name="firstName"
@@ -43,7 +43,7 @@ function SideView(props) {
                     />
                 </div>
 
-                <div className="form-row-sideView">
+                <div className="sidebar-form-row">
                     <label> Last name </label>
                     <input type="text"
                         value={user.lastName}
@@ -51,7 +51,7 @@ function SideView(props) {
                     />
                 </div>
 
-                <div className="form-row-sideView">
+                <div className="sidebar-form-row">
                     <label> Email </label>
                     <input type="text"
                         value={user.email}
@@ -59,7 +59,7 @@ function SideView(props) {
                     />
                 </div>
 
-                <div className="form-row-sideView">
+                <div className="sidebar-form-row">
                     <label> Phone no </label>
                     <input type="text"
                         value={user.phoneNumber}
@@ -67,7 +67,7 @@ function SideView(props) {
                     />
                 </div>
 
-                <div className="form-row-sideView">
+                <div className="sidebar-form-row">
                     <label> Username</label>
                     <input type="text"
                         value={user.userName}
@@ -75,9 +75,9 @@ function SideView(props) {
                     />
                 </div>
 
-                <div className="form-row-sideView">
+                <div className="sidebar-form-row">
                     <label> Password </label>
-                    <input type="text"
+                    <input type="password"
                         value={user.password}
                         onChange={e => setUser({ ...user, password: e.target.value })}
                     />
