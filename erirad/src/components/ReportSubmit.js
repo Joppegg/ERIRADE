@@ -27,11 +27,8 @@ function ReportSubmit(props) {
     const [isLoading, setLoading] = React.useState(true);
     
     //CHECKBOX
-    const [report, setReport] = useState({
-        text: '',
-        isLoading: true
-    })
     const [snippet, setSnippet] = useState({
+    
      text: '',
      tags: []
     })
@@ -154,7 +151,7 @@ function ReportSubmit(props) {
                 </div>
                 <div className="form-row">
                     <Button variant="contained" color="primary" onClick={handleClick}>
-                        Submit
+                        Save
                        </Button>
                 </div>
             </form>
