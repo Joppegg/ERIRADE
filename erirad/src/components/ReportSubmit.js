@@ -27,17 +27,18 @@ function ReportSubmit(props) {
     const [isLoading, setLoading] = React.useState(true);
     
     //CHECKBOX
-    const [report, setReport] = useState({
-        text: '',
-        isLoading: true
+    const [snippet, setSnippet] = useState({
+    
+     text: '',
+     tags: []
     })
 
+
     const [tags, setTags] = useState([])
-
     const handleCheck = tag => event => {
-        console.log(tag)
+     
         const stateArray = [];
-
+        //this maps through all the old tags to push a new state array with the checked tag.
         tags.map((oldTag) => {
             if (oldTag.tagId === tag.tagId) {
                 stateArray.push({
@@ -53,10 +54,28 @@ function ReportSubmit(props) {
                     isChecked: oldTag.isChecked
                 })
             }
-        }
+         }
         )
         setTags(stateArray);
+        console.log(tags)
+        console.log(snippet)
+        
     }
+
+    useEffect(() => {
+        // through all the tags. If a tag is checked, append the id to an array, and then set new snippet state.
+        console.log("useffect hit")
+        const tagArray = [];
+        tags.map((currentTag) =>{
+            if (currentTag.isChecked === true){
+                tagArray.push(currentTag.tagId)
+            }
+        })
+        console.log(tagArray)
+        setSnippet({...snippet, tags:tagArray})
+       
+
+    }, [tags])
 
     //This gets all the tags and saves them to state.
     useEffect(() => {
@@ -81,17 +100,21 @@ function ReportSubmit(props) {
             })
     }, [])
 
+    const handleClick = () =>{
+        console.log(snippet)
+    }
+
     return (
         <div className="main-column">
             <form className="form-Container">
 
                 <div className="form-row">
-                    <label> Snippetx </label>
+                    <label> Snippet </label>
                     <textarea
                         rows="12"
-
-                        value={report.text}
-                        onChange={e => setReport({ ...report, text: e.target.value })}
+                        cols="170"
+                        value={snippet.text}
+                        onChange={e => setSnippet({ ...snippet, text: e.target.value })}
                     >
                     </textarea>
                 </div>
@@ -106,8 +129,6 @@ function ReportSubmit(props) {
                                         :
                                         <div>
 
-
-
                                             {tags.map(tag => (
                                                 <FormControlLabel
                                                     control={<Checkbox
@@ -115,7 +136,7 @@ function ReportSubmit(props) {
                                                         checked={tag.isChecked}
                                                         value={tag.tagId}
                                                         onChange={handleCheck(tag)}
-
+                                                        
 
                                                     />}
                                                     label={tag.tagName}
@@ -129,8 +150,8 @@ function ReportSubmit(props) {
                     </div>
                 </div>
                 <div className="form-row">
-                    <Button variant="contained" color="primary">
-                        Submit
+                    <Button variant="contained" color="primary" onClick={handleClick}>
+                        Save
                        </Button>
                 </div>
             </form>

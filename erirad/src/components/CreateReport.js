@@ -58,11 +58,12 @@ function CreateReport(props) {
                     <DialogContent>
                         <DialogContentText>
                             Enter employee id
-          </DialogContentText>
+                   </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"
                             id="name"
+                          
                             value={user.employeeId}
                             onChange={e => setUser({ ...user, employeeId: e.target.value })}
                             label="Employee Id"

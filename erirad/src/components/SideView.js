@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-import CreateReport from './CreateReport';
+
 
 function SideView(props) {
 
