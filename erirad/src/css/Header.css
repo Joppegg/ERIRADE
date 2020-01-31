@@ -19,7 +19,6 @@ h2, h3 {
 }
 
 .container {
-  
   margin: 20px auto 0 auto;
   padding: 30px;
   background-color: #FFF;
@@ -49,10 +48,8 @@ h2, h3 {
 
 }
 
-
-
 .column-layout{
- 
+  justify-content: center;
   background-color: #FFF;
   margin: 20px 20px 0 20px;
   line-height: 1.65;
@@ -61,18 +58,28 @@ h2, h3 {
 }
 
 .main-column{
-  flex: 3;
-  order: 2;
+  flex: 1;
+  order: 1;
   text-align: center;
   margin-left: 40px;
   margin-right: 40px;
+}
+
+.add-container {
+display: flex;
+}
+
+.add-space{
+  flex: 5
+}
+.add-button{
+  flex: 1
 }
 
 .sidebar-one{
   text-align: center;
   flex: 1;
   order: 1;
-
 }
 
 .sidebar-form-row{
@@ -106,10 +113,13 @@ h2, h3 {
 
 
 .snippetContainer{
+  justify-content: center;
+  width:auto;
   background-color: #FFF;
   margin: 20px 20px 0 20px;
   line-height: 1.65;
   padding: 20px 50px;
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
