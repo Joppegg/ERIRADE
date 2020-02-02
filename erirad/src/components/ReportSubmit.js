@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import '../css/ReportSubmit.css'
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,22 +21,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function ReportSubmit(props) {
-    //CHECKBOX
+function ReportSubmit({value, onChange, id, onTagChecked}) {
+
+    //value är 1. id är 1. Onchange uppdaterar state i parent med texten.
+     const handleChange = event => {
+        const text = event.target.value;
+        onChange(id, text);
+      };
+
+    const handleCheckedTags = () =>{
+        onTagChecked(id, tags)
+        console.log(tags)
+    } 
+
     const classes = useStyles();
     const [isLoading, setLoading] = React.useState(true);
     
     //CHECKBOX
-    const [snippet, setSnippet] = useState({
-    
-     text: '',
-     tags: []
-    })
+    const [snippet, setSnippet] = useState({})
 
 
     const [tags, setTags] = useState([])
     const handleCheck = tag => event => {
-     
         const stateArray = [];
         //this maps through all the old tags to push a new state array with the checked tag.
         tags.map((oldTag) => {
@@ -56,22 +62,22 @@ function ReportSubmit(props) {
             }
          }
         )
+        console.log('state')
+        console.log(stateArray)
         setTags(stateArray);
-        console.log(tags)
-        console.log(snippet)
-        
+        handleCheckedTags();
     }
 
     useEffect(() => {
         // through all the tags. If a tag is checked, append the id to an array, and then set new snippet state.
-        console.log("useffect hit")
+     
         const tagArray = [];
         tags.map((currentTag) =>{
             if (currentTag.isChecked === true){
                 tagArray.push(currentTag.tagId)
             }
         })
-        console.log(tagArray)
+      //  console.log(tagArray)
         setSnippet({...snippet, tags:tagArray})
        
 
@@ -92,7 +98,7 @@ function ReportSubmit(props) {
                 )
                 setTags(newArray);
                 setLoading(false);
-                tags.map(tag => console.log(tag))
+                
 
             })
             .catch(err => {
@@ -113,8 +119,9 @@ function ReportSubmit(props) {
                     <textarea
                         rows="12"
                         cols="170"
-                        value={snippet.text}
-                        onChange={e => setSnippet({ ...snippet, text: e.target.value })}
+                        value={value}
+                        // onChange={e => setSnippet({ ...snippet, text: e.target.value })}
+                        onChange={handleChange}
                     >
                     </textarea>
                 </div>
