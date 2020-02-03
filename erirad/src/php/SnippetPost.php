@@ -3,12 +3,12 @@ header("Access-Control-Allow-Origin: *");
 require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
-$_GET = json_decode($rest_json, true);
+
 
 $snippets = json_decode($_GET['textValues']);
 //$employeeId = mysqli_escape_string($_POST, ['employeeId']);
 
-foreach($snippets as $value){
+
     $snippetId = $snippets[0];
     $snippetText = $snippets[1];
 
@@ -23,16 +23,8 @@ foreach($snippets as $value){
     }
 
     $sqlInsertSnippet = "INSERT INTO snippet (snippetId, reportId, snippetText) VALUES ('$snippetId','$reportId','$snippetText')";
-
+    mysqli_query($connection, $sqlInsertSnippet);
     
-}
 
 
-
-
-
-$sql = "INSERT INTO snippet (snippetText) VALUES ('$snippetText')";
-
-
-mysqli_query($connection, $sql);
 ?>
