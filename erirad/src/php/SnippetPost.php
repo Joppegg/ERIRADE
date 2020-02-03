@@ -6,7 +6,9 @@ $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
 
-$snippets = json_decode($_POST['testArray']);
+
+$snippets = ($_POST['testArray']);
+
 //$employeeId = mysqli_escape_string($_POST, ['employeeId']);
 
 /*
@@ -16,9 +18,12 @@ $snippets = array(
     array('1', 'johan')
 );
 */
+echo $snippets[0];
+echo $snippets[1];
+/*
 echo $snippets[0][0].": SnippetID" .$snippets[0][1]. ": Snippet Text";
 echo $snippets[1][0].": SnippetID" .$snippets[1][1]. ": Snippet Text";
-
+*/
     $snippetId = $snippets[0];
     $snippetText = $snippets[1];
 
