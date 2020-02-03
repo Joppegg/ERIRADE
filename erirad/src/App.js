@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import ReportView from './components/ReportView';
+import ComponentRouter from './components/ComponentRouter';
 
 function App() {
 
@@ -27,7 +28,7 @@ const handleEmployeeId = (id) => {
      <div className="App">
       {
         isLoggedIn ?
-        <ReportView/> 
+        <ComponentRouter/>
         :
         <LoginView onLogIn={handleLogin} onEmployeeLogin={handleEmployeeId}/>
       }

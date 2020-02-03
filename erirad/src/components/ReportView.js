@@ -7,7 +7,7 @@ import Footer from './Footer';
 function ReportView(props) {
     return (
         <div className="App">
-            <Header />
+            
             <MainView />
             <Footer />
         </div>
