@@ -42,7 +42,7 @@ function SnippetHolder(props) {
 
     const handleSubmit = () => {
 
-        const namedList = {'textValues': textvalues}
+        const namedList = {textValues: textvalues}
         console.log(JSON.stringify(namedList, null, 2))
         axios({
           method: 'post',
