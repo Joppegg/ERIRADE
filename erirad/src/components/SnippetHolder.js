@@ -16,6 +16,9 @@ function SnippetHolder(props) {
     const [tagValues, setTagValues] = useState({})
     const [snippetTextArea, setSnippetTextArea] = useState([{}]);
 
+     
+  
+
     //Uppdaterar state med texterna.
     const handleFieldChange = (fieldId, value) =>{
         setTextValues({...textvalues, [fieldId]: value});
@@ -41,24 +44,20 @@ function SnippetHolder(props) {
     }
 
     const handleSubmit = () => {
-
-        const namedList = {textValues: textvalues}
-        console.log(JSON.stringify(namedList, null, 2))
+        const testArray = ["1", "hej"]
+        //const namedList = {textValues: textvalues}
+        console.log(JSON.stringify(testArray, null, 2))
         axios({
           method: 'post',
           url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
           headers: { 'content-type': 'application/json' },
-          data: namedList
+          data: JSON.stringify(testArray)
         })
           .then(result => {
             console.log(result)
             console.log(result.data)
           })
           .catch(error => console.log(error));
-
-
-
-
 
     }
 
