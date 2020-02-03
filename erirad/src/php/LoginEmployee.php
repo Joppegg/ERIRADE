@@ -24,7 +24,8 @@ if($resultCheck < 1){
             $_SESSION['email'];
             $_SESSION['phoneNumber'];
 
-            echo 'login success';
+            $empId = $_SESSION['employeeId'];
+            echo json_encode($empId);
         }
     }
 }
