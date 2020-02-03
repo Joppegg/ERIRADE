@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../css/Header.css'
 import ReportSubmit from './ReportSubmit';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
-import purple from '@material-ui/core/colors/purple';
 
 /*
 *This functions purpose is to dynamically render and pass state to the child components, which will be individual snippets.
@@ -12,47 +11,62 @@ import purple from '@material-ui/core/colors/purple';
 
 function SnippetHolder(props) {
 
+    const [textvalues, setTextValues] = useState({});
+    const [tagValues, setTagValues] = useState({})
+    const [snippetTextArea, setSnippetTextArea] = useState([]);
 
-    const onParentSubmit = () =>{
-        this.child.method()
-    }
+    //Uppdaterar state med texterna.
+    const handleFieldChange = (fieldId, value) =>{
+        setTextValues({...textvalues, [fieldId]: value});
+     
+    };
+    const handleTagChange = (tagId, value) => 
+    { 
+       setTagValues({...tagValues, [tagId] : value})
+    };
 
-    const [snippets, setSnippets] = useState([
-        <ReportSubmit/>
-     ])
+    const newSnippets = snippetTextArea.map((snippet, index) => (
+          <ReportSubmit
+          key={index}
+          id={index}
+          onChange={handleFieldChange}
+          onTagChecked={handleTagChange}
+          value={textvalues[snippet]}
+        />
+    ));
 
     const addSnippet = () => {
-        const snippet = (
-            <ReportSubmit />
-        )
-        setSnippets([...snippets, snippet])
-
-        console.log(snippets)
+        setSnippetTextArea([...snippetTextArea, null]);
+        //Pusha först ett tomt värde i parent, med id
     }
-    useEffect(() => {
-        console.log(snippets)
-    })
 
-    //this should invoke a callback method in all snippets, sending them into the database
-
-    
+    const returnTagvalues = () => {
+        console.log(tagValues)
+    }
+    ///TODO:
+    //Press submit to send the information into the database.
+    //
     return (
         <div>
-            <div className="snippetContainer">{snippets}</div>
+            <div className="snippetContainer">{newSnippets}</div>
             <div className="add-container">
                 <div className="add-space"></div>
                 <div className="add-button">
-                    
                     <Fab onClick={addSnippet} color="primary" aria-label="add">
                         <AddIcon />
                     </Fab>
                 </div>
             </div>
             <div className="form-row">
-                    <Button variant="contained" color="primary">
-                        Submit Report
+                <Button
+                    variant="contained"
+                    color="primary"
+                 >
+                    Submit Report
                        </Button>
-                </div>
+            </div>
+            <pre>{JSON.stringify(textvalues, null, 2)}</pre>
+            <pre>{JSON.stringify(tagValues, null, 2)}</pre>   
         </div>
     );
 }

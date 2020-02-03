@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
-
+import React from 'react';
 
 function SideView(props) {
-
-
     return (
-        <div className="sidebar-one">
-            <h2>HEj</h2>
+        <div>
+            
         </div>
     );
 }
