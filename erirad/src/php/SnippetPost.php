@@ -8,7 +8,7 @@ $_POST = json_decode($rest_json, true);
 
 
 $snippets = json_decode(json_encode($_POST['textValues']));
-$tags = json_decode(json_encode($_POST['tags']));
+
 
 foreach($snippets as $snippetText){
     
@@ -28,6 +28,16 @@ foreach($snippets as $snippetText){
     }
     
     
+
+    $sqlGetReportId = "SELECT reportId FROM report WHERE employeeId = '63'";
+
+
+    $resultReportId = mysqli_query($connection, $sqlGetReportId);
+    $resultCheckReportId = mysqli_num_rows($resultReportId);
+
+    
+    $row = mysqli_fetch_array($resultReportId);
+    $reportId = $row['reportId'];
     
     
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import '../css/ReportSubmit.css'
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function ReportSubmit({value, onChange, id, onTagChecked}) {
+function Snippet({value, onChange, id, onTagChecked, onTagId}) {
 
     //value är 1. id är 1. Onchange uppdaterar state i parent med texten.
      const handleChange = event => {
@@ -31,6 +31,7 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
 
     const handleCheckedTags = () =>{
         onTagChecked(id, tags)
+        onTagId(id, newTagId)
         console.log(tags)
     } 
 
@@ -40,21 +41,14 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
     //CHECKBOX
     const [snippet, setSnippet] = useState({})
 
-    const [text, setText] = useState({
-        text: '',
-        snippetId: {id}
-    })
 
-    const handleChangedText = text => event => {
-     setText({...text, text})
-
-    }
-
-
+    const [newTagId, setNewTagId] = useState([])
 
     const [tags, setTags] = useState([])
     const handleCheck = tag => event => {
         const stateArray = [];
+   
+
         //this maps through all the old tags to push a new state array with the checked tag.
         tags.map((oldTag) => {
             if (oldTag.tagId === tag.tagId) {
@@ -63,6 +57,7 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
                     tagName: oldTag.tagName,
                     isChecked: event.target.checked
                 })
+
             }
             else {
                 stateArray.push({
@@ -70,27 +65,30 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
                     tagName: oldTag.tagName,
                     isChecked: oldTag.isChecked
                 })
+           
             }
          }
         )
         console.log('state')
         console.log(stateArray)
         setTags(stateArray);
+        //setNewTagId(tagIdarray);
         handleCheckedTags();
     }
 
     useEffect(() => {
         // through all the tags. If a tag is checked, append the id to an array, and then set new snippet state.
-     
+        const tagIdarray = [];
         const tagArray = [];
         tags.map((currentTag) =>{
             if (currentTag.isChecked === true){
                 tagArray.push(currentTag.tagId)
+                tagIdarray.push(currentTag.tagId)
             }
         })
       //  console.log(tagArray)
         setSnippet({...snippet, tags:tagArray})
-       
+        setNewTagId(tagIdarray);
 
     }, [tags])
 
@@ -154,6 +152,7 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
                                                         checked={tag.isChecked}
                                                         value={tag.tagId}
                                                         onChange={handleCheck(tag)}
+                                                        key={tag.tagId}
                                                         
 
                                                     />}
@@ -178,4 +177,4 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
     );
 }
 
-export default ReportSubmit;
+export default Snippet;

@@ -7,6 +7,8 @@ $_POST = json_decode($rest_json, true);
 $username = mysqli_escape_string($connection, $_POST['username']);
 $password = mysqli_escape_string($connection, $_POST['password']);
 
+echo $password;
+
 $sqlLogin = "SELECT * FROM Employee WHERE username ='$username'";
 $resultLogin = mysqli_query($connection, $sqlLogin);
 $resultCheck = mysqli_num_rows($resultLogin);
@@ -22,7 +24,7 @@ if($resultCheck < 1){
             $_SESSION['firstName'];
             $_SESSION['lastName'];
             $_SESSION['email'];
-            $_SESSION['phoneNumber'];
+            $_SESSION['phoneNumber']; 
 
             $empId = $_SESSION['employeeId'];
             echo json_encode($empId);
