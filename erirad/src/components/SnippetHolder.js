@@ -25,7 +25,6 @@ function SnippetHolder(props) {
        setTagValues({...tagValues, [tagId] : value})
     };
 
-
     const newSnippets = snippetTextArea.map((snippet, index) => (
           <ReportSubmit
           key={index}
@@ -41,16 +40,12 @@ function SnippetHolder(props) {
         //Pusha först ett tomt värde i parent, med id
     }
 
-
     const returnTagvalues = () => {
-     
         console.log(tagValues)
     }
     ///TODO:
     //Press submit to send the information into the database.
     //
-
-
     return (
         <div>
             <div className="snippetContainer">{newSnippets}</div>
@@ -71,8 +66,7 @@ function SnippetHolder(props) {
                        </Button>
             </div>
             <pre>{JSON.stringify(textvalues, null, 2)}</pre>
-            <pre>{JSON.stringify(tagValues, null, 2)}</pre>
-           
+            <pre>{JSON.stringify(tagValues, null, 2)}</pre>   
         </div>
     );
 }

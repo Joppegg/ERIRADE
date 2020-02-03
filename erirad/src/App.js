@@ -4,6 +4,12 @@ import Header from './components/Header'
 import MainView from './components/MainView';
 import Footer from './components/Footer';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 function App() {
