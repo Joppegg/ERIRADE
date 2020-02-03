@@ -58,7 +58,7 @@ function Header(props) {
             <div className="container">
                 <div className="logo">
                     <a href="localhost:3000">
-                        <img className="logoImg" src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ericsson_logo.svg/512px-Ericsson_logo.svg.png' />
+                        <img alt="logo" className="logoImg" src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ericsson_logo.svg/512px-Ericsson_logo.svg.png' />
                     </a>
                 </div>
                 <h2>A very nice header!</h2>

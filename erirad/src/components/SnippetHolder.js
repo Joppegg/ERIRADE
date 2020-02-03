@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState} from 'react';
 import '../css/Header.css'
 import ReportSubmit from './ReportSubmit';
 import Fab from '@material-ui/core/Fab';
@@ -16,6 +16,9 @@ function SnippetHolder(props) {
     const [tagValues, setTagValues] = useState({})
     const [snippetTextArea, setSnippetTextArea] = useState([{}]);
 
+    const [tags, setTags] = useState({
+        
+    })
      
   
 
@@ -26,6 +29,13 @@ function SnippetHolder(props) {
     const handleTagChange = (tagId, value) => 
     { 
        setTagValues({...tagValues, [tagId] : value})
+       //Tag id vill vi ha kvar.
+       setTags({...tags, [tagId]: value})
+    };
+
+    const handleTagId = (tagId, value) => 
+    { 
+        setTags({...tags, [tagId] : value })
     };
 
     const newSnippets = snippetTextArea.map((snippet, index) => (
@@ -33,6 +43,7 @@ function SnippetHolder(props) {
           key={index}
           id={index}
           onChange={handleFieldChange}
+          onTagId={handleTagId}
           onTagChecked={handleTagChange}
           value={textvalues[snippet]}
         />
@@ -62,12 +73,6 @@ function SnippetHolder(props) {
 
     }
 
-    const returnTagvalues = () => {
-        console.log(tagValues)
-    }
-    ///TODO:
-    //Press submit to send the information into the database.
-    //
     return (
         <div>
             <div className="snippetContainer">{newSnippets}</div>
@@ -88,8 +93,9 @@ function SnippetHolder(props) {
                     Submit Report
                        </Button>
             </div>
-            <pre>{JSON.stringify(textvalues, null, 2)}</pre>
-            <pre>{JSON.stringify(tagValues, null, 2)}</pre>   
+            <pre>{JSON.stringify(tags, null, 2)}</pre>
+            <pre>{/*JSON.stringify(textvalues, null, 2)*/}</pre>
+            <pre>{/*JSON.stringify(tagValues, null, 2)*/}</pre>   
         </div>
     );
 }

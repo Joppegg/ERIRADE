@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 import './css/Header.css';
-import Header from './components/Header'
-import MainView from './components/MainView';
-import Footer from './components/Footer';
 import LoginView from './components/LoginView'
 import {
   BrowserRouter as Router,
