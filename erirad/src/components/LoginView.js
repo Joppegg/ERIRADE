@@ -18,7 +18,7 @@ function LoginView({onLogIn, onEmployeeLogin}) {
             data: user
         })
             .then(result => {
-                console.log(result)
+                console.log(result.status)
                 console.log(result.data)
             })
             .catch(error => console.log(error));

@@ -9,7 +9,7 @@ function ReportView(props) {
         <div className="App">
             
             <MainView />
-            <Footer />
+          
         </div>
     );
 }
