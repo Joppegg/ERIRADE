@@ -9,6 +9,8 @@ $password = mysqli_escape_string($connection, $_POST['password']);
 
 echo $password;
 
+session_start();
+
 $sqlLogin = "SELECT * FROM Employee WHERE username ='$username'";
 $resultLogin = mysqli_query($connection, $sqlLogin);
 $resultCheck = mysqli_num_rows($resultLogin);
@@ -16,17 +18,18 @@ if($resultCheck < 1){
     echo 'user do not exist';
 }else{
     if($row = mysqli_fetch_assoc($resultLogin)){
-        $hashedPwdCheck = password_verify($password, $row['password']);
+        $hashedPwdCheck = password_verify($password, $row['pwd']);
         if($hashedPwdCheck == false){
             echo 'wrong password';
         }else if($hashedPwdCheck == true){
            
-            $_SESSION['firstName'];
-            $_SESSION['lastName'];
-            $_SESSION['email'];
-            $_SESSION['phoneNumber']; 
+            isset($_SESSION['firstName']);
+            isset($_SESSION['lastName']);
+            isset($_SESSION['email']);
+            isset($_SESSION['phoneNumber']);
+            isset($_SESSION['userName']);
 
-            $empId = $_SESSION['employeeId'];
+            $empId = isset($_SESSION['employeeId']);
             echo json_encode($empId);
         }
     }
