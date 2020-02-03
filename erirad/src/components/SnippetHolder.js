@@ -44,14 +44,14 @@ function SnippetHolder(props) {
     }
 
     const handleSubmit = () => {
-        const testArray = ["1", "hej"]
-        //const namedList = {textValues: textvalues}
-        console.log(JSON.stringify(testArray, null, 2))
+       // const testArray = {testArray: ["1", "hej"]}
+        const namedList = {textValues: textvalues}
+        //console.log(JSON.stringify(testArray, null, 2))
         axios({
           method: 'post',
           url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
           headers: { 'content-type': 'application/json' },
-          data: JSON.stringify(testArray)
+          data: JSON.stringify(namedList, null,2)
         })
           .then(result => {
             console.log(result)
