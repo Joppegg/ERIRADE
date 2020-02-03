@@ -40,6 +40,17 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
     //CHECKBOX
     const [snippet, setSnippet] = useState({})
 
+    const [text, setText] = useState({
+        text: '',
+        snippetId: {id}
+    })
+
+    const handleChangedText = text => event => {
+     setText({...text, text})
+
+    }
+
+
 
     const [tags, setTags] = useState([])
     const handleCheck = tag => event => {
