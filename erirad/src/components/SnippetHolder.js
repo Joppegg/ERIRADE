@@ -4,6 +4,7 @@ import ReportSubmit from './ReportSubmit';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 /*
 *This functions purpose is to dynamically render and pass state to the child components, which will be individual snippets.
@@ -40,6 +41,25 @@ function SnippetHolder(props) {
         //Pusha först ett tomt värde i parent, med id
     }
 
+    const handleSubmit = () => {
+        axios({
+          method: 'post',
+          url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
+          headers: { 'content-type': 'application/json' },
+          data: textvalues
+        })
+          .then(result => {
+            console.log(result)
+            console.log(result.data)
+          })
+          .catch(error => console.log(error));
+
+
+
+          
+
+    }
+
     const returnTagvalues = () => {
         console.log(tagValues)
     }
@@ -61,6 +81,7 @@ function SnippetHolder(props) {
                 <Button
                     variant="contained"
                     color="primary"
+                    onClick={handleSubmit}
                  >
                     Submit Report
                        </Button>

@@ -10,9 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
 function CreateReport(props) {
-
+    
     const [open, setOpen] = React.useState(false);
-
     const [user, setUser] = useState({
         employeeId: '',
         submitted: false
@@ -24,7 +23,6 @@ function CreateReport(props) {
 
     const handleClose = () => {
         setOpen(false);
-
     };
 
     const handleSubmit= (e) => {
