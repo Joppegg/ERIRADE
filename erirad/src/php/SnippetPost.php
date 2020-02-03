@@ -10,14 +10,10 @@ $_POST = json_decode($rest_json, true);
 $snippets = json_decode(json_encode($_POST['textValues']));
 
 
-echo $snippets[0];
-echo $snippets[1];
-
 foreach($snippets as $snippetText){
-    echo $snippetText;
-    $reportId = '11';
-        
     
+    $reportId = '11';
+  
     $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
     mysqli_query($connection, $sqlInsertSnippet);
 
