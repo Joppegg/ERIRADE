@@ -12,14 +12,13 @@ import axios from 'axios';
 
 function SnippetHolder(props) {
 
-    const [textvalues, setTextValues] = useState({});
+    const [textvalues, setTextValues] = useState({})
     const [tagValues, setTagValues] = useState({})
-    const [snippetTextArea, setSnippetTextArea] = useState([]);
+    const [snippetTextArea, setSnippetTextArea] = useState([{}]);
 
     //Uppdaterar state med texterna.
     const handleFieldChange = (fieldId, value) =>{
         setTextValues({...textvalues, [fieldId]: value});
-     
     };
     const handleTagChange = (tagId, value) => 
     { 
@@ -42,6 +41,9 @@ function SnippetHolder(props) {
     }
 
     const handleSubmit = () => {
+
+        const namedList = {'textValues': textvalues}
+        console.log(JSON.stringify(namedList, null, 2))
         axios({
           method: 'post',
           url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
@@ -56,7 +58,7 @@ function SnippetHolder(props) {
 
 
 
-          
+
 
     }
 
