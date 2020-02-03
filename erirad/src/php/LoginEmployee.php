@@ -7,6 +7,8 @@ $_POST = json_decode($rest_json, true);
 $username = mysqli_escape_string($connection, $_POST['username']);
 $password = mysqli_escape_string($connection, $_POST['password']);
 
+echo $password;
+
 $sqlLogin = "SELECT * FROM Employee WHERE username ='$username'";
 $resultLogin = mysqli_query($connection, $sqlLogin);
 $resultCheck = mysqli_num_rows($resultLogin);

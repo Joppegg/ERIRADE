@@ -152,6 +152,7 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
                                                         checked={tag.isChecked}
                                                         value={tag.tagId}
                                                         onChange={handleCheck(tag)}
+                                                        key={tag.tagId}
                                                         
 
                                                     />}

@@ -8,7 +8,7 @@ $_POST = json_decode($rest_json, true);
 
 
 $snippets = json_decode(json_encode($_POST['textValues']));
-$tags = json_decode(json_encode($_POST['tags']));
+
 
 echo $snippets[0];
 echo $snippets[1];
@@ -42,7 +42,7 @@ foreach($snippets as $snippetText){
     
     $row = mysqli_fetch_array($resultReportId);
     $reportId = $row['reportId'];
-    */
+    
     
 
 }
