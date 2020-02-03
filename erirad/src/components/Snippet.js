@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function ReportSubmit({value, onChange, id, onTagChecked, onTagId}) {
+function Snippet({value, onChange, id, onTagChecked, onTagId}) {
 
     //value är 1. id är 1. Onchange uppdaterar state i parent med texten.
      const handleChange = event => {
@@ -177,4 +177,4 @@ function ReportSubmit({value, onChange, id, onTagChecked, onTagId}) {
     );
 }
 
-export default ReportSubmit;
+export default Snippet;

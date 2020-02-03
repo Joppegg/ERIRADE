@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import '../css/Header.css'
-import ReportSubmit from './ReportSubmit';
+import Snippet from './Snippet';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -39,7 +39,7 @@ function SnippetHolder(props) {
     };
 
     const newSnippets = snippetTextArea.map((snippet, index) => (
-          <ReportSubmit
+          <Snippet
           key={index}
           id={index}
           onChange={handleFieldChange}
