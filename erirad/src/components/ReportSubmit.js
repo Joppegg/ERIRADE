@@ -50,8 +50,6 @@ function ReportSubmit({value, onChange, id, onTagChecked}) {
 
     }
 
-
-
     const [tags, setTags] = useState([])
     const handleCheck = tag => event => {
         const stateArray = [];

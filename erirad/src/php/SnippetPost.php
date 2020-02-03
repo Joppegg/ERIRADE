@@ -16,7 +16,7 @@ foreach($snippets as $snippetText){
     echo $snippetText;
     
     
-    $sqlGetReportId = "SELECT reportId FROM report WHERE employeeId IS NULL";
+    $sqlGetReportId = "SELECT reportId FROM report WHERE employeeId = '63'";
 
     $resultReportId = mysqli_query($connection, $sqlGetReportId);
     $resultCheckReportId = mysqli_num_rows($resultReportId);
