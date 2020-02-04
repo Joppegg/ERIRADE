@@ -5,7 +5,12 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 /*
 *This functions purpose is to dynamically render and pass state to the child components, which will be individual snippets.
 */
@@ -57,6 +62,7 @@ function SnippetHolder(props) {
     const handleSubmit = () => {
        // const testArray = {testArray: ["1", "hej"]}
         const namedList = {textValues: textvalues}
+        const matrix ={matrix: tags}
         console.log(JSON.stringify(namedList))
         console.log(namedList)
         axios({
@@ -68,6 +74,7 @@ function SnippetHolder(props) {
           .then(result => {
             console.log(result)
             console.log(result.data)
+            console.log(matrix)
           })
           .catch(error => console.log(error));
 
@@ -75,6 +82,7 @@ function SnippetHolder(props) {
 
     return (
         <div>
+        <Link to="/home">Home</Link>
             <div className="snippetContainer">{newSnippets}</div>
             <div className="add-container">
                 <div className="add-space"></div>

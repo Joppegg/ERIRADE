@@ -23,6 +23,7 @@ h2, h3 {
   padding: 30px;
   background-color: #FFF;
   text-align: center;
+  display: flex;
 }
 
 
@@ -108,9 +109,13 @@ display: flex;
 }
 
 .logo{
-  float: left;
+  flex: 1;
 }
 
+.menuItem {
+  flex: 3;
+
+}
 
 .snippetContainer{
   justify-content: center;

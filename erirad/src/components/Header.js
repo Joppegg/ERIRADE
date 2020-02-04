@@ -56,15 +56,19 @@ function Header(props) {
     return (
         <div>
             <div className="container">
-                <div className="logo">
+                <div className="menuItem">
                     <a href="localhost:3000">
                         <img alt="logo" className="logoImg" src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ericsson_logo.svg/512px-Ericsson_logo.svg.png' />
                     </a>
                 </div>
-                <h2>A very nice header!</h2>
-                <CreateReport />
-                
-                <div className="menuButton">
+
+                <div className="menuItem">
+                    <h2>A very nice header!</h2> </div>
+                <div className="menuItem">
+                    <CreateReport />
+                </div>
+
+                <div className="menuItem">
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                         Register user
                    </Button>
