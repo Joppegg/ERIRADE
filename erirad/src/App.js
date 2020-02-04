@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import ReportView from './components/ReportView';
 import ComponentRouter from './components/ComponentRouter';
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -28,9 +30,18 @@ const handleEmployeeId = (id) => {
      <div className="App">
       {
         isLoggedIn ?
+   
+     
         <ComponentRouter/>
+       
+
+      
         :
+        <div>
+        <Header/>
         <LoginView onLogIn={handleLogin} onEmployeeLogin={handleEmployeeId}/>
+        <Footer/>
+        </div>  
       }
       </div>
 

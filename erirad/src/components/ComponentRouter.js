@@ -15,8 +15,7 @@ function ComponentRouter(props) {
             <Router >
                 <Switch>
                     <Route exact path="/" component={ReportView} />
-                </Switch>
-                
+                </Switch>  
             </Router>
             <Footer />
         </div>
