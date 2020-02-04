@@ -11,8 +11,13 @@ $snippets = json_decode(json_encode($_POST['textValues']));
 
 
 foreach($snippets as $snippetText){
+    $tags = array('1', '2', '3');
+    foreach($tags as $tagId){
+        
+    }
+
     
-    $reportId = '11';
+    $reportId = '12';
   
     $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
     mysqli_query($connection, $sqlInsertSnippet);
@@ -21,11 +26,18 @@ foreach($snippets as $snippetText){
     $resultSnippetId = mysqli_query($connection, $sqlFindSnippetId);
 
     while($row = mysqli_fetch_array($resultSnippetId)){
-        $snippetId = $row['snippetId'];
-        foreach($tags as $tagId){
-            $sqlInsertTag = "INSERT INTO snippettag (snippetId, tagId) VALUES ('$snippetId', '$tagId')";
+        for ($i = 0; $i < sizeof($row); $i++) {
+            $snippetId = $row[$i];
+            echo json_encode($snippetId);
+            foreach($tags as $tagId){
+                $sqlInsertSnippetTag = "INSERT INTO snippettag (snippetId, tagId) VALUES ('$snippetId','$tagId')";
+                mysqli_query($connection, $sqlInsertSnippetTag);
+            }
+            
         }
     }
+    
+}
     
     
 
@@ -38,16 +50,5 @@ foreach($snippets as $snippetText){
     
     $row = mysqli_fetch_array($resultReportId);
     $reportId = $row['reportId'];
-    
-    
-
-}
-    
-
-    
-
-   
-    
-
 
 ?>
