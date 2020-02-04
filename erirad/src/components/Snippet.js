@@ -73,6 +73,8 @@ function Snippet({value, onChange, id, onTagChecked, onTagId}) {
         console.log(stateArray)
         setTags(stateArray);
         //setNewTagId(tagIdarray);
+        //TODO: SetTags har inte uppdaterats än, innan handle checked tags kallas. 
+        console.log(stateArray)
         handleCheckedTags();
     }
 
