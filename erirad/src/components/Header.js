@@ -120,7 +120,7 @@ function Header(props) {
                                 value={user.password}
                                 onChange={e => setUser({ ...user, password: e.target.value })}
                                 label="Password"
-                                type="text"
+                                type="password"
                                 fullWidth
                             />
                         </DialogContent>

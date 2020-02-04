@@ -16,6 +16,7 @@ function LoginView({onLogIn, onEmployeeLogin}) {
             url: `http://localhost/ERIRADAPP/erirad/src/php/LoginEmployee.php`,
             headers: { 'content-type': 'application/json' },
             data: user
+            
         })
             .then(result => {
                 console.log(result.status)
