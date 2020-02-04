@@ -4,15 +4,39 @@ import {
     Switch,
     Route,
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
+import TagSelector from './TagSelector';
+import { Button } from '@material-ui/core';
+
+
 //This function will serve as the main view when the user is logged in
 function UserHomePage(props) {
 
     const [employeeId, setEmployeeId] = useState(0);
 
     return (
-         <div className="snippetContainer">
-         <Link to="/">Your report view</Link>
+        <div className="snippetContainer">
+            <div className="homepageContainer">
+                <div className="homepageRow">
+                    <Link to="/report">Your report view</Link>
+                </div>
+
+                <div className="homepageRow">
+                    <h2>Filter on what kind of information you would like to see here!</h2>
+                </div>
+                <div className="homepageRow">
+                    <TagSelector />
+                  
+                        <Button
+                            variant="contained"
+                            color="primary"
+                        >
+                            Search
+                       </Button>
+                  
+                </div>
+
+            </div>
         </div>
     );
 }

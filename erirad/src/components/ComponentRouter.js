@@ -15,10 +15,10 @@ function ComponentRouter(props) {
            <Header/>
             <Router >
                 <Switch>
-                    <Route exact path="/" component={ReportView} />
+                    <Route exact path="/" component={UserHomePage} />
                 </Switch>  
                 <Switch>
-                    <Route exact path="/home" component={UserHomePage} />
+                    <Route exact path="/report" component={ReportView} />
                 </Switch>  
             </Router>
             <Footer />

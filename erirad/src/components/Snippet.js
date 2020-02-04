@@ -32,7 +32,7 @@ function Snippet({value, onChange, id, onTagChecked, onTagId}) {
     const handleCheckedTags = () =>{
         onTagChecked(id, tags)
         onTagId(id, newTagId)
-        console.log(tags)
+
     } 
 
     const classes = useStyles();
@@ -46,9 +46,8 @@ function Snippet({value, onChange, id, onTagChecked, onTagId}) {
 
     const [tags, setTags] = useState([])
     const handleCheck = tag => event => {
-        const stateArray = [];
+    const stateArray = [];
    
-
         //this maps through all the old tags to push a new state array with the checked tag.
         tags.map((oldTag) => {
             if (oldTag.tagId === tag.tagId) {
