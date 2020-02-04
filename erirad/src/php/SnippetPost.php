@@ -11,16 +11,19 @@ $snippets = json_decode(json_encode($_POST['textValues']));
 $matrix = json_decode(json_encode($_POST['matrix']));
 
 print_r($matrix);
+
 print_r($snippets);
 
 foreach($snippets as $snippetText){
-    
     foreach($tags as $tagId){
-
+        // echo json_encode($tagId);
     }
+}
 
+foreach($snippets as $snippetText){
     
-    $reportId = '12';
+    
+    $reportId = '13';
   
     $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
     mysqli_query($connection, $sqlInsertSnippet);
