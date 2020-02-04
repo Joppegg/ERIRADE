@@ -12,6 +12,7 @@ import ComponentRouter from './components/ComponentRouter';
 import Header from './components/Header'
 import Footer from './components/Footer'
 
+//This handles rendering of the component router (the "Main application") based on successful login authentication
 function App() {
 
   
@@ -30,12 +31,7 @@ const handleEmployeeId = (id) => {
      <div className="App">
       {
         isLoggedIn ?
-   
-     
         <ComponentRouter/>
-       
-
-      
         :
         <div>
         <Header/>

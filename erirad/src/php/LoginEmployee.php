@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header( "Content-type: application/json" );
 require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
@@ -27,12 +28,19 @@ if($resultCheck < 1){
             isset($_SESSION['email']);
             isset($_SESSION['phoneNumber']);
             isset($_SESSION['userName']);
-            
-            echo json_encode('3');
             //skriver inte ut variablerna.
-            echo (isset($_SESSION['employeeId']));
-            echo json_encode($row['employeeId']);
+            
+            //Echo en array
+            $jsonAnswer = array(
+                'code' => '2',
+                'employeeId' => $row['employeeId']
+                
+
+
+            );
+            echo json_encode($jsonAnswer);
     
+        }
     }
 }
 
