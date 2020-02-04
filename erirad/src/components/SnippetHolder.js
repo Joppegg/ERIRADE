@@ -71,7 +71,7 @@ function SnippetHolder(props) {
           method: 'post',
           url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
           headers: { 'content-type': 'application/json' },
-          data: {namedList, matrix}
+          data: matrix
             
         })
           .then(result => {
