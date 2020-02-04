@@ -8,6 +8,7 @@ import {
 import ReportView from './ReportView';
 import Header from './Header';
 import Footer from './Footer';
+import UserHomePage from './UserHomePage';
 function ComponentRouter(props) {
     return (
         <div>
@@ -15,6 +16,9 @@ function ComponentRouter(props) {
             <Router >
                 <Switch>
                     <Route exact path="/" component={ReportView} />
+                </Switch>  
+                <Switch>
+                    <Route exact path="/home" component={UserHomePage} />
                 </Switch>  
             </Router>
             <Footer />
