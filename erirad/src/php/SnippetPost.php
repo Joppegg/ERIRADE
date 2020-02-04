@@ -10,17 +10,20 @@ $_POST = json_decode($rest_json, true);
 $snippets = json_decode(json_encode($_POST['textValues']));
 $matrix = json_decode(json_encode($_POST['matrix']));
 
-var_dump($matrix);
+//var_dump($matrix);
 
 //print_r($snippets);
 
 
-foreach($snippets as $snippetText){
+foreach($snippets as $parentkey=> $snippetText){
+    $saveKey = $parentkey;
     foreach($matrix as $tags){
-        var_dump($tags);
-        
+  
+      //   var_dump($tags);
+       // var_dump($snippetText);
         foreach($tags as $key => $tagId){
-            echo json_encode('tag id: ' .$tagId. ' ');
+            echo json_encode('Tag ID: ' .$tagId. ' Should be added to Snippet Number: '.$parentkey.' ');
+           
         }
     }
     
