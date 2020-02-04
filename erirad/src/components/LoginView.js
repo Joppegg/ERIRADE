@@ -9,6 +9,11 @@ function LoginView({onLogIn, onEmployeeLogin}) {
         username: '',
         password: ''
     })
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const handleInvalidInput = () => {
+        setErrorMessage('Please enter a Registered user')
+    }
 
     const handleLogIn = () => {
 
@@ -20,12 +25,19 @@ function LoginView({onLogIn, onEmployeeLogin}) {
             
         })
             .then(result => {
-                console.log(result.status)
                 console.log(result.data)
+                if (result.data.code==='2'){
+                    console.log('Login success')
+                    onEmployeeLogin(result.data.employeeId)
+                    onLogIn(true)
+                }
+                else {
+                    handleInvalidInput();
+                }
+                
             })
             .catch(error => console.log(error));
-            
-            onLogIn(true)
+     
 
 
     }
@@ -37,6 +49,7 @@ function LoginView({onLogIn, onEmployeeLogin}) {
             <input type="text" placeholder="Username" onChange={ e => setUser({...user, username: e.target.value})}></input>
             <input type="password" placeholder="Password" onChange={e => setUser({...user, password: e.target.value })}></input>
             <button onClick={handleLogIn}>Log in by clicking this.</button>
+            <p className="ErrorText">{errorMessage}</p>
             <pre>{JSON.stringify(user, null, 2)}</pre>
         </div>
     );
