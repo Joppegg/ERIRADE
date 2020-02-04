@@ -8,12 +8,12 @@ $_POST = json_decode($rest_json, true);
 
 
 $snippets = json_decode(json_encode($_POST['textValues']));
-
+$matrix = json_decode(json_encode($_POST['matrix']));
 
 foreach($snippets as $snippetText){
-    $tags = array('1', '2', '3');
+    
     foreach($tags as $tagId){
-        
+
     }
 
     
