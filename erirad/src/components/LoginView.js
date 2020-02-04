@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
+
 function LoginView({onLogIn, onEmployeeLogin}) {
 
     const [user, setUser] = useState({
@@ -28,10 +29,9 @@ function LoginView({onLogIn, onEmployeeLogin}) {
 
     }
 
-
-
     return (
-        <div>
+       
+            <div className="snippetContainer">
             <h2>Log in here!</h2>
             <input type="text" placeholder="Username" onChange={ e => setUser({...user, username: e.target.value})}></input>
             <input type="password" placeholder="Password" onChange={e => setUser({...user, password: e.target.value })}></input>
