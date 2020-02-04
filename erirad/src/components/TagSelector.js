@@ -51,6 +51,8 @@ function TagSelector(props) {
             console.log(stateArray)
             setTags(stateArray);
     }
+
+    
     
 
     //This gets all the tags and saves them to state.
@@ -100,6 +102,8 @@ function TagSelector(props) {
                     ))}
                 </div>
             }
+
+          
 
         </div>
     );
