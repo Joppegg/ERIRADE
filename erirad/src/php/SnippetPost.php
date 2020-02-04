@@ -10,21 +10,22 @@ $_POST = json_decode($rest_json, true);
 $snippets = json_decode(json_encode($_POST['textValues']));
 $matrix = json_decode(json_encode($_POST['matrix']));
 
-print_r($matrix);
+var_dump($matrix);
 
-print_r($snippets);
+//print_r($snippets);
+
 
 foreach($snippets as $snippetText){
-    foreach($tags as $tagId){
-        // echo json_encode($tagId);
+    foreach($matrix as $tags){
+        var_dump($tags);
+        
+        foreach($tags as $key => $tagId){
+            echo json_encode('tag id: ' .$tagId. ' ');
+        }
     }
-}
-
-foreach($snippets as $snippetText){
     
-    
-    $reportId = '13';
-  
+    $reportId = '14';
+    /*
     $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
     mysqli_query($connection, $sqlInsertSnippet);
 
@@ -35,14 +36,19 @@ foreach($snippets as $snippetText){
         for ($i = 0; $i < sizeof($row); $i++) {
             $snippetId = $row[$i];
             echo json_encode($snippetId);
-            foreach($tags as $tagId){
-                $sqlInsertSnippetTag = "INSERT INTO snippettag (snippetId, tagId) VALUES ('$snippetId','$tagId')";
-                mysqli_query($connection, $sqlInsertSnippetTag);
+
+            
+                    
+                    //$sqlInsertSnippetTag = "INSERT INTO snippettag (snippetId, tagId) VALUES ('$snippetId','$tagId')";
+                    //mysqli_query($connection, $sqlInsertSnippetTag);
+                
+                
             }
             
+            
         }
-    }
     
+    */
 }
     
     
