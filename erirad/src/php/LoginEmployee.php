@@ -8,21 +8,17 @@ session_start();
 $username = mysqli_escape_string($connection, $_POST['username']);
 $password = mysqli_escape_string($connection, $_POST['password']);
 
-echo 'username: ' .$username. ' ';
-echo 'password: ' .$password. ' ';
-
-
 
 $sqlLogin = "SELECT * FROM Employee WHERE username ='$username'";
 $resultLogin = mysqli_query($connection, $sqlLogin);
 $resultCheck = mysqli_num_rows($resultLogin);
 if($resultCheck < 1){
-    echo 'user does not exist';
+    echo '1';
 }else{
     if($row = mysqli_fetch_assoc($resultLogin)){
         $hashedPwdCheck = password_verify($password, $row['pwd']);
         if($hashedPwdCheck == false){
-            echo 'wrong password';
+            echo '2';
         }else if($hashedPwdCheck == true){
            
             
@@ -32,11 +28,11 @@ if($resultCheck < 1){
             isset($_SESSION['phoneNumber']);
             isset($_SESSION['userName']);
             
-            echo 'login successful';
+            echo json_encode('3');
             //skriver inte ut variablerna.
             echo (isset($_SESSION['employeeId']));
-     
-        }
+            echo json_encode($row['employeeId']);
+    
     }
 }
 
