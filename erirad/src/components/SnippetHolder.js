@@ -64,20 +64,23 @@ function SnippetHolder(props) {
         const namedList = JSON.stringify({textValues: textvalues}, null, 2)
         const matrix = JSON.stringify({matrix: tags}, null, 2)
 
-   
-        console.log(matrix)
-        console.log(namedList)
+        const payload = {
+            textValues: textvalues,
+            matrix: tags
+        }
+        
         axios({
           method: 'post',
           url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
           headers: { 'content-type': 'application/json' },
-          data: matrix
+
+          data: JSON.stringify(payload, null, 2)
+
             
         })
           .then(result => {
-            console.log(result)
-            console.log(result.data)
-            console.log(matrix)
+          console.log(result.data)
+         
           })
           .catch(error => console.log(error));
 

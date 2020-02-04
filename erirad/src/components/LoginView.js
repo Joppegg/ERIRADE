@@ -24,6 +24,7 @@ function LoginView({onLogIn, onEmployeeLogin}) {
                 console.log(result.data)
             })
             .catch(error => console.log(error));
+            
             onLogIn(true)
 
 

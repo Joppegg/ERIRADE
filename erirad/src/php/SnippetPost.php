@@ -11,8 +11,10 @@ $snippets = json_decode(json_encode($_POST['textValues']));
 $matrix = json_decode(json_encode($_POST['matrix']));
 
 print_r($matrix);
-foreach($matrix as $tags){
-    //print_r($tags);
+
+print_r($snippets);
+
+foreach($snippets as $snippetText){
     foreach($tags as $tagId){
         // echo json_encode($tagId);
     }
