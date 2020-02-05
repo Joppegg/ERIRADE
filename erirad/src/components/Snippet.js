@@ -30,8 +30,7 @@ function Snippet({value, onChange, id, onTagChecked, onTagId}) {
       };
 
     const handleCheckedTags = () =>{
-        console.log ("tags in hadnel checkded")
-        console.log(tags)
+
         onTagChecked(id, tags)
         onTagId(id, newTagId)
 
@@ -70,16 +69,14 @@ function Snippet({value, onChange, id, onTagChecked, onTagId}) {
             }
          }
         )
-        console.log('state')
-        console.log(stateArray)
+
         setTags(stateArray);
         //TODO: SetTags har inte uppdaterats än, innan handle checked tags kallas. 
     }
     //Used to imitate ComponentDidUpdate, to wait for setTags async call..
     useEffect(() =>{
         handleCheckedTags();
-        console.log("tags")
-        console.log(tags)
+
 
     }, [newTagId])
 

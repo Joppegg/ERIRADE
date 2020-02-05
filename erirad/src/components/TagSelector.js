@@ -22,11 +22,24 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function TagSelector(props) {
+function TagSelector({onTagChange}) {
+
+    const [tags, setTags] = useState([])
+    useEffect(() => {
+        // through all the tags. If a tag is checked, append the id to an array, and then set new snippet state.
+        const tagIdarray = [];
+        tags.map((currentTag) =>{
+            if (currentTag.isChecked === true){
+                tagIdarray.push(currentTag.tagId)
+            }
+        })
+        onTagChange(tagIdarray);
+
+    }, [tags])
 
     const handleCheck = tag => event => {
         const stateArray = [];
-
+  
             //this maps through all the old tags to push a new state array with the checked tag.
             tags.map((oldTag) => {
                 if (oldTag.tagId === tag.tagId) {
@@ -46,9 +59,7 @@ function TagSelector(props) {
                
                 }
              }
-            )
-            console.log('state')
-            console.log(stateArray)
+            )   
             setTags(stateArray);
     }
 
@@ -78,7 +89,7 @@ function TagSelector(props) {
     }, [])
 
     const [isLoading, setLoading] = React.useState(true);
-    const [tags, setTags] = useState([])
+
     return (
         <div>
             {isLoading ?
