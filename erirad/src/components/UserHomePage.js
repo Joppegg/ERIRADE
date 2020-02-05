@@ -8,6 +8,7 @@ import {
 import TagSelector from './TagSelector';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
+import SingleSnippetCard from './SingleSnippetCard'
 
 //This function will serve as the main view when the user is logged in
 function UserHomePage(props) {
@@ -60,6 +61,10 @@ function UserHomePage(props) {
                             Search
                        </Button>
                        <pre>{JSON.stringify(tags, null, 2)}</pre>
+                </div>
+
+                <div className="homepageRow">
+                    <SingleSnippetCard/>
                 </div>
 
 
