@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
 } from "react-router-dom";
 import TagSelector from './TagSelector';
@@ -15,6 +12,7 @@ function UserHomePage(props) {
 
     const [employeeId, setEmployeeId] = useState(0);
     const [tags, setTags] = useState([]);
+    const [snippets, setSnippets] = useState([]);
 
     const handleTagChange = (tagIdArray) => {
         //When this is called, it will set the tag array to be: { tags: ["1", "3", "5"]}, to be sent into the database.
@@ -22,10 +20,18 @@ function UserHomePage(props) {
         setTags(tagIdArray)
     }
 
+    useEffect(()=> {
+        console.log(snippets);
+    }, [snippets])
+
+    const renderSnippetCards = () => {
+
+
+
+    }
+
     const handleSearch = () => {
         const payload =  {tags: tags}
-        console.log(payload);
-
         axios({
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/SearchTags.php`,
@@ -35,7 +41,16 @@ function UserHomePage(props) {
         })
             .then(result => {
                 console.log(result.data)
-
+                //Mappa igenom hela res.data, spara in variablerna i ny array.
+                const newArray = [];
+                result.data.map((snippet) =>
+                    newArray.push({
+                        id: snippet.snippetId,
+                        text: snippet.snippetText
+                    })
+                )
+                setSnippets(newArray);
+                
             })
             .catch(error => console.log(error));
 
@@ -64,6 +79,16 @@ function UserHomePage(props) {
                 </div>
 
                 <div className="homepageRow">
+
+                {snippets.map(snippet => (
+                    <div className="homepageRow">
+                        <SingleSnippetCard
+                            text={snippet.text}
+                        />
+                        </div>
+
+
+                    ))}
                     <SingleSnippetCard/>
                 </div>
 
