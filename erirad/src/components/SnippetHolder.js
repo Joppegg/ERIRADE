@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Header.css'
 import Snippet from './Snippet';
 import Fab from '@material-ui/core/Fab';
@@ -34,8 +34,15 @@ function SnippetHolder(props) {
     const handleTagChange = (tagId, value) => {
         setTagValues({ ...tagValues, [tagId]: value })
         //Tag id vill vi ha kvar.
-        setTags({ ...tags, [tagId]: value })
+      
+
     };
+
+    useEffect(() => {
+        console.log("Tag values in snipept holder")
+        console.log(tags)
+
+    },[tags])
 
     const handleTagId = (tagId, value) => {
         setTags({ ...tags, [tagId]: value })
