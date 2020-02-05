@@ -23,6 +23,7 @@ foreach($selectedTags as $tagId){
     $resultSnippets = mysqli_query($connection, $sqlGetSnippetId);
 
     while($rowSnippetId = mysqli_fetch_array($resultSnippets)){
+
     //    echo(json_encode( $tagId . ":". $rowSnippetId));
        // echo(json_encode($rowSnippetId['snippetid']));
         $snippetSpecificId = $rowSnippetId['snippetid'];
@@ -37,6 +38,7 @@ foreach($selectedTags as $tagId){
 
 
        
+
 
         /*
         foreach($rowSnippetId as $snippetId){
