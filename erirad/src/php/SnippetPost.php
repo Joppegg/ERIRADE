@@ -18,8 +18,8 @@ $matrix = json_decode(json_encode($_POST['matrix']));
 foreach($snippets as $parentkey=> $snippetText){
     $saveKey = $parentkey;
     
-    
-    $reportId = '15';
+    //JOHAN detta kommer strula till det för dig, har bytt till ett lokalt reportid... sry m8
+    $reportId = '6';
     
     $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
     mysqli_query($connection, $sqlInsertSnippet);

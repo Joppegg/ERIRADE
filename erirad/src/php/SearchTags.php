@@ -16,13 +16,27 @@ $selectedTags = array(1, 2);
 //
 //
 //
+$snippetIdAndText = array();
 foreach($selectedTags as $tagId){
 
     $sqlGetSnippetId = "SELECT snippetid FROM snippettag WHERE tagId = '$tagId'";
     $resultSnippets = mysqli_query($connection, $sqlGetSnippetId);
 
     while($rowSnippetId = mysqli_fetch_array($resultSnippets)){
-        echo(json_encode( $tagId . ":". $rowSnippetId['snippetid']));
+    //    echo(json_encode( $tagId . ":". $rowSnippetId));
+       // echo(json_encode($rowSnippetId['snippetid']));
+        $snippetSpecificId = $rowSnippetId['snippetid'];
+
+        $sqlGetSnippetTextAndId = "SELECT snippetId, snippetText FROM snippet WHERE snippetId ='$snippetSpecificId'";
+        $resultSnippetTextAndId = mysqli_query($connection, $sqlGetSnippetTextAndId);
+
+        while ($rowSnippetIdAndtext = mysqli_fetch_array($resultSnippetTextAndId)){
+            $snippetIdAndText[] = $rowSnippetIdAndtext; 
+        }
+
+
+
+       
 
         /*
         foreach($rowSnippetId as $snippetId){
@@ -44,7 +58,7 @@ foreach($selectedTags as $tagId){
 }
 
 
-
+echo json_encode($snippetIdAndText);
 
 
 

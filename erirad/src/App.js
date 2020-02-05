@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
 import './css/Header.css';
 import LoginView from './components/LoginView'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import ReportView from './components/ReportView';
+
 import ComponentRouter from './components/ComponentRouter';
 import Header from './components/Header'
 import Footer from './components/Footer'
