@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,6 +13,14 @@ import { Button } from '@material-ui/core';
 function UserHomePage(props) {
 
     const [employeeId, setEmployeeId] = useState(0);
+    const [tags, setTags] = useState([]);
+
+    const handleTagChange = (id) => {
+        
+        // 
+        setTags()
+
+    }
 
     return (
         <div className="snippetContainer">
