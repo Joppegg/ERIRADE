@@ -171,11 +171,7 @@ function Snippet({value, onChange, id, onTagChecked, onTagId}) {
                         </FormControl>
                     </div>
                 </div>
-                <div className="form-row">
-                    <Button variant="contained" color="primary" onClick={handleClick}>
-                        Save
-                       </Button>
-                </div>
+      
             </form>
         </div>
 

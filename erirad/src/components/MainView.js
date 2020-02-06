@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SnippetHolder from './SnippetHolder';
-
+import MenuBar from './MenuBar';
 function MainView(props) {
     return (
          <div className="column-layout">
@@ -10,4 +10,4 @@ function MainView(props) {
     );
 }
 
-export default MainView;
+export default MainView;    

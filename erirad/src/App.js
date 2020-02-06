@@ -29,8 +29,7 @@ const handleEmployeeId = (id) => {
         :
         <div>
         <Header/>
-        <LoginView onLogIn={handleLogin} onEmployeeLogin={handleEmployeeId}/>
-        <Footer/>
+        <LoginView onLogIn={handleLogin} onEmployeeLogin={handleEmployeeId}/>   
         </div>  
       }
       </div>

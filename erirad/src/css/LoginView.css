@@ -1,0 +1,163 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open-sans';
+  }
+  
+  input {
+    font-size: 14px;
+    font-family: 'Open-sans';
+  }
+  
+  body {
+    background-color: #000000;
+    font-family: 'Open-sans';
+    padding-bottom: 100px;
+    
+  }
+  
+  h2, h3 {
+    margin: 0 0 .75em 0;
+    font-family: 'Open-sans';
+  }
+
+
+  .container {
+    margin: 20px auto 0 auto;
+    padding: 30px;
+    background-color: #FFF;
+    text-align: center;
+    display: flex;
+  }
+  
+  
+  .home-row{
+    padding: 2px;
+  }
+  
+  
+  
+  .form-row {
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+  }
+  
+  .form-row label {
+    padding-right: 10px;
+   flex: 1;
+  }
+  
+  .form-row input {
+      flex: 6;
+     
+  }
+  .form-row textarea{
+    flex: 6;
+  
+  }
+  
+  .column-layout{
+    justify-content: center;
+    background-color: #FFF;
+    margin: 20px 20px 0 20px;
+    line-height: 1.65;
+    padding: 20px 50px;
+    display: flex;
+  }
+  
+  .main-column{
+    flex: 1;
+    order: 1;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  
+  .add-container {
+  display: flex;
+  }
+  
+  .add-space{
+    flex: 5
+  }
+  .add-button{
+    flex: 1
+  }
+  
+  .sidebar-one{
+    text-align: center;
+    flex: 1;
+    order: 1;
+  }
+  
+  .sidebar-form-row{
+    padding: 5px 0;
+    display: flex;
+  }
+  
+  
+  .sidebar-form-row label {
+      padding-right:10px;
+    flex: 1;
+  }
+  
+  .sidebar-form-row input{
+    flex: 2;
+  }
+  
+  
+  .form-container{
+    display: flex;
+  }
+  
+  .logoImg{
+    height: 100px;
+    width: 100px;
+  }
+  
+  .logo{
+    flex: 1;
+  }
+  
+  .menuItem {
+    flex: 3;
+  
+  }
+  
+  .loginContainer{
+    justify-content: center;
+    width:400px;
+    margin: 80px 600px 0 500px;
+    line-height: 1.65;
+    padding: 20px 50px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  
+  .homepageContainer{
+    margin: 20px 20px 0 20px;
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .homepageRow {
+    padding: 5px 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin: auto;
+  
+  }
+  .ErrorText{
+    color: red;
+    text-align: center;
+  }

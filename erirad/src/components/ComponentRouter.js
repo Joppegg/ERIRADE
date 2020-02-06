@@ -9,13 +9,20 @@ import ReportView from './ReportView';
 import Header from './Header';
 import Footer from './Footer';
 import UserHomePage from './UserHomePage';
+import MenuBar from './MenuBar';
+import HomePage from './HomePage';
 function ComponentRouter(props) {
     return (
         <div>
-           <Header/>
+      
             <Router >
+                <Header/>
+                <MenuBar/>
                 <Switch>
-                    <Route exact path="/" component={UserHomePage} />
+                    <Route exact path="/" component={HomePage} />
+                </Switch> 
+                <Switch>
+                    <Route exact path="/search" component={UserHomePage} />
                 </Switch>  
                 <Switch>
                     <Route exact path="/report" component={ReportView} />

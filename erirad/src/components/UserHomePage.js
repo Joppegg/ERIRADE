@@ -6,9 +6,11 @@ import TagSelector from './TagSelector';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 import SingleSnippetCard from './SingleSnippetCard'
+import MenuBar from './MenuBar';
 
 //This function will serve as the main view when the user is logged in
 function UserHomePage(props) {
+    
 
     const [employeeId, setEmployeeId] = useState(0);
     const [tags, setTags] = useState([]);
@@ -76,10 +78,9 @@ function UserHomePage(props) {
 
     return (
         <div className="snippetContainer">
+     
+
             <div className="homepageContainer">
-                <div className="homepageRow">
-                    <Link to="/report">Your report view</Link>
-                </div>
 
                 <div className="homepageRow">
                     <h2>Filter on what kind of information you would like to see here!</h2>
@@ -93,7 +94,7 @@ function UserHomePage(props) {
                         >
                             Search
                        </Button>
-                       <pre>{JSON.stringify(tags, null, 2)}</pre>
+ 
                 </div>
 
                 <div className="homepageRow">

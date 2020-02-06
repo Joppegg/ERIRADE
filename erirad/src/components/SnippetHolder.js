@@ -89,7 +89,6 @@ function SnippetHolder(props) {
 
     return (
         <div>
-            <Link to="/">Home</Link>
             <div className="snippetContainer">{newSnippets}</div>
             <div className="add-container">
                 <div className="add-space"></div>
@@ -99,7 +98,7 @@ function SnippetHolder(props) {
                     </Fab>
                 </div>
             </div>
-            <div className="form-row">
+            <div className="form-row-submit">
                 <Button
                     variant="contained"
                     color="primary"
@@ -108,7 +107,7 @@ function SnippetHolder(props) {
                     Submit Report
                        </Button>
             </div>
-            <pre>{JSON.stringify(tags, null, 2)}</pre>
+            <pre>{/*JSON.stringify(tags, null, 2)*/}</pre>
             <pre>{/*JSON.stringify(textvalues, null, 2)*/}</pre>
             <pre>{/*JSON.stringify(tagValues, null, 2)*/}</pre>
         </div>
