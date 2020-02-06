@@ -4,24 +4,33 @@
 html, body {
     padding: 0;
     margin: 0;
-    font-family: 'Open-sans';
+    font-family: 'Open Sans';
   }
   
   input {
     font-size: 14px;
-    font-family: 'Open-sans';
+   
   }
   
+  
+.homePageSideView{
+  margin: 10px 400px 0 400px;
+  display: inline-flex;
+  flex-direction: column;
+  flex: 2;
+  justify-content: flex-start
+
+}
   body {
     background-color: #000000;
-    font-family: 'Open-sans';
+
     padding-bottom: 100px;
     
   }
   
   h2, h3 {
     margin: 0 0 .75em 0;
-    font-family: 'Open-sans';
+
   }
 
 
@@ -59,6 +68,16 @@ html, body {
   .form-row textarea{
     flex: 6;
   
+  }
+
+  .search-column-layout{
+    justify-content: center;
+    background-color: #FFF;
+    margin: 20px 20px 0 20px;
+    line-height: 1.65;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
   }
   
   .column-layout{
@@ -142,10 +161,10 @@ html, body {
   
   .homepageContainer{
     margin: 20px 20px 0 20px;
-    padding: 40px 80px;
+    padding: 10px 80px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 5;
   }
   
   .homepageRow {

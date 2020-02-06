@@ -7,30 +7,33 @@ import { Button } from '@material-ui/core';
 import axios from 'axios';
 import SingleSnippetCard from './SingleSnippetCard'
 import MenuBar from './MenuBar';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+
 
 //This function will serve as the main view when the user is logged in
 function UserHomePage(props) {
-    
+
+
 
     const [employeeId, setEmployeeId] = useState(0);
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
 
-    const getUnique = (arr, index)  =>{
+    const getUnique = (arr, index) => {
 
         const unique = arr
-             .map(e => e[index])
-      
-             // store the keys of the unique objects
-             .map((e, i, final) => final.indexOf(e) === i && i)
-      
-             // eliminate the dead keys & store unique objects
-            .filter(e => arr[e]).map(e => arr[e]);      
-      
-         return unique;
-      }
-      
-     
+            .map(e => e[index])
+
+            // store the keys of the unique objects
+            .map((e, i, final) => final.indexOf(e) === i && i)
+
+            // eliminate the dead keys & store unique objects
+            .filter(e => arr[e]).map(e => arr[e]);
+
+        return unique;
+    }
+
+
 
     const handleTagChange = (tagIdArray) => {
         //When this is called, it will set the tag array to be: { tags: ["1", "3", "5"]}, to be sent into the database.
@@ -38,7 +41,7 @@ function UserHomePage(props) {
         setTags(tagIdArray)
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         console.log(snippets);
     }, [snippets])
 
@@ -49,7 +52,7 @@ function UserHomePage(props) {
     }
 
     const handleSearch = () => {
-        const payload =  {tags: tags}
+        const payload = { tags: tags }
         axios({
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/SearchTags.php`,
@@ -67,48 +70,60 @@ function UserHomePage(props) {
                         text: snippet.snippetText
                     })
                 )
-            //    setSnippets(newArray);
-                console.log(getUnique(newArray,'id'))
-                setSnippets(getUnique(newArray,'id'))
-                
+                //    setSnippets(newArray);
+                console.log(getUnique(newArray, 'id'))
+                setSnippets(getUnique(newArray, 'id'))
+
             })
             .catch(error => console.log(error));
 
     }
 
     return (
-        <div className="snippetContainer">
-     
+        <div className="search-column-layout">
+
+            <div className="homePageSideView">
+                <ButtonGroup
+                    orientation="vertical"
+                    color="primary"
+                    aria-label="vertical outlined primary button group"
+                >
+                    <Button>Filter by Tags</Button>
+                    <Button>Filter by Author</Button>
+                    <Button>Filter by Date</Button>
+                </ButtonGroup>
+
+            </div>
 
             <div className="homepageContainer">
 
                 <div className="homepageRow">
-                    <h2>Filter on what kind of information you would like to see here!</h2>
+                    <h2>Filter on what kind of information you would like to see here</h2>
                 </div>
                 <div className="homepageRow">
                     <TagSelector onTagChange={handleTagChange} />
-                        <Button 
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSearch}
-                        >
-                            Search
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSearch}
+                    >
+                        Search
                        </Button>
- 
+
                 </div>
 
                 <div className="homepageRow">
 
-                {snippets.map(snippet => (
-                    <div className="homepageRow">
-                        <SingleSnippetCard
-                            text={snippet.text}
-                        />
+                    {snippets.map(snippet => (
+                        <div className="homepageRow">
+                            <SingleSnippetCard
+                                text={snippet.text}
+                            />
                         </div>
 
 
                     ))}
-            
+
                 </div>
 
 

@@ -52,7 +52,7 @@ export default function SingleSnippetCard({title, text, author, date}) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            J.G
+            JG
           </Avatar>
         }
         action={

@@ -1,20 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-tml, body {
+html, body {
   padding: 0;
   margin: 0;
-  font-family: 'Open-sans';
+  font-family: 'Open Sans';
 }
 
 
 input {
   font-size: 14px;
-  font-family: 'Open-sans';
+
 }
 
 body {
   background-color: #2905a1;
-  font-family: 'Open-sans';
+
   padding-bottom: 100px;
 }
 
@@ -65,7 +65,7 @@ h2, h3 {
 .column-layout{
   justify-content: center;
   background-color: #FFF;
-  margin: 20px 20px 0 20px;
+  margin: 0px 20px 0 20px;
   line-height: 1.65;
   padding: 20px 50px;
   display: flex;
@@ -127,14 +127,12 @@ display: flex;
 
 .menuItem {
   flex: 5;
-  font-family: 'Open-sans';
   margin:auto;
 }
 
 
 .logoItem {
   flex: 1;
-  font-family: 'Open-sans';
 }
 
 .snippetContainer{
@@ -150,12 +148,32 @@ display: flex;
 }
 
 
+.homePageContainer{
+  justify-content: center;
+  width:auto;
+  background-color: #FFF;
+  margin: 0 20px 0 20px;
+  line-height: 1.65;
+  padding: 20px 50px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
 .homepageContainer{
   margin: 20px 20px 0 20px;
   padding: 40px 80px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 5;
+}
+
+.homePageSideView{
+  margin: 10px 40px 0 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  justify-content: center;
 }
 
 .homepageRow {

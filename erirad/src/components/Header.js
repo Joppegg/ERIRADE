@@ -66,6 +66,9 @@ function Header(props) {
                     <h1>ERIRAD</h1>
                  </div>
                 
+                 <div className="logoItem">
+                  
+                </div>
                 {/*
                 <div className="menuItem">
                     <CreateReport />
