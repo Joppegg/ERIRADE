@@ -19,7 +19,7 @@ foreach($selectedTags as $tagId){
 
         $snippetSpecificId = $rowSnippetId['snippetid'];
 
-        $sqlGetSnippetTextAndId = "SELECT snippetId, snippetText FROM snippet WHERE snippetId ='$snippetSpecificId'";
+        $sqlGetSnippetTextAndId = "SELECT DISTINCT snippetId, snippetText FROM snippet WHERE snippetId ='$snippetSpecificId'";
         $resultSnippetTextAndId = mysqli_query($connection, $sqlGetSnippetTextAndId);
 
         while ($rowSnippetIdAndtext = mysqli_fetch_array($resultSnippetTextAndId)){
