@@ -75,7 +75,7 @@ function Header(props) {
                 </div>*/
             }
                  
-                 {/*
+                 {
                 <div className="menuItem">
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                         Register user
@@ -149,7 +149,7 @@ function Header(props) {
 
 
                 </div>
-                */}
+                }
 
             </div>
 
