@@ -1,25 +1,37 @@
-
 <?php 
 header("Access-Control-Allow-Origin: *");
 require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
-
-
 $snippets = json_decode(json_encode($_POST['textValues']));
 $matrix = json_decode(json_encode($_POST['matrix']));
+$employeeId = mysqli_escape_string($connection, $_POST['employeeId']);
 
-//var_dump($matrix);
 
-//print_r($snippets);
+echo json_encode("employee ID: " .$employeeId);
+
+$sqlInsertReport = "INSERT INTO report (employeeId) VALUES ('$employeeId')";
+mysqli_query($connection, $sqlInsertReport);
+
+
 
 
 foreach($snippets as $parentkey=> $snippetText){
     $saveKey = $parentkey;
     
     //JOHAN detta kommer strula till det för dig, har bytt till ett lokalt reportid... sry m8
-    $reportId = '6';
+
+    //hämtar senaste tillagda reportId:et, alltså det som insertas längst upp i filen
+    //funkar inte av någon jävla anledning 
+
+    
+    $getLatestReportId = "SELECT reportId FROM report ORDER BY reportId DESC LIMIT 1";
+    $resultLatest = mysqli_query($connection, $getLatestReportId);
+
+    $latestReportId = mysqli_fetch_assoc($resultLatest);
+    $reportId = $latestReportId['reportId'];
+
     
     $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
     mysqli_query($connection, $sqlInsertSnippet);
