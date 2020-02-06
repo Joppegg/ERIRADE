@@ -14,6 +14,22 @@ function UserHomePage(props) {
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
 
+    const getUnique = (arr, index)  =>{
+
+        const unique = arr
+             .map(e => e[index])
+      
+             // store the keys of the unique objects
+             .map((e, i, final) => final.indexOf(e) === i && i)
+      
+             // eliminate the dead keys & store unique objects
+            .filter(e => arr[e]).map(e => arr[e]);      
+      
+         return unique;
+      }
+      
+     
+
     const handleTagChange = (tagIdArray) => {
         //When this is called, it will set the tag array to be: { tags: ["1", "3", "5"]}, to be sent into the database.
         //What will be returned is a jsonarray with: snippetÌD and snippetText. 
@@ -49,7 +65,9 @@ function UserHomePage(props) {
                         text: snippet.snippetText
                     })
                 )
-                setSnippets(newArray);
+            //    setSnippets(newArray);
+                console.log(getUnique(newArray,'id'))
+                setSnippets(getUnique(newArray,'id'))
                 
             })
             .catch(error => console.log(error));
@@ -89,7 +107,7 @@ function UserHomePage(props) {
 
 
                     ))}
-                    <SingleSnippetCard/>
+            
                 </div>
 
 
