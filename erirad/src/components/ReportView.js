@@ -4,11 +4,11 @@ import Header from './Header'
 import MainView from './MainView';
 import Footer from './Footer';
 
-function ReportView(props) {
+function ReportView({employeeId}) {
     return (
         <div className="App">
             
-            <MainView />
+            <MainView employeeId={employeeId} />
           
         </div>
     );

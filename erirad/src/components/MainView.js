@@ -2,10 +2,10 @@ import React from 'react';
 
 import SnippetHolder from './SnippetHolder';
 import MenuBar from './MenuBar';
-function MainView(props) {
+function MainView({employeeId}) {
     return (
          <div className="column-layout">
-         <SnippetHolder/>
+         <SnippetHolder employeeId={employeeId}/>
         </div>
     );
 }

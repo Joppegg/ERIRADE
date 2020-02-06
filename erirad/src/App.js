@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './css/Header.css';
 import LoginView from './components/LoginView'
 
@@ -14,18 +14,27 @@ const [isLoggedIn, setIsLoggedIn] = useState(false)
 const [employeeId, setemployeeId] = useState(null)
 
 const handleLogin = () => {
-  setIsLoggedIn(true)
+ // setIsLoggedIn(true)
 }
 
 const handleEmployeeId = (id) => {
   setemployeeId(id) 
 }
 
+useEffect(() => {
+  console.log("eid")
+  console.log(employeeId)
+  if(employeeId != null){
+    setIsLoggedIn(true)
+  }
+ 
+}, [employeeId])
+
   return (
      <div className="App">
       {
         isLoggedIn ?
-        <ComponentRouter/>
+        <ComponentRouter employeeId={employeeId}/>
         :
         <div>
         <Header/>

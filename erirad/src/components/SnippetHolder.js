@@ -15,7 +15,7 @@ import {
 *This functions purpose is to dynamically render and pass state to the child components, which will be individual snippets.
 */
 
-function SnippetHolder(props) {
+function SnippetHolder({employeeId}) {
 
     const [textvalues, setTextValues] = useState([])
     const [tagValues, setTagValues] = useState({})
@@ -65,9 +65,12 @@ function SnippetHolder(props) {
     }
 
     const handleSubmit = () => {
+        console.log("Logging eid")
+        console.log(employeeId)
         const payload = {
             textValues: textvalues,
-            matrix: tags
+            matrix: tags,
+            employeeId: employeeId
         }
 
         axios({

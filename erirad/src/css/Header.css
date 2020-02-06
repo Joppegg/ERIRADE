@@ -22,6 +22,10 @@ h2, h3 {
   margin: 0 0 .75em 0;
 }
 
+.container-center  {
+  margin:auto;
+}
+
 .container {
   margin: 20px auto 0 auto;
   padding: 30px;

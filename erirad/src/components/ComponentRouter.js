@@ -11,7 +11,7 @@ import Footer from './Footer';
 import UserHomePage from './UserHomePage';
 import MenuBar from './MenuBar';
 import HomePage from './HomePage';
-function ComponentRouter(props) {
+function ComponentRouter({employeeId}) {
     return (
         <div>
       
@@ -25,7 +25,11 @@ function ComponentRouter(props) {
                     <Route exact path="/search" component={UserHomePage} />
                 </Switch>  
                 <Switch>
-                    <Route exact path="/report" component={ReportView} />
+                    <Route exact path="/report"
+                     
+                     component={ () => <ReportView employeeId={employeeId} />} 
+                     
+                     />
                 </Switch>  
             </Router>
             <Footer />
