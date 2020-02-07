@@ -11,21 +11,85 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { green } from '@material-ui/core/colors';
+import CheckIcon from '@material-ui/icons/Check';
+import SaveIcon from '@material-ui/icons/Save';
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+        
+    },
+    buttonSuccess: {
+        backgroundColor: green[500],
+        '&:hover': {
+            backgroundColor: green[700],
+        },
+    },
+    fabProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: -6,
+        left: -6,
+        zIndex: 1,
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
+}));
 /*
 *This functions purpose is to dynamically render and pass state to the child components, which will be individual snippets.
 */
 
-function SnippetHolder({employeeId}) {
+function SnippetHolder({ employeeId }) {
 
     const [textvalues, setTextValues] = useState([])
     const [tagValues, setTagValues] = useState({})
     const [snippetTextArea, setSnippetTextArea] = useState([{}]);
-
     const [tags, setTags] = useState({
-
     })
 
+    const classes = useStyles();
+    const [loading, setLoading] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const timer = React.useRef();
 
+    const buttonClassname = clsx({
+        [classes.buttonSuccess]: success,
+    });
+
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(timer.current);
+        };
+    }, []);
+
+    const handleButtonClick = () => {
+        handleSubmit();
+        if (!loading) {
+            setSuccess(false);
+            setLoading(true);
+            timer.current = setTimeout(() => {
+                setSuccess(true);
+                setLoading(false);
+            }, 500);
+        }
+    };
 
     //Uppdaterar state med texterna.
     const handleFieldChange = (fieldId, value) => {
@@ -34,7 +98,7 @@ function SnippetHolder({employeeId}) {
     const handleTagChange = (tagId, value) => {
         setTagValues({ ...tagValues, [tagId]: value })
         //Tag id vill vi ha kvar.
-      
+
 
     };
 
@@ -42,7 +106,7 @@ function SnippetHolder({employeeId}) {
         console.log("Tag values in snipept holder")
         console.log(tags)
 
-    },[tags])
+    }, [tags])
 
     const handleTagId = (tagId, value) => {
         setTags({ ...tags, [tagId]: value })
@@ -92,9 +156,9 @@ function SnippetHolder({employeeId}) {
 
     return (
         <div>
-          
+
             <div className="snippetContainer">
-            <h3 className="text-center"> When submitted, these snippets are saved to a single report with individual tagging for filtering. </h3>
+                <h3 className="text-center"> When submitted, these snippets are saved to a single report with individual tagging for filtering. </h3>
                 {newSnippets}</div>
             <div className="add-container">
                 <div className="add-space"></div>
@@ -104,15 +168,26 @@ function SnippetHolder({employeeId}) {
                     </Fab>
                 </div>
             </div>
+
             <div className="form-row-submit">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                >
-                    Submit Report
-                       </Button>
+                <div className={classes.root}>
+                    <div className={classes.wrapper}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={buttonClassname}
+                            disabled={loading}
+                            onClick={handleButtonClick}
+                        >
+                            Submit Report
+                   </Button>
+                        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    </div>
+                </div>
+
+
             </div>
+
             <pre>{/*JSON.stringify(tags, null, 2)*/}</pre>
             <pre>{/*JSON.stringify(textvalues, null, 2)*/}</pre>
             <pre>{/*JSON.stringify(tagValues, null, 2)*/}</pre>
