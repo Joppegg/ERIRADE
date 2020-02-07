@@ -33,9 +33,9 @@ if($resultCheck < 1){
             //Echo en array
             $jsonAnswer = array(
                 'code' => '2',
-                'employeeId' => $row['employeeId']
-                'firstName' => $row['firstName']
-                'lastName' => $row['lastName'];
+                'employeeId' => $row['employeeId'],
+                'firstName' => $row['firstName'],
+                'lastName' => $row['lastName']
             );
             echo json_encode($jsonAnswer);
     
