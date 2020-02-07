@@ -11,6 +11,8 @@ $employeeId = mysqli_escape_string($connection, $_POST['employeeId']);
 
 echo json_encode("employee ID: " .$employeeId);
 
+
+
 $sqlInsertReport = "INSERT INTO report (employeeId) VALUES ('$employeeId')";
 mysqli_query($connection, $sqlInsertReport);
 
@@ -20,11 +22,6 @@ mysqli_query($connection, $sqlInsertReport);
 foreach($snippets as $parentkey=> $snippetText){
     $saveKey = $parentkey;
     
-    //JOHAN detta kommer strula till det för dig, har bytt till ett lokalt reportid... sry m8
-
-    //hämtar senaste tillagda reportId:et, alltså det som insertas längst upp i filen
-    //funkar inte av någon jävla anledning 
-
     
     $getLatestReportId = "SELECT reportId FROM report ORDER BY reportId DESC LIMIT 1";
     $resultLatest = mysqli_query($connection, $getLatestReportId);
