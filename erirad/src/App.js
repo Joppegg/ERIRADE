@@ -13,12 +13,21 @@ function App() {
 const [isLoggedIn, setIsLoggedIn] = useState(false)
 const [employeeId, setemployeeId] = useState(null)
 
-const handleLogin = () => {
- // setIsLoggedIn(true)
-}
+const [employee, setEmployee] = useState({
+  employeeID: '',
+  firstName: '',
+  lastName: ''
+})
 
-const handleEmployeeId = (id) => {
-  setemployeeId(id) 
+
+const handleEmployeeId = (data) => {
+  setemployeeId(data.employeeId) 
+
+  setEmployee({
+    employeeId: data.employeeId,
+    firstName: data.firstName,
+    lastName: data.lastName
+  })
 }
 
 useEffect(() => {
@@ -30,6 +39,14 @@ useEffect(() => {
  
 }, [employeeId])
 
+useEffect(() => {
+  console.log("employee")
+  console.log(employee)
+}, [employee])
+
+const EmployeeContext = React.createContext(employeeId);
+
+
   return (
      <div className="App">
       {
@@ -38,7 +55,7 @@ useEffect(() => {
         :
         <div>
         <Header/>
-        <LoginView onLogIn={handleLogin} onEmployeeLogin={handleEmployeeId}/>   
+        <LoginView onEmployeeLogin={handleEmployeeId}/>   
         </div>  
       }
       </div>
