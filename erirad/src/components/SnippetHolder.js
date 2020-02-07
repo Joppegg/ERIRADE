@@ -64,6 +64,8 @@ function SnippetHolder({ employeeId }) {
     const [tags, setTags] = useState({
     })
 
+    const [submittedText, setSubmittedText] = useState("Submit Report")
+
     const classes = useStyles();
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
@@ -87,6 +89,7 @@ function SnippetHolder({ employeeId }) {
             timer.current = setTimeout(() => {
                 setSuccess(true);
                 setLoading(false);
+                setSubmittedText("Submitted");
             }, 500);
         }
     };
@@ -179,7 +182,7 @@ function SnippetHolder({ employeeId }) {
                             disabled={loading}
                             onClick={handleButtonClick}
                         >
-                            Submit Report
+                            {submittedText}
                    </Button>
                         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                     </div>
