@@ -168,6 +168,10 @@ display: flex;
   flex: 5;
 }
 
+.text-center{
+  text-align: center;
+}
+
 .homePageSideView{
   margin: 10px 40px 0 10px;
   display: flex;

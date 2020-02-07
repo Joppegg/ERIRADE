@@ -92,7 +92,10 @@ function SnippetHolder({employeeId}) {
 
     return (
         <div>
-            <div className="snippetContainer">{newSnippets}</div>
+          
+            <div className="snippetContainer">
+            <h3 className="text-center"> When submitted, these snippets are saved to a single report with individual tagging for filtering. </h3>
+                {newSnippets}</div>
             <div className="add-container">
                 <div className="add-space"></div>
                 <div className="add-button">

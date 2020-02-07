@@ -165,6 +165,7 @@ html, body {
     display: flex;
     flex-direction: column;
     flex: 5;
+    text-align: center;
   }
   
   .homepageRow {
