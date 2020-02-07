@@ -31,8 +31,11 @@ if($resultEmployeeId != null){
     echo json_encode($snippetText);
 }
 else{
-
+    $empNotExists = 'The employee does not exist';
+    echo json_encode($empNotExists);
 }
+    
+
 
 
 
