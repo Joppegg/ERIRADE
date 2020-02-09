@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Link
-} from "react-router-dom";
+
 import TagSelector from './TagSelector';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 import SingleSnippetCard from './SingleSnippetCard'
-import MenuBar from './MenuBar';
+
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
@@ -15,7 +13,6 @@ function UserHomePage(props) {
 
 
 
-    const [employeeId, setEmployeeId] = useState(0);
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
 
@@ -45,11 +42,7 @@ function UserHomePage(props) {
         console.log(snippets);
     }, [snippets])
 
-    const renderSnippetCards = () => {
 
-
-
-    }
 
     const handleSearch = () => {
         const payload = { tags: tags }

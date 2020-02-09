@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
+
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
 
 
-//This is for the checkboxes
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-    },
-    formControl: {
-        margin: theme.spacing(1),
-    },
-}));
 
 
 

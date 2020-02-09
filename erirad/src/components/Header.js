@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 import '../css/Header.css'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,12 +8,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
-import CreateReport from './CreateReport';
-import {EmployeeContext} from '../../App'
+
 
 
 function Header(props) {
-    const theme = useContext(EmployeeContext);
 
     const [open, setOpen] = useState(false)
     const [user, setUser] = useState({

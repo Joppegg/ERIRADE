@@ -4,7 +4,8 @@ import LoginView from './components/LoginView'
 
 import ComponentRouter from './components/ComponentRouter';
 import Header from './components/Header'
-import Footer from './components/Footer'
+
+import {} from 'react-redux'
 
 //This handles rendering of the component router (the "Main application") based on successful login authentication
 function App() {
