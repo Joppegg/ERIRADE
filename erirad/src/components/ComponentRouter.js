@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+
 } from "react-router-dom";
 import ReportView from './ReportView';
 import Header from './Header';
@@ -11,26 +11,26 @@ import Footer from './Footer';
 import UserHomePage from './UserHomePage';
 import MenuBar from './MenuBar';
 import HomePage from './HomePage';
-function ComponentRouter({employeeId}) {
+function ComponentRouter({ employeeId }) {
     return (
         <div>
-      
+
             <Router >
-                <Header/>
-                <MenuBar/>
+                <Header />
+                <MenuBar />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                </Switch> 
+                </Switch>
                 <Switch>
                     <Route exact path="/search" component={UserHomePage} />
-                </Switch>  
+                </Switch>
                 <Switch>
                     <Route exact path="/report"
-                     
-                     component={ () => <ReportView employeeId={employeeId} />} 
-                     
-                     />
-                </Switch>  
+
+                        component={() => <ReportView employeeId={employeeId} />}
+
+                    />
+                </Switch>
             </Router>
             <Footer />
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import '../css/Header.css'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
-import CreateReport from './CreateReport';
 
 
 
@@ -52,7 +51,7 @@ function Header(props) {
 
     };
 
-
+  
     return (
         <div>
             <div className="container">
@@ -78,6 +77,9 @@ function Header(props) {
                  {
                 <div className="menuItem">
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                        Register user
+                   </Button>
+                   <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                         Register user
                    </Button>
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

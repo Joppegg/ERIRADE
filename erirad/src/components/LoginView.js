@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import '../css/LoginView.css';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import {useSelector, useDispatch} from 'react-redux';
+import {signIn} from '../actions';
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
@@ -35,20 +36,21 @@ const useStyles = makeStyles(theme => ({
 
 function LoginView({ onLogIn, onEmployeeLogin }) {
 
-    const classes = useStyles();
+    const login = useSelector(state => state.loggedReducer);
+    const dispatch = useDispatch();
 
+    const classes = useStyles();
     const [user, setUser] = useState({
         username: '',
         password: ''
     })
     const [errorMessage, setErrorMessage] = useState('')
-
     const handleInvalidInput = () => {
         setErrorMessage('Incorrect login information')
     }
 
     const handleLogIn = () => {
-
+ 
         axios({
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/LoginEmployee.php`,
@@ -60,6 +62,7 @@ function LoginView({ onLogIn, onEmployeeLogin }) {
                 if (result.data.code === '2') {
                     console.log('Login success')
                     onEmployeeLogin(result.data)
+                    dispatch(signIn());
                     onLogIn(true)
                 }
                 else {
