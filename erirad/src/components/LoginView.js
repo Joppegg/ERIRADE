@@ -1,11 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../css/LoginView.css';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {useSelector, useDispatch} from 'react-redux';
-import {signIn} from '../actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { signIn, signInEmployee } from '../actions';
+
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
@@ -13,7 +14,6 @@ const useStyles = makeStyles(theme => ({
             width: 350,
             color: 'white',
             background: 'white',
-
         },
     },
 
@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
             width: 350,
             color: 'black',
             background: 'white',
-
         },
         "&:hover": {
             //you want this to be the same as the backgroundColor above
@@ -50,7 +49,6 @@ function LoginView({ onLogIn, onEmployeeLogin }) {
     }
 
     const handleLogIn = () => {
- 
         axios({
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/LoginEmployee.php`,
@@ -63,6 +61,7 @@ function LoginView({ onLogIn, onEmployeeLogin }) {
                     console.log('Login success')
                     onEmployeeLogin(result.data)
                     dispatch(signIn());
+                    dispatch(signInEmployee(result.data))
                     onLogIn(true)
                 }
                 else {
@@ -82,20 +81,20 @@ function LoginView({ onLogIn, onEmployeeLogin }) {
 
             <div className="form-row">
                 <form className={classes.root} noValidate autoComplete="off">
-                    <TextField id="standard-basic" label="Username" variant="filled" onChange={e => setUser({ ...user, username: e.target.value })}/>
+                    <TextField id="standard-basic" label="Username" variant="filled" onChange={e => setUser({ ...user, username: e.target.value })} />
                 </form>
             </div>
 
 
             <div className="form-row">
                 <form className={classes.root} noValidate autoComplete="off">
-                    <TextField id="standard-basic" label="Password" type="password" variant="filled" onChange={e => setUser({ ...user, password: e.target.value })}/>
+                    <TextField id="standard-basic" label="Password" type="password" variant="filled" onChange={e => setUser({ ...user, password: e.target.value })} />
                 </form>
             </div>
             <div className="form-row">
-            <div className={classes.button}>
-            <Button variant="outlined" onClick={handleLogIn} >Sign in</Button>
-            </div>
+                <div className={classes.button}>
+                    <Button variant="outlined" onClick={handleLogIn} >Sign in</Button>
+                </div>
 
                 <p className="ErrorText">{errorMessage}</p>
             </div>
