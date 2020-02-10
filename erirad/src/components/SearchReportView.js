@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
-
 import TagSelector from './TagSelector';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 import SingleSnippetCard from './SingleSnippetCard'
-
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
+
+
+
 //This function will serve as the main view when the user is logged in
-function UserHomePage(props) {
-
-
+function SearchReportView(props) {
 
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
-
     const getUnique = (arr, index) => {
 
         const unique = arr
@@ -89,7 +87,6 @@ function UserHomePage(props) {
             </div>
 
             <div className="homepageContainer">
-
                 <div className="homepageRow">
                     <h2>Filter on what kind of information you would like to see here</h2>
                 </div>
@@ -106,15 +103,12 @@ function UserHomePage(props) {
                 </div>
 
                 <div className="homepageRow">
-
                     {snippets.map(snippet => (
                         <div className="homepageRow">
                             <SingleSnippetCard
                                 text={snippet.text}
                             />
                         </div>
-
-
                     ))}
 
                 </div>
@@ -125,4 +119,4 @@ function UserHomePage(props) {
     );
 }
 
-export default UserHomePage;
+export default SearchReportView;

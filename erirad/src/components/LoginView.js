@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
             width: 350,
             color: 'white',
             background: 'white',
-        },
+        }, 
     },
 
     button: {

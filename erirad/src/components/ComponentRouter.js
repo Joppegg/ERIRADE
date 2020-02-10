@@ -8,9 +8,11 @@ import {
 import ReportView from './ReportView';
 import Header from './Header';
 import Footer from './Footer';
-import UserHomePage from './UserHomePage';
+import SearchReportView from './SearchReportView';
 import MenuBar from './MenuBar';
 import HomePage from './HomePage';
+import AuthorReports from './AuthorReports';
+import CreateReportRequest from './CreateReportRequest';
 function ComponentRouter({ employeeId }) {
     return (
         <div>
@@ -22,14 +24,24 @@ function ComponentRouter({ employeeId }) {
                     <Route exact path="/" component={HomePage} />
                 </Switch>
                 <Switch>
-                    <Route exact path="/search" component={UserHomePage} />
+                    <Route exact path="/search" component={SearchReportView} />
                 </Switch>
                 <Switch>
                     <Route exact path="/report"
-
                         component={() => <ReportView employeeId={employeeId} />}
-
                     />
+                </Switch>
+                <Switch>
+                    <Route exact path="/author"
+                    component={() => <AuthorReports/>}
+                    />
+
+                </Switch>
+                <Switch>
+                    <Route exact path="/createreport"
+                    component={() => <CreateReportRequest/>}
+                    />
+
                 </Switch>
             </Router>
             <Footer />
