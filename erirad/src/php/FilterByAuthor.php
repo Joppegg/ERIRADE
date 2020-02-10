@@ -14,6 +14,7 @@ $resultFindEmployeeId = mysqli_query($connection, $sqlFindEmployeeId);
 $resultEmployeeId = mysqli_fetch_assoc($resultFindEmployeeId);
 $employeeId = $resultEmployeeId['employeeId'];
 
+
 if($resultEmployeeId != null){
     $sqlFindReportId = "SELECT reportId FROM report WHERE employeeId = '$employeeId'";
     $resultFindReportId = mysqli_query($connection, $sqlFindReportId);
@@ -25,10 +26,15 @@ if($resultEmployeeId != null){
         $resultFindSnippetText = mysqli_query($connection, $sqlFindSnippetText);
         while($rowSnippetText = mysqli_fetch_array($resultFindSnippetText)){
             $snippetText[] = $rowSnippetText;
+            foreach($snippetText as $text){
+               
+                echo json_encode($text);
+            }
+            
         }
     }
     
-    echo json_encode($snippetText);
+    
 }
 else{
     $empNotExists = 'The employee does not exist';

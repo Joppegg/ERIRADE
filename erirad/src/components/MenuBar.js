@@ -47,6 +47,25 @@ function MenuBar(props) {
                     </Link>
                 </div>
             </div>
+
+            <div className="menuBarColumn">
+                <div className="menuBarColumn-button">
+                    <Link to="/author">
+                        <Button>Filter by author
+                              </Button>
+                    </Link>
+                </div>
+            </div>
+
+            <div className="menuBarColumn">
+                <div className="menuBarColumn-button">
+                    <Link to="/createreport">
+                        <Button>Create report request
+                              </Button>
+                    </Link>
+                </div>
+            </div>
+
         </div >
     );
 }
