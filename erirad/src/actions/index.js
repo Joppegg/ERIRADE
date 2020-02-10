@@ -4,3 +4,10 @@ export const signIn = () => {
     };
 };
 
+export const signInEmployee = employee => {
+    return {
+        type: 'EMPLOYEE',
+        payload: employee
+    };
+};
+
