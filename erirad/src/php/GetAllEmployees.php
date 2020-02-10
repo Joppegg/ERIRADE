@@ -6,8 +6,10 @@ $_POST = json_decode($rest_json, true);
 
 $sqlGetAll = "SELECT * FROM employee";
 $result = mysqli_query($connection, $sqlGetAll);
+$allEmployees = array();
 while($row = mysqli_fetch_assoc($result)){
     $allEmployees[] = $row;
-    echo json_encode($allEmployees);
+
     
 }
+echo json_encode($allEmployees);
