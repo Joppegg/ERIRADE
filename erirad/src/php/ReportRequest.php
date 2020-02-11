@@ -5,6 +5,14 @@ $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
 
+$report = json_decode(json_encode($_POST['report']));
+
+echo json_encode($report);
+echo($report);
+
+echo $report['title'];
+//Det är för att report-objektet kommer in. I det så ligger title, author osv.
+
 $authorId = mysqli_escape_string($connection, $_POST['requesterId']);
 $title = mysqli_escape_string($connection, $_POST['title']);
 $description = mysqli_escape_string($connection, $_POST['description']);
