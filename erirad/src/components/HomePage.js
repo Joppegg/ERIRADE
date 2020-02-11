@@ -4,15 +4,19 @@ function HomePage(props) {
     return (
 
         <div className="snippetContainer">
-            <div className="homepageContainer">
-                <h2>Welcome to the homepage</h2>
-                <p>This page will be the entrypoint to the reporting system. Here you will be able to create a request for a report
-                    as well as responding to requests. 
+            <div className="overViewHomePage">
+                <div className="overViewHomePageColumn">
+                    <h2>Welcome to the homepage</h2>
+                    <p>This page will be the entrypoint to the reporting system. Here you will be able to create a request for a report
+                        as well as responding to requests.
                 </p>
-
-                <div className="homepageRow">
-                <IncomingReportRequest/>
-
+                </div>
+                <div className="homePageIncomingRequests">
+                   <h2>Vill du spela ett spel med mig?</h2>
+                </div>
+                <div className="homePageIncomingRequests">
+                    <h2>Your pending reports</h2>
+                    <IncomingReportRequest />
                 </div>
             </div>
         </div>
