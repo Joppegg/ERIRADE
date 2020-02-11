@@ -15,6 +15,7 @@ function HomePage(props) {
                    <h2>Vill du spela ett spel med mig?</h2>
                 </div>
                 <div className="homePageIncomingRequests">
+                    <h2>Your pending reports</h2>
                     <IncomingReportRequest />
                 </div>
             </div>

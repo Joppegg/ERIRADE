@@ -30,37 +30,16 @@ function IncomingReportRequest(props) {
 
     return (
         <List className={classes.root}>
-            <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemLink href="#simple-list">
-                <ListItemText
-                    primary="Brunch this weekend?"
-                    secondary={
-                        <React.Fragment>
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary"
-                            >
-                                Ali Connors
-              </Typography>
-                            {" — I'll be in your neighborhood doing errands this…"}
-                        </React.Fragment>
-                    }
-                />
-                </ListItemLink>
-            </ListItem>
+        
           
             <Divider variant="inset" component="li" />
+            <ListItemLink href="#simple-list">
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Summer BBQ"
+                    primary="Project report february"
                     secondary={
                         <React.Fragment>
                             <Typography
@@ -69,20 +48,22 @@ function IncomingReportRequest(props) {
                                 className={classes.inline}
                                 color="textPrimary"
                             >
-                                to Scott, Alex, Jennifer
+                              Projékt Ledersson
               </Typography>
-                            {" — Wish I could come, but I'm out of town this…"}
+                            {" — This month the focus will be on…"}
                         </React.Fragment>
                     }
                 />
             </ListItem>
+            </ListItemLink>
             <Divider variant="inset" component="li" />
+            <ListItemLink href="#simple-list">
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Oui Oui"
+                    primary="Monthly report"
                     secondary={
                         <React.Fragment>
                             <Typography
@@ -91,13 +72,14 @@ function IncomingReportRequest(props) {
                                 className={classes.inline}
                                 color="textPrimary"
                             >
-                                Sandra Adams
+                                Chef Chefsson
               </Typography>
-                            {' — Do you have Paris recommendations? Have you ever…'}
+                            {' — Dont forget to fill in the...'}
                         </React.Fragment>
                     }
                 />
             </ListItem>
+            </ListItemLink>
         </List>
     );
 }
