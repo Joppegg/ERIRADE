@@ -13,7 +13,9 @@ while($row = mysqli_fetch_assoc($resultSnippetTexts)){
     $textlist[] = $row['snippettext'];
     foreach($textlist as $snippetText){
         $ary = explode(' ',$snippetText);
+        print_r($ary);
         foreach($ary as $text){
+            
             $stop_words = array("a", "you", "if", "the", "this", "that", "about", "entry", "report", "have", "with", "is", "where", "attended", "meetings", "discussed", "multiple", "snippets");
             $max_count = 100;
             $string = preg_replace('/ss+/i', '', $text);
@@ -38,7 +40,9 @@ while($row = mysqli_fetch_assoc($resultSnippetTexts)){
             
             if(sizeof($keywords) != 0){
                 $keywordsUnique = array_unique($keywords);
-                var_dump($keywordsUnique);
+                foreach($keywordsUnique as $word){
+                    //echo $word;
+                }
                 $count = 10;
                 if($count > 100){
                     
