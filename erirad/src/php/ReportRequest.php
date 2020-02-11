@@ -4,14 +4,15 @@ require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
-/*
-$authorId = mysqli_escape_string($connection, $_POST['authorId']);
+
+$authorId = mysqli_escape_string($connection, $_POST['requesterId']);
 $title = mysqli_escape_string($connection, $_POST['title']);
 $description = mysqli_escape_string($connection, $_POST['description']);
 $deadline = mysqli_escape_string($connection, $_POST['deadline']);
 $time = time();
 $timestamp = (date("Y/m/d H:i:s",$time));
-*/
+
+/*
 $authorId = 5;
 $title = 'sofia maria nyberg';
 $description = 'suger';
@@ -20,7 +21,7 @@ $converted = strtotime($timeString);
 $deadline = date("Y-m-d", $converted);
 
 $timestamp = (date("Y/m/d H:i:s", time()));
-
+*/
 //inserting a request into DB
 $sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp')";
 mysqli_query($connection, $sqlInsertReportRequest);
