@@ -5,9 +5,11 @@ $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 $arr = array();
 
-$empFirstName = mysqli_escape_string($connection, $_POST['firstName']);
-$empLastName = mysqli_escape_string($connection, $_POST['lastName']);
+//$empFirstName = mysqli_escape_string($connection, $_POST['firstName']);
+//$empLastName = mysqli_escape_string($connection, $_POST['lastName']);
 
+$empFirstName = 'Sofia';
+$empLastName = 'Nyberg';
 
 $sqlFindEmployeeId = "SELECT employeeId FROM employee WHERE firstName = '$empFirstName' AND lastName = '$empLastName'";
 $resultFindEmployeeId = mysqli_query($connection, $sqlFindEmployeeId);
@@ -35,6 +37,7 @@ if($resultEmployeeId != null){
         }
     }
     echo json_encode($arr);
+    
     
 
 }
