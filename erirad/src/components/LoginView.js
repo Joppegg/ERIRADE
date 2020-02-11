@@ -34,10 +34,11 @@ const useStyles = makeStyles(theme => ({
 
 
 function LoginView({ onLogIn, onEmployeeLogin }) {
-
+    const [success, setSuccess] = React.useState(false);
     const login = useSelector(state => state.loggedReducer);
     const dispatch = useDispatch();
 
+    
     const classes = useStyles();
     const [user, setUser] = useState({
         username: '',
