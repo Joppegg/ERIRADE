@@ -14,7 +14,7 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
-
+import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +30,8 @@ const useStyles = makeStyles(theme => ({
             },
         }
     },
+
+    
 }));
 
 //This function is responsible for creating a report group.
@@ -49,6 +51,27 @@ function CreateReportRequest(props) {
             })
     }, [])
 
+    const handleSubmit = () => {
+        const payload = {
+            requesterId: employee.employeeId,
+            report: createReport
+        }
+
+        axios({
+
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
+            headers: { 'content-type': 'application/json' },
+            data: JSON.stringify(payload, null, 2)
+
+        })
+            .then(result => {
+                console.log(result.data)
+
+            })
+            .catch(error => console.log(error));
+
+    }
 
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
@@ -86,7 +109,7 @@ function CreateReportRequest(props) {
         <div className="search-column-layout">
             <div className="homepageContainer">
                 <h2> Hello</h2>
-                <button> Create report request</button>
+         
 
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
@@ -129,7 +152,6 @@ function CreateReportRequest(props) {
 
                     </Grid>
                 </MuiPickersUtilsProvider>
-
                 <div className={classes.root}>
                     <Autocomplete
                         multiple
@@ -151,6 +173,10 @@ function CreateReportRequest(props) {
                         )}
                     />
                 </div>
+
+                <Button variant="contained" color="primary">
+                Create report request
+                 </Button>
 
                 <pre>{JSON.stringify(employee, null, 2)}</pre>
                 <pre>{JSON.stringify(createReport, null, 2)}</pre>
