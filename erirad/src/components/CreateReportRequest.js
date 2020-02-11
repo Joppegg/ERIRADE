@@ -60,12 +60,13 @@ function CreateReportRequest(props) {
         axios({
 
             method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
+            url: `http://localhost/ERIRADAPP/erirad/src/php/ReportRequest.php`,
             headers: { 'content-type': 'application/json' },
             data: JSON.stringify(payload, null, 2)
 
         })
             .then(result => {
+                console.log(JSON.stringify(payload, null, 2))
                 console.log(result.data)
 
             })
@@ -159,12 +160,10 @@ function CreateReportRequest(props) {
                         options={allEmployees}
                         getOptionLabel={option => option.email}               
                         onChange={(event, value) =>  setCreateReport({...createReport, employees:value})}
-             
                         renderInput={params => (
                      
                             <TextField
                                 {...params}
-
                                 variant="standard"
                                 label="Add persons"
                                 placeholder="Favorites"
@@ -174,7 +173,9 @@ function CreateReportRequest(props) {
                     />
                 </div>
 
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary"
+                onClick={handleSubmit}
+                >
                 Create report request
                  </Button>
 
