@@ -4,8 +4,8 @@ require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
-//$empId = mysqli_escape_string($connection, $_POST['employeeId']);
-$empId = '5';
+
+$empId = mysqli_escape_string($connection, $_POST['employeeId']);
 //DENNA QUERY:
 $sqlJoined = "SELECT e.employeeId, e.requestId, e.reportId, r.title, r.description, r.authorId FROM employeeinput e JOIN reportrequest r ON e.requestId = r.requestId WHERE e.employeeId = '$empId'";
 

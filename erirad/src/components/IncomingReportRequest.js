@@ -32,6 +32,11 @@ function ListItemLink(props) {
 }
 
 function IncomingReportRequest(props) {
+    const [reportList, setReportList] = useState({
+        reports: []
+
+    });
+
     const classes = useStyles();
     const employee = useSelector(state => state.employee);
     
@@ -42,24 +47,26 @@ function IncomingReportRequest(props) {
     //On submit, submit this into employee input
 
     useEffect(() => {
-
+        console.log("employee")
+        console.log(employee.employeeId)
         axios({
             method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/GetReportRequest.php`,
+            url: `http://localhost/ERIRADAPP/erirad/src/php/ReceiveEmpInput.php`,
             headers: { 'content-type': 'application/json' },
-            data: employee.employeeId
+            data: {employeeId: employee.employeeId}
             })
             .then(result => {
                 console.log(result.data)
+                setReportList(result.data)
             })
             .catch(error => console.log(error));
-    })
+    }, [employee])
 
     return (
 
         <List className={classes.root}>
         <pre>{JSON.stringify(employee.employeeId, null, 2)}</pre>
-
+        <pre>{JSON.stringify(reportList, null, 2)}</pre>
             <Divider variant="inset" component="li" />
             <ListItemLink href="#simple-list">
                 <ListItem alignItems="flex-start">
