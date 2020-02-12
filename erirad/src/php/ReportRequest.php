@@ -6,16 +6,12 @@ $_POST = json_decode($rest_json, true);
 
 $report = (array)json_decode(json_encode($_POST['report']));
 $listOfEmployees = $report['employees'];
+print_r($listOfEmployees);
 //problem: tar endast det första empId - måste loopa igenom men då kan det bli knas
 $empId = reset($listOfEmployees)->employeeId;
 
 
-$report = json_decode(json_encode($_POST['report']));
-
-echo json_encode($report);
-echo($report);
-
-echo $report['title'];
+//$report = json_decode(json_encode($_POST['report']));
 //Det är för att report-objektet kommer in. I det så ligger title, author osv.
 
 $authorId = mysqli_escape_string($connection, $_POST['requesterId']);
@@ -43,14 +39,19 @@ if($numberOfRows > 0){
 }
 
 foreach($listOfEmployees as $employee){
+
+    print_r($employee);
+    $empId = $employee->employeeId;
+    echo $empId;
     $submitted = "false";
     $accepted = "false";
     $submittedDate = "null";
 
+
     //inserting into report to generate a reportId :)
     $submitted = "no";
     $sqlCreateNewReport = "INSERT INTO report (employeeId, submitted) VALUES ('$empId', '$submitted')";
-    mysqli_query($connection, $sqlCreateNewReport);
+     mysqli_query($connection, $sqlCreateNewReport);
 
     //getting the generated reportId to be used as FK in employeeInput
     $sqlGetReportId = "SELECT reportId FROM report WHERE employeeId = '$empId' ORDER BY reportId DESC LIMIT 1";
