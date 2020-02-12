@@ -11,3 +11,9 @@ export const signInEmployee = employee => {
     };
 };
 
+export const setReport = report => {
+    return{
+        type: 'SET_REPORT',
+        payload: report
+    }
+}

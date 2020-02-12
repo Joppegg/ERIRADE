@@ -179,8 +179,7 @@ function CreateReportRequest(props) {
                 Create report request
                  </Button>
 
-                <pre>{JSON.stringify(employee, null, 2)}</pre>
-                <pre>{JSON.stringify(createReport, null, 2)}</pre>
+    
             
 
             </div>

@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setReport } from '../actions';
 import axios from 'axios';
 
 
@@ -33,10 +34,9 @@ function ListItemLink(props) {
 
 function IncomingReportRequest(props) {
     const [reportList, setReportList] = useState([]);
-
     const classes = useStyles();
     const employee = useSelector(state => state.employee);
-
+    const dispatch = useDispatch();
     //For the logged in Employee, loop through the employeeInputField.
     //Save the EmployeeInputs in a list.
     //With a click on the list, launch a new view with Create Report. Send in the EmployeeInput Props.
@@ -61,23 +61,23 @@ function IncomingReportRequest(props) {
     }, [employee])
 
 
-    useEffect(() => {
-        console.log(reportList)
-        console.log("use effect called reportlist")
-        reportList.map((report) => {
-            console.log(report.employeeId)
-            console.log(report.title)
-        })
+    const handleClick = (report) => {
+        console.log(report)
+    }
 
-
-    }, [reportList])
-
-
+    const handleListItemClick =(event) => {
+        console.log(event)
+        dispatch(setReport(event))
+    }
     const reportCards = reportList.map((report) => (
-        <div>
+        <div >
         <Divider variant="inset" component="li" />
             <ListItemLink href="#simple-list">
-                <ListItem alignItems="flex-start">
+                <ListItem 
+                onClick={event => handleListItemClick(report)}
+                button 
+         
+                 alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
                     </ListItemAvatar>
