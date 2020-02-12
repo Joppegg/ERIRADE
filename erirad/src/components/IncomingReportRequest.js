@@ -34,7 +34,6 @@ function ListItemLink(props) {
 function IncomingReportRequest(props) {
     const [reportList, setReportList] = useState({
         reports: []
-
     });
 
     const classes = useStyles();
@@ -57,11 +56,21 @@ function IncomingReportRequest(props) {
             })
             .then(result => {
                 console.log(result.data)
-                setReportList(result.data)
+                setReportList({reports:[result.data]})
             })
             .catch(error => console.log(error));
     }, [employee])
 
+
+    useEffect(() => {
+        console.log(reportList)
+       console.log("use effect called reportlist")
+       reportList.reports.map((report) => { 
+            console.log(report.employeeId)
+        })
+
+    
+    }, [reportList])
     return (
 
         <List className={classes.root}>
