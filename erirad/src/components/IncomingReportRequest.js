@@ -32,13 +32,11 @@ function ListItemLink(props) {
 }
 
 function IncomingReportRequest(props) {
-    const [reportList, setReportList] = useState({
-        reports: []
-    });
+    const [reportList, setReportList] = useState([]);
 
     const classes = useStyles();
     const employee = useSelector(state => state.employee);
-    
+
     //For the logged in Employee, loop through the employeeInputField.
     //Save the EmployeeInputs in a list.
     //With a click on the list, launch a new view with Create Report. Send in the EmployeeInput Props.
@@ -52,11 +50,12 @@ function IncomingReportRequest(props) {
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/ReceiveEmpInput.php`,
             headers: { 'content-type': 'application/json' },
-            data: {employeeId: employee.employeeId}
-            })
+            data: { employeeId: employee.employeeId }
+        })
             .then(result => {
+                console.log("Datan:")
                 console.log(result.data)
-                setReportList({reports:[result.data]})
+                setReportList(result.data)
             })
             .catch(error => console.log(error));
     }, [employee])
@@ -64,26 +63,26 @@ function IncomingReportRequest(props) {
 
     useEffect(() => {
         console.log(reportList)
-       console.log("use effect called reportlist")
-       reportList.reports.map((report) => { 
+        console.log("use effect called reportlist")
+        reportList.map((report) => {
             console.log(report.employeeId)
+            console.log(report.title)
         })
 
-    
-    }, [reportList])
-    return (
 
-        <List className={classes.root}>
-        <pre>{JSON.stringify(employee.employeeId, null, 2)}</pre>
-        <pre>{JSON.stringify(reportList, null, 2)}</pre>
-            <Divider variant="inset" component="li" />
+    }, [reportList])
+
+
+    const reportCards = reportList.map((report) => (
+        <div>
+        <Divider variant="inset" component="li" />
             <ListItemLink href="#simple-list">
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
                     </ListItemAvatar>
                     <ListItemText
-                        primary="Project report february"
+                        primary={report.title}
                         secondary={
                             <React.Fragment>
                                 <Typography
@@ -93,37 +92,21 @@ function IncomingReportRequest(props) {
                                     color="textPrimary"
                                 >
                                     Projékt Ledersson
-              </Typography>
-                                {" — This month the focus will be on…"}
+                             </Typography>
+                                {" — " +  report.description}
                             </React.Fragment>
                         }
                     />
                 </ListItem>
             </ListItemLink>
-            <Divider variant="inset" component="li" />
-            <ListItemLink href="#simple-list">
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary="Monthly report"
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={classes.inline}
-                                    color="textPrimary"
-                                >
-                                    Chef Chefsson
-              </Typography>
-                                {' — Dont forget to fill in the...'}
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
-            </ListItemLink>
+            </div>     
+    ));
+
+
+    return (
+
+        <List className={classes.root}>
+            {reportCards}       
         </List>
     );
 }
