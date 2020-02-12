@@ -11,13 +11,7 @@ $sqlJoined = "SELECT e.employeeId, e.requestId, e.reportId, r.title, r.descripti
 
 $resultJoined = mysqli_query($connection, $sqlJoined);
 while($rowEmpInput = mysqli_fetch_array($resultJoined)){
-    $requestId = $rowEmpInput['requestId'];
-    $reportId = $rowEmpInput['reportId'];
-    $title = $rowEmpInput['title'];
-    $description = $rowEmpInput['description'];
-    $authorId = $rowEmpInput['authorId'];
-    $elements = array();
-    array_push($elements, $requestId, $reportId, $title, $description, $authorId);
-    echo json_encode($elements);
+    echo json_encode($rowEmpInput);
+    
     
 }
