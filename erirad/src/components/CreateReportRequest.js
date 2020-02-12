@@ -43,7 +43,7 @@ function CreateReportRequest(props) {
                 //Mappa igenom hela res.data, spara in variablerna i ny array.
                 console.log(res.data);
                 setAllEmployees(res.data);
-               // setLoading(false);
+                //setLoading(false);
 
             })
             .catch(err => {
