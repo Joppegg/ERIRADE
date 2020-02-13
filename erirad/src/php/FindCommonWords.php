@@ -13,7 +13,7 @@ while($row = mysqli_fetch_assoc($resultSnippetTexts)){
     $textlist[] = $row['snippettext'];
     foreach($textlist as $snippetText){
         $ary = explode(' ',$snippetText);
-        
+        print_r($ary);
         foreach($ary as $text){
             
             $stop_words = array("a", "you", "if", "the", "this", "that", "about", "entry", "report", "have", "with", "is", "where", "attended", "meetings", "discussed", "multiple", "snippets");
