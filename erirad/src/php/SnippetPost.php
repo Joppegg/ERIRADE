@@ -12,28 +12,31 @@ $employeeId = mysqli_escape_string($connection, $_POST['employeeId']);
 echo json_encode("employee ID: " .$employeeId);
 
 
-
-$sqlInsertReport = "INSERT INTO report (employeeId) VALUES ('$employeeId')";
-mysqli_query($connection, $sqlInsertReport);
-
+//vill ju inte skapa en ny report, vill ju ha det reportId som är requestat i empInput
+//så jävla snygg query
+$sqlGetReportIdFromEmpInput = "SELECT reportId FROM employeeInput ORDER BY reportId DESC LIMIT 1";
+$result = mysqli_query($connection, $sqlGetReportIdFromEmpInput);
+$latestReportIdFromEmpInputList = mysqli_fetch_assoc($result);
+$latestReportIdFromEmpInput = $latestReportIdFromEmpInputList['reportId'];
+echo $latestReportIdFromEmpInput;
 
 
 
 foreach($snippets as $parentkey=> $snippetText){
     $saveKey = $parentkey;
     
-    
+    /*
     $getLatestReportId = "SELECT reportId FROM report ORDER BY reportId DESC LIMIT 1";
     $resultLatest = mysqli_query($connection, $getLatestReportId);
 
     $latestReportId = mysqli_fetch_assoc($resultLatest);
     $reportId = $latestReportId['reportId'];
-
+    */
     
-    $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$snippetText')";
-    mysqli_query($connection, $sqlInsertSnippet);
+    $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$latestReportIdFromEmpInput','$snippetText')";
+    $resultInsertedSnippet = mysqli_query($connection, $sqlInsertSnippet);
 
-    $sqlFindSnippetId = "SELECT snippetId FROM snippet WHERE reportId = '$reportId'";
+    $sqlFindSnippetId = "SELECT snippetId FROM snippet WHERE reportId = '$latestReportIdFromEmpInput'";
     $resultSnippetId = mysqli_query($connection, $sqlFindSnippetId);
 
     while($row = mysqli_fetch_array($resultSnippetId)){
@@ -43,8 +46,8 @@ foreach($snippets as $parentkey=> $snippetText){
 
             foreach($matrix as $tags){
   
-                var_dump($matrix);
-                var_dump($tags);
+                //var_dump($matrix);
+                //var_dump($tags);
                   foreach($tags as $key => $tagId){
                       echo json_encode('Tag ID: ' .$tagId. ' Should be added to Snippet Number: '.$parentkey.' ');
                       
@@ -52,28 +55,27 @@ foreach($snippets as $parentkey=> $snippetText){
                       mysqli_query($connection, $sqlInsertSnippetTag);
                   }
               }
-                    
-                    
-                
-                
+   
             }
-            
-            
+
         }
-    
-    
+
 }
-    
-    
+    //Check if the snippet is inserted - update row in report if it is
+    if($resultInsertedSnippet){
+        echo 'hello world';
+        $reportSubmitted = 'true';
+        $sqlUpdateReport = "UPDATE report SET submitted = '$reportSubmitted' WHERE reportId = '$latestReportIdFromEmpInput'";
+        $resultUpdated = mysqli_query($connection, $sqlUpdateReport);
 
-    $sqlGetReportId = "SELECT reportId FROM report WHERE employeeId = '63'";
+        //update the employeeinput row if report is submitted
+        if($resultUpdated){
+            echo 'bye world';
+            $empInputSubmitted = 'true';
+            $sqlUpdateEmpInput = "UPDATE employeeinput SET submitted = '$empInputSubmitted' WHERE reportId = '$latestReportIdFromEmpInput'";
+            mysqli_query($connection, $sqlUpdateEmpInput);
+        }
+    }
 
-
-    $resultReportId = mysqli_query($connection, $sqlGetReportId);
-    $resultCheckReportId = mysqli_num_rows($resultReportId);
-
-    
-    $row = mysqli_fetch_array($resultReportId);
-    $reportId = $row['reportId'];
 
 ?>
