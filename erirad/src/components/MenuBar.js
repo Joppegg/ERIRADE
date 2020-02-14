@@ -23,7 +23,7 @@ function MenuBar(props) {
         <div className="menuBar">
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">
-                    <Link to="/">
+                    <Link style={{ textDecoration: 'none', color: 'black' }}  to="/">
                         <Button>Home
                               </Button>
                     </Link>
@@ -32,7 +32,7 @@ function MenuBar(props) {
 
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">
-                    <Link to="/search">
+                    <Link style={{ textDecoration: 'none', color: 'black' }}  to="/search">
                         <Button>Search reports
                               </Button>
                     </Link>
@@ -41,7 +41,7 @@ function MenuBar(props) {
 
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">
-                    <Link to="/report">
+                    <Link style={{ textDecoration: 'none', color: 'black' }}  to="/report">
                         <Button>Create report
                               </Button>
                     </Link>
@@ -50,7 +50,7 @@ function MenuBar(props) {
 
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">
-                    <Link to="/author">
+                    <Link style={{ textDecoration: 'none', color: 'black' }}  to="/author">
                         <Button>Filter by author
                               </Button>
                     </Link>
@@ -59,14 +59,15 @@ function MenuBar(props) {
 
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">
-                    <Link to="/createreport">
+                    <Link  style={{ textDecoration: 'none', color: 'black' }}  to="/createreport">
                         <Button>Create report request
                               </Button>
                     </Link>
                 </div>
             </div>
 
-        </div >
+
+        </div>
     );
 }
 
