@@ -11,7 +11,9 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setReport } from '../actions';
 import axios from 'axios';
-
+import {
+    Link
+} from "react-router-dom";
 
 
 
@@ -29,11 +31,12 @@ const useStyles = makeStyles(theme => ({
 
 
 function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
+    return <ListItem button  {...props} />;
 }
 
 function IncomingReportRequest(props) {
     const [reportList, setReportList] = useState([]);
+    const [reportCards, setReportCards] = useState([]);
     const classes = useStyles();
     const employee = useSelector(state => state.employee);
     const dispatch = useDispatch();
@@ -44,7 +47,7 @@ function IncomingReportRequest(props) {
     //On submit, submit this into employee input
 
     useEffect(() => {
-        console.log("employee")
+        console.log("UseEffect for employee Called")
         console.log(employee.employeeId)
         axios({
             method: 'post',
@@ -53,9 +56,18 @@ function IncomingReportRequest(props) {
             data: { employeeId: employee.employeeId }
         })
             .then(result => {
-                console.log("Datan:")
-                console.log(result.data)
-                setReportList(result.data)
+                console.log("Data from RecieveEmpInput:")
+                if(result.data.length!= 0){
+                    setReportList(result.data)
+                    console.log(result.data)
+                    console.log(result.data.length)
+                }
+                else {
+                    console.log("empty")
+                    console.log(result.data)
+                    console.log(result.data.length)
+                }
+             
             })
             .catch(error => console.log(error));
     }, [employee])
@@ -69,38 +81,50 @@ function IncomingReportRequest(props) {
         console.log(event)
         dispatch(setReport(event))
     }
-    const reportCards = reportList.map((report) => (
-        <div >
-        <Divider variant="inset" component="li" />
-            <ListItemLink href="#simple-list">
-                <ListItem 
-                onClick={event => handleListItemClick(report)}
-                button 
-         
-                 alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={report.title}
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={classes.inline}
-                                    color="textPrimary"
-                                >
-                                    Projékt Ledersson
-                             </Typography>
-                                {" — " +  report.description}
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
-            </ListItemLink>
-            </div>     
-    ));
+  
+    useEffect(() => {
+        const fetchReportCards = reportList.map((report) => (
+            <div >
+            <Divider variant="inset" component="li" />
+                <ListItemLink>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to="/report">
+                    <ListItem 
+                    onClick={event => handleListItemClick(report)}
+                    button 
+             
+                     alignItems="flex-start">
+                        <ListItemAvatar>
+                            <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={report.title}
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        className={classes.inline}
+                                        color="textPrimary"
+                                    >
+                                        Projékt Ledersson
+                                 </Typography>
+                                    {" — " +  report.description}
+                                </React.Fragment>
+                            }
+                        />
+                    </ListItem>
+                    </Link>
+                </ListItemLink>
+                </div>     
+        ));
+
+        setReportCards(fetchReportCards);
+  
+
+
+    }, [reportList])
+
+   
 
 
     return (
