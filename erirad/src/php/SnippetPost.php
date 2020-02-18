@@ -63,14 +63,13 @@ foreach($snippets as $parentkey=> $snippetText){
 }
     //Check if the snippet is inserted - update row in report if it is
     if($resultInsertedSnippet){
-        echo 'hello world';
         $reportSubmitted = 'true';
         $sqlUpdateReport = "UPDATE report SET submitted = '$reportSubmitted' WHERE reportId = '$latestReportIdFromEmpInput'";
         $resultUpdated = mysqli_query($connection, $sqlUpdateReport);
 
         //update the employeeinput row if report is submitted
         if($resultUpdated){
-            echo 'bye world';
+            
             $empInputSubmitted = 'true';
             $sqlUpdateEmpInput = "UPDATE employeeinput SET submitted = '$empInputSubmitted' WHERE reportId = '$latestReportIdFromEmpInput'";
             mysqli_query($connection, $sqlUpdateEmpInput);
