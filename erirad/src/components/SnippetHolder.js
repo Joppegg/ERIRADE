@@ -135,9 +135,7 @@ function SnippetHolder({ employeeId }) {
             employeeId: employeeId,
             reportId: report.reportId
         }
-
         axios({
-
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
             headers: { 'content-type': 'application/json' },
