@@ -128,12 +128,12 @@ function SnippetHolder({ employeeId }) {
     }
 
     const handleSubmit = () => {
-        console.log("Logging eid")
-        console.log(employeeId)
+
         const payload = {
             textValues: textvalues,
             matrix: tags,
-            employeeId: employeeId
+            employeeId: employeeId,
+            reportId: report.reportId
         }
 
         axios({
@@ -157,7 +157,7 @@ function SnippetHolder({ employeeId }) {
         <div>
 
             <div className="snippetContainer">
-            <h3 className="text-center"> Author here
+            <h3 className="text-center"> Report requested by {report.firstName} {report.lastName}
                      </h3>
                 <h3 className="text-center"> {report.title}
                      </h3>
