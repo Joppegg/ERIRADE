@@ -171,6 +171,13 @@ display: flex;
   
 }
 
+.sentRequestList{
+  text-align: center;
+  margin-left: 70px;
+  flex: 1; 
+  
+}
+
 .homePageContainer{
   justify-content: center;
   width:auto;

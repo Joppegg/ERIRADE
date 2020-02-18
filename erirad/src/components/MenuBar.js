@@ -66,6 +66,15 @@ function MenuBar(props) {
                 </div>
             </div>
 
+            <div className="menuBarColumn">
+                <div className="menuBarColumn-button">
+                    <Link  style={{ textDecoration: 'none', color: 'black' }}  to="/sentrequests">
+                        <Button>Your sent requests
+                              </Button>
+                    </Link>
+                </div>
+            </div>
+
 
         </div>
     );

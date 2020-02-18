@@ -13,6 +13,7 @@ import MenuBar from './MenuBar';
 import HomePage from './HomePage';
 import AuthorReports from './AuthorReports';
 import CreateReportRequest from './CreateReportRequest';
+import SentRequests from './SentRequests';
 function ComponentRouter({ employeeId }) {
     return (
         <div>
@@ -41,7 +42,12 @@ function ComponentRouter({ employeeId }) {
                     <Route exact path="/createreport"
                     component={() => <CreateReportRequest/>}
                     />
+                </Switch>
 
+                <Switch>
+                    <Route exact path="/sentrequests"
+                    component={() => <SentRequests/>}
+                    />
                 </Switch>
             </Router>
             <Footer />
