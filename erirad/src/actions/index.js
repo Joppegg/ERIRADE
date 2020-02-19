@@ -17,3 +17,10 @@ export const setReport = report => {
         payload: report
     }
 }
+
+export const setRequest = reportRequest => {
+    return{
+        type: 'SET_REQUEST',
+        payload: reportRequest
+    }
+}
