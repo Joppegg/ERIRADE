@@ -8,8 +8,8 @@ $submitted = '';
 
 
 
-//$empId = mysqli_escape_string($connection, $_POST['employeeId']);
-$empId = '5';
+$empId = mysqli_escape_string($connection, $_POST['employeeId']);
+//$empId = '5';
 $sqlGetRequestId = "SELECT requestId FROM reportrequest WHERE authorId = '$empId'";
 $resultRequestId = mysqli_query($connection, $sqlGetRequestId);
 
@@ -17,10 +17,10 @@ while($rowRequestId = mysqli_fetch_array($resultRequestId)){
     //$formatListReportRequest[] = $rowRequestId;
     $requestId = $rowRequestId['requestId'];
     
-    $sqlAllRequestsSubmitted = "SELECT COUNT(*) AS count FROM employeeinput WHERE submitted != '$submittedTrue' AND requestId = '$requestId'";
+    $sqlAllRequestsSubmitted = "SELECT * FROM employeeinput WHERE submitted != '$submittedTrue' AND requestId = '$requestId'";
     $resultRequestsSubmitted = mysqli_query($connection, $sqlAllRequestsSubmitted);
     
-    $countOfRows = mysqli_fetch_assoc($resultRequestsSubmitted);
+    $countOfRows = mysqli_num_rows($resultRequestsSubmitted);
     if($countOfRows == 0){
         $submitted = 'true';
         $sqlUpdateStatus = "UPDATE reportrequest SET isSubmitted = '$submitted' WHERE requestId = '$requestId'";
