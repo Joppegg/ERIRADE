@@ -13,16 +13,24 @@ function SentRequests(props) {
     useEffect(() => {
         axios({
             method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/ReceiveEmpInput.php`,
+            url: `http://localhost/ERIRADAPP/erirad/src/php/ManagerView.php`,
             headers: { 'content-type': 'application/json' },
             data: { employeeId: employee.employeeId }
             })
             .then(result => {
                 console.log("Data from Getreports:")
                 console.log(result.data)
+                setReportList(result.data)
             })
             .catch(error => console.log(error));
     }, [])
+
+    useEffect(() => {
+        console.log("State reportlist:")
+        console.log(reportList)
+
+
+    },[reportList])
 
 
     return (
