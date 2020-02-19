@@ -21,8 +21,10 @@ $deadline = $report['deadline'];
 $time = time();
 $timestamp = (date("Y/m/d H:i:s",$time));
 
+$isSubmitted = 'false';
+
 //inserting a request into DB
-$sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp')";
+$sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime, isSubmitted) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp', '$isSubmitted')";
 mysqli_query($connection, $sqlInsertReportRequest);
 
 //notice for that a report has been requested from a specific user 
