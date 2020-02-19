@@ -219,6 +219,12 @@ display: flex;
   margin: auto;
 
 }
+
+.requestRow{
+ margin-left: 250px;
+ margin-right: 250px;
+
+}
 .ErrorText{
   color: red;
   text-align: center;

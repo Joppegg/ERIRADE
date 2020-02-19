@@ -82,9 +82,10 @@ function SentRequests(props) {
     useEffect(() => {
         const fetchReportCards = reportList.map((report) => (
             <div >
-            <Divider variant="inset" component="li" />
+            <Divider variant="inset"  />
+            <Link style={{ textDecoration: 'none', color: 'black' }} to="/reportinput">
                 <ListItemLink>
-                <Link style={{ textDecoration: 'none', color: 'black' }} to="/reportinput">
+               
                     <ListItem 
                     onClick={event => handleListItemClick(report)}
                     button 
@@ -93,7 +94,8 @@ function SentRequests(props) {
                         <ListItemAvatar>
                             <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
                         </ListItemAvatar>
-                        <ListItemText
+                        <ListItemText 
+
                             primary={report.title}
                             secondary={
                                 <React.Fragment>
@@ -110,26 +112,22 @@ function SentRequests(props) {
                             }
                         />
                     </ListItem>
-                    </Link>
+                   
                 </ListItemLink>
+                </Link>
                 </div>     
         ));
         setReportCards(fetchReportCards);
     }, [reportList])
-
-
-
-
-
-
-
 
     return (
         <div className="snippetContainer">
             <div className="overViewHomePage">
                 <div className="sentRequestList">
                     <h2>Your sent report requests</h2>
+                    <div className="requestRow">
                     {reportCards}  
+                    </div>
                 </div>
             </div>
         </div>
