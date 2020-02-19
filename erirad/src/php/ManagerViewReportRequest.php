@@ -10,11 +10,7 @@ $sqlGetReportRequestInput = "SELECT requestId, title, description, creationTime 
 $resultReportRequest = mysqli_query($connection, $sqlGetReportRequestInput);
 
 while($rowReportRequest = mysqli_fetch_array($resultReportRequest)){
-    $formatListReportRequest = array(
-        'requestId' => $rowReportRequest['requestId'],
-        'title' => $rowReportRequest['title'],
-        'description' => $rowReportRequest['description'],
-        'creationTime' => $rowReportRequest['creationTime'],
-    );
-    echo json_encode($formatListReportRequest);
+    $formatListReportRequest[] = $rowReportRequest;
+    
 }
+echo json_encode($formatListReportRequest);
