@@ -22,7 +22,7 @@ while($rowReportRequest = mysqli_fetch_array($resultReportRequest)){
         array_push($formatListReportRequest, $submitted);
         print_r($formatListReportRequest);
     }else{
-        
+        $shelloe = 1;
         foreach($formatListReportRequest as $arr){
             $submitted = 'false';
             array_push($arr, $submitted);
