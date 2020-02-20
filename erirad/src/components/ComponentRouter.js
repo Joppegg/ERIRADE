@@ -14,6 +14,7 @@ import HomePage from './HomePage';
 import AuthorReports from './AuthorReports';
 import CreateReportRequest from './CreateReportRequest';
 import SentRequests from './SentRequests';
+import ManagerReportView from './ManagerReportView';
 function ComponentRouter({ employeeId }) {
     return (
         <div>
@@ -47,6 +48,11 @@ function ComponentRouter({ employeeId }) {
                 <Switch>
                     <Route exact path="/sentrequests"
                     component={() => <SentRequests/>}
+                    />
+                </Switch>
+                <Switch>
+                    <Route exact path="/reportinput"
+                    component={() => <ManagerReportView/>}
                     />
                 </Switch>
             </Router>

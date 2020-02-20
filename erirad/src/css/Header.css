@@ -147,6 +147,19 @@ display: flex;
   flex-direction: column;
 }
 
+.ManagerReportContainer{
+  justify-content: center;
+  width:auto;
+  background-color: #FFF;
+  margin: 0 20px 0 20px;
+  line-height: 1.65;
+  padding: 20px 50px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+
 .overViewHomePage{
   justify-content: flex-end;
   width:auto;
@@ -158,7 +171,29 @@ display: flex;
   
 }
 
+.overViewManagerView{
+  justify-content: center;
+  width:auto;
+  background-color: #FFF;
+  line-height: 1.65;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  
+}
+
 .overViewHomePageColumn{
+  justify-content: center;
+  width:auto;
+  flex: 1; 
+}
+
+.overViewManagerViewReport{
+  justify-content: center;
+  width:auto;
+  flex: 5; 
+}
+.overViewManagerViewSideBar{
   justify-content: center;
   width:auto;
   flex: 1; 

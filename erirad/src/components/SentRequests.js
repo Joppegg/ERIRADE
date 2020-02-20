@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setReport } from '../actions';
+import { setRequest} from '../actions';
 import axios from 'axios';
 import {
     Link
@@ -36,6 +37,7 @@ function SentRequests(props) {
     const classes = useStyles();
     const employee = useSelector(state => state.employee);
     const dispatch = useDispatch();
+    const selectedRequest = useSelector(state => state.requestSelected);
     const [reportList, setReportList] = useState([]);
     const [reportCards, setReportCards] = useState([]);
 
@@ -77,6 +79,7 @@ function SentRequests(props) {
         console.log(event)
         //Skapa dispatch för speciifc report
         //dispatch(setSpecificReport(event))
+        dispatch(setRequest(event))
     }
 
     useEffect(() => {
