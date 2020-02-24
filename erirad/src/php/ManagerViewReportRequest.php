@@ -30,12 +30,9 @@ while($rowRequestId = mysqli_fetch_array($resultRequestId)){
     }
 }
 
-$sqlGetReportRequestInput = "SELECT requestId, title, description, creationTime, isSubmitted FROM reportrequest WHERE authorId = '$empId'";
+$sqlGetReportRequestInput = "SELECT requestId, title, description, creationTime, isSubmitted FROM reportrequest WHERE authorId = '$empId' AND isSubmitted = '$submitted'";
 $resultReportRequest = mysqli_query($connection, $sqlGetReportRequestInput);
 while($row = mysqli_fetch_array($resultReportRequest)){
     $formatListReportRequest[] = $row;
 }
-
-
-
 echo json_encode($formatListReportRequest);

@@ -39,9 +39,8 @@ function SearchReportView(props) {
     useEffect(() => {
         console.log(snippets);
     }, [snippets])
-
-
-
+    
+    
     const handleSearch = () => {
         const payload = { tags: tags }
         axios({
@@ -69,6 +68,7 @@ function SearchReportView(props) {
             .catch(error => console.log(error));
 
     }
+    
 
     return (
         <div className="search-column-layout">

@@ -64,7 +64,12 @@ function Header(props) {
                 <div className="menuItem">
                     <h1>ERIRAD</h1>
                  </div>
+                {/*Vill ju att denna nedanför ska ändras när man loggar in - typ welcome: Andreas
                 
+                <div className="menuItem">
+                    <h3>Welcome: User</h3>
+                </div>*/
+                }
                  <div className="logoItem">
                   
                 </div>
@@ -79,9 +84,7 @@ function Header(props) {
                     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                         Register user
                    </Button>
-                   <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                        Register user
-                   </Button>
+                  
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
                         <DialogContent>
