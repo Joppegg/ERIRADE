@@ -68,7 +68,10 @@ function AuthorReports(props) {
     return (
         <div className="search-column-layout">
             <div className="homepageContainer">
-                <h2> Hello</h2>
+                <h2> 
+                     Har fixat så att man kan söka på author men vet ej hur man ska rendera resultaten.
+                     Finns i konsolen. 
+                </h2>
                 
                 <TextField 
                 id="outlined-multiline-static"
@@ -86,7 +89,13 @@ function AuthorReports(props) {
                 rows="1"
                 variant="outlined"
                 />
-                <button onClick={handleSearch}> Search for author</button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSearch}
+                >
+                  Search
+                </Button>
             </div>
         </div>
     );

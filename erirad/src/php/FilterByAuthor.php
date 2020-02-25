@@ -8,9 +8,6 @@ $arr = array();
 $empFirstName = mysqli_escape_string($connection, $_POST['firstName']);
 $empLastName = mysqli_escape_string($connection, $_POST['lastName']);
 
-$empFirstName = 'Sofia';
-$empLastName = 'Nyberg';
-
 $sqlFindEmployeeId = "SELECT employeeId FROM employee WHERE firstName = '$empFirstName' AND lastName = '$empLastName'";
 $resultFindEmployeeId = mysqli_query($connection, $sqlFindEmployeeId);
 $resultEmployeeId = mysqli_fetch_assoc($resultFindEmployeeId);

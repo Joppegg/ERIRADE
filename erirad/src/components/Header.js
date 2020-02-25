@@ -64,12 +64,12 @@ function Header(props) {
                 <div className="menuItem">
                     <h1>ERIRAD</h1>
                  </div>
-                {/*Vill ju att denna nedanför ska ändras när man loggar in - typ welcome: Andreas
+                {//Vill ju att denna nedanför ska ändras när man loggar in - typ welcome: Andreas
                 
                 <div className="menuItem">
                     <h3>Welcome: User</h3>
-                </div>*/
-                }
+                </div>
+                }           
                  <div className="logoItem">
                   
                 </div>
