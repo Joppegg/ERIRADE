@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: 'green',
     },
     inline: {
         display: 'inline',
@@ -83,8 +83,19 @@ function SentRequests(props) {
     }
 
     useEffect(() => {
+
         const fetchReportCards = reportList.map((report) => (
-            <div >
+
+            
+            <div 
+          
+            className= {
+                report.isSubmitted ?
+                "finished"
+                :
+                "notFinished"
+                }
+            >
             <Divider variant="inset"  />
             <Link style={{ textDecoration: 'none', color: 'black' }} to="/reportinput">
                 <ListItemLink>
