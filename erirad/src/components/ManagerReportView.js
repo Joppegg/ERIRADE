@@ -9,6 +9,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setReport } from '../actions';
+import { setRequest} from '../actions';
+import axios from 'axios';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,7 +27,39 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+
 function ManagerReportView(props) {
+    const employee = useSelector(state => state.employee);
+    const [reportList, setReportList] = useState([]);
+    const [reportCards, setReportCards] = useState([]);
+    useEffect(() => {
+        axios({
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/ManagerViewReportRequest.php`,
+            headers: { 'content-type': 'application/json' },
+            data: { employeeId: employee.employeeId }
+            })
+            .then(result => {
+                if(result.data.length!= 0){
+                    setReportList(result.data)
+                    console.log(result.data)
+                    console.log(result.data.length)
+                }
+                else {
+                    console.log("empty")
+                    console.log(result.data)
+                    console.log(result.data.length)
+                }
+    
+            })
+            .catch(error => console.log(error));
+    }, [])
+    
+    useEffect(() => {
+        console.log("State reportlist:")
+        console.log(reportList)
+    
+    },[reportList])
     const classes = useStyles();
     return (
         <div className="ManagerReportContainer">
@@ -118,7 +156,16 @@ function ManagerReportView(props) {
                             color="primary"
                         >
                             Merge into document
-                   </Button>
+                        </Button>
+                      
+                    </div>
+                    <div className={classes.wrapper}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                        >
+                            Submit the big fkn document
+                        </Button>
                       
                     </div>
                 </div>

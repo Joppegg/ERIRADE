@@ -12,7 +12,7 @@ function HomePage(props) {
                 </p>
                 </div>
                 <div className="homePageIncomingRequests">
-                   <h2>Play a Game?</h2>
+                   <h2></h2>
                 </div>
                 <div className="homePageIncomingRequests">
                     <h2>Your pending reports</h2>
