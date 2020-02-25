@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import axios from 'axios';
 import SingleSnippetCard from './SingleSnippetCard'
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import AuthorReports from './AuthorReports';
 
 
 
@@ -11,6 +12,9 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 //This function will serve as the main view when the user is logged in
 function SearchReportView(props) {
+
+    const [view, setView] = useState(false);
+    
 
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
@@ -40,6 +44,13 @@ function SearchReportView(props) {
         console.log(snippets);
     }, [snippets])
     
+    const handleTagClick = () => {
+        setView(false)
+    }
+
+    const handleAuthorClick = () => {
+        setView(true)
+    }
     
     const handleSearch = () => {
         const payload = { tags: tags }
@@ -71,22 +82,34 @@ function SearchReportView(props) {
     
 
     return (
+
+     
         <div className="search-column-layout">
 
-            <div className="homePageSideView">
+        <div className="homePageSideView">
                 <ButtonGroup
                     orientation="vertical"
                     color="primary"
                     aria-label="vertical outlined primary button group"
                 >
-                    <Button>Filter by Tags</Button>
-                    <Button>Filter by Author</Button>
-                    <Button>Filter by Date</Button>
+                    <Button
+                    onClick = {handleTagClick}
+                    
+                    >Filter by Tags</Button>
+                    <Button
+                    onClick = {handleAuthorClick}
+                    
+                    >Filter by Author</Button>
                 </ButtonGroup>
 
             </div>
 
-            <div className="homepageContainer">
+        {
+                view ?
+                <AuthorReports/>
+                :
+
+                <div className="homepageContainer">
                 <div className="homepageRow">
                     <h2>Filter on what kind of information you would like to see here</h2>
                 </div>
@@ -115,6 +138,11 @@ function SearchReportView(props) {
 
 
             </div>
+
+
+                }
+      
+
         </div>
     );
 }
