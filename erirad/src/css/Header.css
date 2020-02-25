@@ -11,7 +11,13 @@ input {
   font-size: 14px;
 
 }
+.finished{
+  background-color:hsl(120,60%,70%);
+}
 
+.notFinished{
+  background-color: hsl(0, 100%, 69%);
+}
 body {
   background-color: #2905a1;
 
