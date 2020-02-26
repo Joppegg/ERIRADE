@@ -5,6 +5,7 @@ import axios from 'axios';
 import SingleSnippetCard from './SingleSnippetCard'
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AuthorReports from './AuthorReports';
+import FilterByDate from './FilterByDate';
 
 
 
@@ -14,7 +15,7 @@ import AuthorReports from './AuthorReports';
 function SearchReportView(props) {
 
     const [view, setView] = useState(false);
-    
+    const [dateView, setDateView] = useState(false);
 
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
@@ -50,6 +51,10 @@ function SearchReportView(props) {
 
     const handleAuthorClick = () => {
         setView(true)
+    }
+    
+    const handleDateClick = () => {
+        setDateView(true);
     }
     
     const handleSearch = () => {
@@ -100,15 +105,21 @@ function SearchReportView(props) {
                     onClick = {handleAuthorClick}
                     
                     >Filter by Author</Button>
+                    
+                    <Button
+                    onClick = {handleDateClick}
+                    
+                    >Filter by Date</Button>
                 </ButtonGroup>
 
             </div>
 
         {
                 view ?
+                
                 <AuthorReports/>
                 :
-
+                
                 <div className="homepageContainer">
                 <div className="homepageRow">
                     <h2>Filter on what kind of information you would like to see here</h2>
@@ -138,9 +149,31 @@ function SearchReportView(props) {
 
 
             </div>
+        }
+        {
+            dateView ?
+            <FilterByDate/>
+            :
+            <div className="homepageContainer">
+                <div className="homepageRow">
+                    <h2>Filter on what kind of information you would like to see here</h2>
+                </div>
+            <div className="homepageRow">
+                    <TagSelector onTagChange={handleTagChange} />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSearch}
+                    >
+                        Search
+                       </Button>
 
+            </div>
+        </div>
+        }
+            
 
-                }
+            
       
 
         </div>

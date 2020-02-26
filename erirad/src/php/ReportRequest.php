@@ -51,7 +51,7 @@ foreach($listOfEmployees as $employee){
 
 
     //inserting into report to generate a reportId :)
-    $submitted = "no";
+    $submitted = "0";
     $sqlCreateNewReport = "INSERT INTO report (employeeId, submitted) VALUES ('$empId', '$submitted')";
      mysqli_query($connection, $sqlCreateNewReport);
 
