@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setReport } from '../actions';
 import { setRequest} from '../actions';
 import axios from 'axios';
+import Snippet from './Snippet';
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,6 +36,59 @@ function ManagerReportView(props) {
     const [reportCards, setReportCards] = useState([]);
     const request = useSelector(state => state.requestSelected);
 
+    const report = useSelector(state => state.reportSelected);
+    const [textvalues, setTextValues] = useState([])
+    const [tagValues, setTagValues] = useState({})
+    const [snippetTextArea, setSnippetTextArea] = useState([{}]);
+    const [tags, setTags] = useState({
+    })
+
+    const [submittedText, setSubmittedText] = useState("Submit Report")
+    //handle submit hanterar big submit
+
+    //Uppdaterar state med texterna.
+    const handleFieldChange = (fieldId, value) => {
+        setTextValues({ ...textvalues, [fieldId]: value });
+    };
+    const handleTagChange = (tagId, value) => {
+        setTagValues({ ...tagValues, [tagId]: value })
+        //Tag id vill vi ha kvar.
+
+
+    };
+
+    const handleTagId = (tagId, value) => {
+        setTags({ ...tags, [tagId]: value })
+    };
+
+    const newSnippets = snippetTextArea.map((snippet, index) => (
+        <Snippet
+            key={index}
+            id={index}
+            onChange={handleFieldChange}
+            onTagId={handleTagId}
+            onTagChecked={handleTagChange}
+            value={textvalues[snippet]}
+        />
+    ));
+
+    const handleSubmit = () => {
+        console.log(request);
+        const payload = {
+            textValues: textvalues,
+            matrix: tags,
+            employeeId: employee.employeeId,
+            reportId: report.reportId
+        }
+
+        axios({
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
+            headers: { 'content-type' : 'application/json' },
+            data: JSON.stringify(payload, null, 2)
+        })
+    }
+
     const handleMerge = () => {
         console.log(request);
         
@@ -50,6 +104,8 @@ function ManagerReportView(props) {
         })
         
     }
+    
+
     useEffect(() => {
         console.log("State reportlist:")
         console.log(reportList)
@@ -164,6 +220,7 @@ function ManagerReportView(props) {
                         <Button
                             variant="contained"
                             color="primary"
+                            onClick={handleSubmit}
                         >
                             Submit the big fkn document
                         </Button>
