@@ -29,38 +29,36 @@ const useStyles = makeStyles(theme => ({
 
 
 function ManagerReportView(props) {
+    const [reportText, setReportText] = useState("");
     const employee = useSelector(state => state.employee);
     const [reportList, setReportList] = useState([]);
     const [reportCards, setReportCards] = useState([]);
-    useEffect(() => {
+    const request = useSelector(state => state.requestSelected);
+
+    const handleMerge = () => {
+        console.log(request);
+        
         axios({
-            method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/ManagerViewReportRequest.php`,
-            headers: { 'content-type': 'application/json' },
-            data: { employeeId: employee.employeeId }
-            })
-            .then(result => {
-                if(result.data.length!= 0){
-                    setReportList(result.data)
-                    console.log(result.data)
-                    console.log(result.data.length)
-                }
-                else {
-                    console.log("empty")
-                    console.log(result.data)
-                    console.log(result.data.length)
-                }
-    
-            })
-            .catch(error => console.log(error));
-    }, [])
-    
+          method: 'post',
+          url: `http://localhost/ERIRADAPP/erirad/src/php/ManagerViewEmpInput.php`,
+          headers: { 'content-type': 'application/json' },
+          data: request.requestId
+        })
+        .then(result => {
+            console.log(result.data)
+            
+        })
+        
+    }
     useEffect(() => {
         console.log("State reportlist:")
         console.log(reportList)
     
     },[reportList])
     const classes = useStyles();
+    const handleChange = (event) => {
+        setReportText(event.target.value);
+    };
     return (
         <div className="ManagerReportContainer">
             <div className="overViewManagerViewReport">
@@ -68,10 +66,12 @@ function ManagerReportView(props) {
                 <textarea
                     rows="24"
                     cols="140"
-
+                    onChange={handleMerge} value={'hello'} 
+                    
                 // onChange={e => setSnippet({ ...snippet, text: e.target.value })}
-
+                    {...reportText}
                 >
+                   
                 </textarea>
 
             </div>
@@ -154,6 +154,7 @@ function ManagerReportView(props) {
                         <Button
                             variant="contained"
                             color="primary"
+                            onClick={handleMerge}
                         >
                             Merge into document
                         </Button>

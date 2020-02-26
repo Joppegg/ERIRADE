@@ -5,6 +5,7 @@ $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 $arr = array();
 
+//Finns en bugg i loopen tror jag som skriver ut fler snippettexts än vad som finns i databasen
 $empFirstName = mysqli_escape_string($connection, $_POST['firstName']);
 $empLastName = mysqli_escape_string($connection, $_POST['lastName']);
 

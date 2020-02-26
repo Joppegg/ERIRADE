@@ -4,15 +4,28 @@ require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
-$requestId = mysqli_escape_string($connection, $_POST['requestId']);
-//$empId = '5';
+//$requestId = mysqli_escape_string($connection, $_POST['requestId']);
+$requestId = '43';
 $submitted = 'true';
-$sqlGetEmpInputText = "SELECT e.employeeId, e.reportId, e.submitted, e.submittedDate FROM employeeinput e JOIN reportrequest r ON e.requestId = r.requestId WHERE e.submitted = '$submitted' AND requestId = '$requestId'";
-$resultEmpInput = mysqli_query($connection, $sqlGetEmpInputText);
+$sqlGetEmpInputReportId = "SELECT employeeId, reportId, submitted, submittedDate FROM employeeinput WHERE submitted = '$submitted' AND requestId = '$requestId'";
+$resultEmpInputReportId = mysqli_query($connection, $sqlGetEmpInputReportId);
 
-while($rowEmpInput = mysqli_fetch_array($resultEmpInput)){
-    $formatListEmpInput[] = $rowEmpInput;
+while($rowEmpInput = mysqli_fetch_assoc($resultEmpInputReportId)){
+    $reportId = $rowEmpInput['reportId'];
     
+    $sqlGetSnippetText = "SELECT snippetText FROM snippet WHERE reportId = '$reportId'";
+    $resultSnippetText = mysqli_query($connection, $sqlGetSnippetText);
+    
+    while($rowSnipp = mysqli_fetch_assoc($resultSnippetText)){
+        $snippetTextList[] = $rowSnipp['snippetText'];
+        
+        $str = '';
+        foreach($snippetTextList as $snippetText){
+            $str .= $snippetText . "\n";
+            
+        }
+    }
+ 
 }
 
-echo json_encode($formatListEmpInput);
+echo json_encode(nl2br($str));
