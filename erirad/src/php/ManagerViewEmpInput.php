@@ -4,9 +4,9 @@ require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
-$requestId = mysqli_escape_string($connection, $_POST['requestId']);
+//$requestId = mysqli_escape_string($connection, $_POST['requestId']);
 
-//$requestId = '43';
+$requestId = '43';
 $submitted = 'true';
 $sqlGetEmpInputReportId = "SELECT employeeId, reportId, submitted, submittedDate FROM employeeinput WHERE submitted = '$submitted' AND requestId = '$requestId'";
 $resultEmpInputReportId = mysqli_query($connection, $sqlGetEmpInputReportId);
