@@ -60,8 +60,9 @@ function AuthorReports(props) {
   const [selectedDate, setSelectedDate] = React.useState(new Date('2020-02-12T21:11:54'));
     const handleDateChange = date => {
         setSelectedDate(date);
-        
+       
     };
+
   
   const handleDateSearch = () => {
     console.log(author);
