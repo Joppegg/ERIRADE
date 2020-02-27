@@ -5,6 +5,7 @@ import {
 import '../css/Header.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 
 function MenuBar(props) {
+    const employee = useSelector(state => state.employee);
 
     const classes = useStyles();
     return (
@@ -39,16 +41,10 @@ function MenuBar(props) {
                 </div>
             </div>
 
-            <div className="menuBarColumn">
-                <div className="menuBarColumn-button">
-                    <Link style={{ textDecoration: 'none', color: 'black' }}  to="/report">
-                        <Button>Create report
-                              </Button>
-                    </Link>
-                </div>
-            </div>
 
 
+         {
+            employee.role === 'manager' ? 
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">
                     <Link  style={{ textDecoration: 'none', color: 'black' }}  to="/createreport">
@@ -57,6 +53,11 @@ function MenuBar(props) {
                     </Link>
                 </div>
             </div>
+            :
+            null
+
+         }
+          
 
             <div className="menuBarColumn">
                 <div className="menuBarColumn-button">

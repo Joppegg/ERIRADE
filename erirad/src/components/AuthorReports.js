@@ -84,7 +84,6 @@ function AuthorReports(props) {
         <h2>
           Filter by author
                 </h2>
-
         <TextField 
        
           id="outlined-multiline-static"

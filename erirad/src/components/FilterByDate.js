@@ -24,6 +24,8 @@ import {
 } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
+import { set } from 'date-fns';
+import * as moment  from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,31 +50,54 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500],
   },
 }));
-function AuthorReports(props) {
+
+function FilterByDate(props) {
   const [snippets, setSnippets] = useState([]);
   const employee = useSelector(state => state.employee);
   const [snippetTextArray, setSnippetTextArray] = useState([]);
-  const [author, setAuthor] = useState({
-    fromDate: '',
-    toDate: '',
+  const [date, setDate] = useState({
+    fromDate: '2020-02-11T21:11:54',
+    toDate: '2020-02-12T21:11:54',
   });
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2020-02-12T21:11:54'));
+
     const handleDateChange = date => {
         setSelectedDate(date);
        
     };
 
   
-  const handleDateSearch = () => {
-    console.log(author);
+    const handleDateTo = (param) => {
+      console.log("Param är: ")
+      console.log(param)
+      const newDate = moment(param).format('YYYY-MM-DD')
+      console.log("Todate är:")
+      console.log(newDate)
+      setDate({...date,
+              toDate: newDate})
+    }
+    
+    const handleDateFrom = (param) => {
 
+      const beginDate = moment(param).format('YYYY-MM-DD')
+      console.log(beginDate);
+      setDate({...date,
+      fromDate: beginDate })
+
+    }
+    
+
+
+
+  const handleDateSearch = () => {
+    console.log(date);
 
     axios({
       method: 'post',
       url: `http://localhost/ERIRADAPP/erirad/src/php/FilterByDate.php`,
       headers: { 'content-type': 'application/json' },
-      data: author
+      data: date
     })
       .then(result => {
         console.log(result.data)
@@ -109,8 +134,8 @@ function AuthorReports(props) {
                     margin="normal"
                     id="FromDate-picker-inline"
                     label="From Date:"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={date.fromDate}
+                    onChange={date => handleDateFrom(date)}
                     KeyboardButtonProps={{
                     'aria-label': 'change date',
                     }}
@@ -130,8 +155,8 @@ function AuthorReports(props) {
                     margin="normal"
                     id="ToDate-picker-inline"
                     label="From Date:"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={date.toDate}
+                    onChange={ date => handleDateTo(date)}
                     KeyboardButtonProps={{
                     'aria-label': 'change date',
                     }}
@@ -169,4 +194,4 @@ function AuthorReports(props) {
   );
 
 }
-export default AuthorReports;
+export default FilterByDate;

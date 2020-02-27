@@ -16,6 +16,9 @@ function SearchReportView(props) {
 
     const [view, setView] = useState(false);
     const [dateView, setDateView] = useState(false);
+    const [filter, setFilter ] = useState({
+        view: 'tags'
+    })
 
     const [tags, setTags] = useState([]);
     const [snippets, setSnippets] = useState([]);
@@ -33,6 +36,50 @@ function SearchReportView(props) {
         return unique;
     }
 
+    
+    const filterToRender = (param) => {
+        console.log(param)
+        switch(param){
+            case 'tags':
+              return  <div className="homepageContainer">
+                <div className="homepageRow">
+                    <h2>Filter on what kind of information you would like to see here</h2>
+                </div>
+                <div className="homepageRow">
+                    <TagSelector onTagChange={handleTagChange} />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSearch}
+                    >
+                        Search
+                       </Button>
+
+                </div>
+
+                <div className="homepageRow">
+                    {snippets.map(snippet => (
+                        <div className="homepageRow">
+                            <SingleSnippetCard
+                                text={snippet.text}
+                            />
+                        </div>
+                    ))}
+
+                </div>
+
+
+            </div>;
+            case 'authors':
+            return <AuthorReports/>;
+            case 'date': 
+            return  <FilterByDate/>;
+            default: 
+            return null;
+
+        }
+    }
+
 
 
     const handleTagChange = (tagIdArray) => {
@@ -47,15 +94,22 @@ function SearchReportView(props) {
     
     const handleTagClick = () => {
         setView(false)
+        setFilter({view: 'tags'})
     }
 
     const handleAuthorClick = () => {
         setView(true)
+        setFilter({view: 'authors'})
     }
     
     const handleDateClick = () => {
         setDateView(true);
+        setFilter({view: 'date'})
     }
+
+    useEffect(() =>{
+        console.log(filter)
+    }, [filter])
     
     const handleSearch = () => {
         const payload = { tags: tags }
@@ -87,11 +141,13 @@ function SearchReportView(props) {
     
 
     return (
-
+            
      
         <div className="search-column-layout">
 
         <div className="homePageSideView">
+     
+      
                 <ButtonGroup
                     orientation="vertical"
                     color="primary"
@@ -113,68 +169,7 @@ function SearchReportView(props) {
                 </ButtonGroup>
 
             </div>
-
-        {
-                view ?
-                
-                <AuthorReports/>
-                :
-                
-                <div className="homepageContainer">
-                <div className="homepageRow">
-                    <h2>Filter on what kind of information you would like to see here</h2>
-                </div>
-                <div className="homepageRow">
-                    <TagSelector onTagChange={handleTagChange} />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSearch}
-                    >
-                        Search
-                       </Button>
-
-                </div>
-
-                <div className="homepageRow">
-                    {snippets.map(snippet => (
-                        <div className="homepageRow">
-                            <SingleSnippetCard
-                                text={snippet.text}
-                            />
-                        </div>
-                    ))}
-
-                </div>
-
-
-            </div>
-        }
-        {
-            dateView ?
-            <FilterByDate/>
-            :
-            <div className="homepageContainer">
-                <div className="homepageRow">
-                    <h2>Filter on what kind of information you would like to see here</h2>
-                </div>
-            <div className="homepageRow">
-                    <TagSelector onTagChange={handleTagChange} />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSearch}
-                    >
-                        Search
-                       </Button>
-
-            </div>
-        </div>
-        }
-            
-
-            
-      
+            {filterToRender(filter.view)}
 
         </div>
     );
