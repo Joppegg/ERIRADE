@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setReport } from '../actions';
-import { setRequest} from '../actions';
+import { setRequest } from '../actions';
 import axios from 'axios';
 import Snippet from './Snippet';
 
@@ -30,91 +30,188 @@ const useStyles = makeStyles(theme => ({
 
 
 function ManagerReportView(props) {
-    const [reportText, setReportText] = useState("");
-    const employee = useSelector(state => state.employee);
-    const [reportList, setReportList] = useState([]);
+
+    const [tags, setTags] = useState([
+        "5",
+        "6"
+    ])
+
+    //Report cards, the list to the right.
     const [reportCards, setReportCards] = useState([]);
+
+    //This is the "big" reporttext.
+    const [reportText, setReportText] = useState("");
+    const [individualText, setIndividualtext] = useState([
+
+    ])
+
+    //Just for mock data, replace this
+    const [author, setAuthor] = useState({
+        firstName: 'Jon',
+        lastName: 'qweqw',
+    });
+
+    const [textArray, setTextArray] = useState([]);
+
+    const employee = useSelector(state => state.employee);
+
     const request = useSelector(state => state.requestSelected);
-
-    const report = useSelector(state => state.reportSelected);
-    const [textvalues, setTextValues] = useState([])
-    const [tagValues, setTagValues] = useState({})
-    const [snippetTextArea, setSnippetTextArea] = useState([{}]);
-    const [tags, setTags] = useState({
-    })
-
-    const [submittedText, setSubmittedText] = useState("Submit Report")
-    //handle submit hanterar big submit
-
-    //Uppdaterar state med texterna.
-    const handleFieldChange = (fieldId, value) => {
-        setTextValues({ ...textvalues, [fieldId]: value });
-    };
-    const handleTagChange = (tagId, value) => {
-        setTagValues({ ...tagValues, [tagId]: value })
-        //Tag id vill vi ha kvar.
+    const classes = useStyles();
 
 
-    };
+    const getUnique = (arr, index) => {
 
-    const handleTagId = (tagId, value) => {
-        setTags({ ...tags, [tagId]: value })
-    };
+        const unique = arr
+            .map(e => e[index])
 
-    const newSnippets = snippetTextArea.map((snippet, index) => (
-        <Snippet
-            key={index}
-            id={index}
-            onChange={handleFieldChange}
-            onTagId={handleTagId}
-            onTagChecked={handleTagChange}
-            value={textvalues[snippet]}
-        />
-    ));
+            // store the keys of the unique objects
+            .map((e, i, final) => final.indexOf(e) === i && i)
 
-    const handleSubmit = () => {
-        console.log(request);
-        const payload = {
-            textValues: textvalues,
-            matrix: tags,
-            employeeId: employee.employeeId,
-            reportId: report.reportId
-        }
+            // eliminate the dead keys & store unique objects
+            .filter(e => arr[e]).map(e => arr[e]);
 
-        axios({
-            method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
-            headers: { 'content-type' : 'application/json' },
-            data: JSON.stringify(payload, null, 2)
-        })
+        return unique;
     }
+
 
     const handleMerge = () => {
-        console.log(request);
+
+        //For every text
+        setReportText("")
+        individualText.map((report) => {
         
-        axios({
-          method: 'post',
-          url: `http://localhost/ERIRADAPP/erirad/src/php/ManagerViewEmpInput.php`,
-          headers: { 'content-type': 'application/json' },
-          data: request.requestId
+            if (report.isChecked===true){
+                console.log(report.text)
+                setReportText(prevState => prevState  + report.firstName + " " + report.lastName +"\n" + report.text + "\n\n")
+            }
         })
-        .then(result => {
-            console.log(result.data)
-            
-        })
+
+        
+        //Todo: Put text into textArea
+        //Varje Report får ha ett id.
+        //När man trycker på checkbox så skapas antingen id med texten, eller så tas det bort.
+        console.log(textArray);
+
+    }
+
+    const handleSubmit = () => {
+        //Todo: Send into database.
+    }
+
+    //When a checkbox is clicked, push or remove the id and text into textArray
+    const handleCheck = snippet => event => {
+
+        console.log(snippet)
+    
+        const stateArray = [];
+
+        individualText.map((oldSnippet) => {
+           
+            if (oldSnippet.id === snippet.id) {
+               
+                stateArray.push({
+                    id: oldSnippet.id,
+                    firstName: oldSnippet.firstName,
+                    lastName: oldSnippet.lastName,
+                    text: oldSnippet.text,
+                    isChecked: event.target.checked
+                })
+
+            }
+            else {
+    
+                stateArray.push({
+                    id: oldSnippet.id,
+                    firstName: oldSnippet.firstName,
+                    lastName: oldSnippet.lastName,
+                    text: oldSnippet.text,
+                    isChecked: oldSnippet.isChecked
+                })
+           
+            }
+         }
+        )   
+        setIndividualtext(stateArray);
         
     }
-    
+
+
+    //Mock data for merge and snippet post functionality. This request will be replaced with 
+    //real individual reports when the PHP backend works.
 
     useEffect(() => {
-        console.log("State reportlist:")
-        console.log(reportList)
-    
-    },[reportList])
-    const classes = useStyles();
-    const handleChange = (event) => {
-        setReportText(event.target.value);
-    };
+        const payload = { tags: tags }
+        console.log(payload)
+        axios({
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/SearchTags.php`,
+            headers: { 'content-type': 'application/json' },
+            data: JSON.stringify(payload, null, 2)
+
+        })
+            .then(result => {
+                console.log(result.data)
+                //Mappa igenom hela res.data, spara in variablerna i ny array.
+                const newArray = [];
+                result.data.map((snippet) =>
+                    newArray.push({
+                        id: snippet.snippetId,
+                        firstName: 'Jon',
+                        lastName: 'Grundtman',
+                        text: snippet.snippetText,
+                        isChecked: false
+                    })
+                )
+                console.log(getUnique(newArray, 'id'))
+                setIndividualtext(getUnique(newArray, 'id'))
+
+            })
+            .catch(error => console.log(error));
+    }, [])
+
+    //create list to the right from the fetched text.
+    useEffect(() => {
+        const fetchReportCards = individualText.map((report) => (
+            <div key={report.id} >
+                <Divider variant="inset" component="li" />
+                        <ListItem
+                            alignItems="flex-start">
+                            <Checkbox
+                            color="primary"
+                            onChange={handleCheck(report)}
+
+                            />
+                            <ListItemAvatar>
+                                <Avatar alt="Projékt Ledersson" src="/static/images/avatar/2.jpg" />
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={report.id}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes.inline}
+                                            color="textPrimary"
+                                        >
+                                            {report.firstName + " " + report.lastName}
+                                 </Typography>
+                                        {" — " + report.text}
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                
+            </div>
+        ));
+
+        setReportCards(fetchReportCards);
+        console.log(individualText)
+    }, [individualText])
+
+
+
+
     return (
         <div className="ManagerReportContainer">
             <div className="overViewManagerViewReport">
@@ -122,114 +219,45 @@ function ManagerReportView(props) {
                 <textarea
                     rows="24"
                     cols="140"
-                    onChange={handleMerge} value={'hello'} 
-                    
-                // onChange={e => setSnippet({ ...snippet, text: e.target.value })}
-                    {...reportText}
+                    value={reportText}
+                    onChange={e => setReportText(e.target.value )}
                 >
-                   
+
                 </textarea>
 
             </div>
             <div className="overViewManagerViewSideBar">
                 <List className={classes.root}>
-                    <ListItem alignItems="flex-start">
-        
-                    <Checkbox/>
-                        <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Monthly Report"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        className={classes.inline}
-                                        color="textPrimary"
-                                    >
-                                        Anställd Anställdsson
-              </Typography>
-                                    {" — Status for Week 7 to be…"}
-                                </React.Fragment>
-                            }
-                        />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                    <ListItem alignItems="flex-start">
-                    <Checkbox/>
-                        <ListItemAvatar>
-                   
-                            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Monthly Report"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        className={classes.inline}
-                                        color="textPrimary"
-                                    >
-                                        Kalle Moraeus
-              </Typography>
-                                    {" — lorem ipsum dolor sit amet …"}
-                                </React.Fragment>
-                            }
-                        />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                    <ListItem alignItems="flex-start">
-                    <Checkbox/>
-                        <ListItemAvatar>
-                            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Monthly Report"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        className={classes.inline}
-                                        color="textPrimary"
-                                    >
-                                        James B
-              </Typography>
-                                    {' — lorem ipsum dolor sit amet'}
-                                </React.Fragment>
-                            }
-                        />
-                    </ListItem>
+
+                    {reportCards}
+                
                 </List>
                 <div className="managerViewMerge">
-                <div className={classes.root}>
-                    <div className={classes.wrapper}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleMerge}
-                        >
-                            Merge into document
+                    <div className={classes.root}>
+                        <div className={classes.wrapper}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleMerge}
+                            >
+                                Merge into document
                         </Button>
-                      
-                    </div>
-                    <div className={classes.wrapper}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSubmit}
-                        >
-                            Submit the big fkn document
+
+                        </div>
+                        <div className={classes.wrapper}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSubmit}
+                            >
+                                Submit the big fkn document
                         </Button>
-                      
+
+                        </div>
                     </div>
+
+
                 </div>
-
-
-            </div>
             </div>
         </div>
     );
