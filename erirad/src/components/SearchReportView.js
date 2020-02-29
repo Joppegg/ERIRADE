@@ -113,6 +113,7 @@ function SearchReportView(props) {
     
     const handleSearch = () => {
         const payload = { tags: tags }
+        console.log(payload)
         axios({
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/SearchTags.php`,
