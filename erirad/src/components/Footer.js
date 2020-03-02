@@ -4,9 +4,10 @@ function Footer(props) {
     return (
         <div className="container">
             <div className="container-center">
-            <h2>
-               A very nice Footer!
-            </h2>
+            <p>
+            © 2020 Ericsson - A Johan Erdös production
+            </p>
+            <a href="#">Terms and Condition</a>
             </div>
         </div>
     );

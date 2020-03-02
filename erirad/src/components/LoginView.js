@@ -100,6 +100,7 @@ function LoginView({ onLogIn, onEmployeeLogin }) {
                 <p className="ErrorText">{errorMessage}</p>
             </div>
             <pre>{/*JSON.stringify(user, null, 2)*/}</pre>
+            
         </div>
     );
 }

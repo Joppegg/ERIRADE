@@ -5,7 +5,7 @@ import SnippetHolder from './SnippetHolder';
 function MainView({employeeId}) {
     return (
          <div className="column-layout">
-         <SnippetHolder employeeId={employeeId}/>
+         <SnippetHolder employeeId={employeeId}/> 
         </div>
     );
 }
