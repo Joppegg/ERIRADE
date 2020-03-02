@@ -34,6 +34,7 @@ function ManagerReportView(props) {
     const [tags, setTags] = useState([
         "5",
         "6"
+        
     ])
 
     //Report cards, the list to the right.
@@ -272,7 +273,7 @@ function ManagerReportView(props) {
                                 color="primary"
                                 onClick={handleSubmit}
                             >
-                                Submit the big fkn document
+                                Submit the big document
                         </Button>
 
                         </div>
