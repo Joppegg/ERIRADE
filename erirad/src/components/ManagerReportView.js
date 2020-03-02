@@ -41,6 +41,7 @@ function ManagerReportView(props) {
 
     //This is the "big" reporttext.
     const [reportText, setReportText] = useState("");
+    
     const [individualText, setIndividualtext] = useState([
 
     ])
@@ -54,7 +55,7 @@ function ManagerReportView(props) {
     const [textArray, setTextArray] = useState([]);
 
     const employee = useSelector(state => state.employee);
-
+    const report = useSelector(state => state.report)
     const request = useSelector(state => state.requestSelected);
     const classes = useStyles();
 
@@ -96,6 +97,27 @@ function ManagerReportView(props) {
 
     const handleSubmit = () => {
         //Todo: Send into database.
+        /*
+        const payload = {
+            reportText: reportText,
+            employee: employee.employeeId,
+            report: report.reportId
+            
+        }
+        axios({
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
+            headers: { 'content-type': 'application/json' },
+            data: JSON.stringify(payload, null, 2)
+
+            
+        })
+            .then(result => {
+                console.log(result.data)
+
+            })
+            .catch(error => console.log(error));
+        */
     }
 
     //When a checkbox is clicked, push or remove the id and text into textArray
