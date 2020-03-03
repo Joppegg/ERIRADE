@@ -16,7 +16,7 @@ $resultList = mysqli_query($connection, $sqlGetDates);
 while($row = mysqli_fetch_array($resultList)){
     $reportIdList[] = $row;
     $rep = $row['reportId'];
-    echo $rep;
+   // echo $rep;
     
         
         $sqlGetSnippet = "SELECT snippettext FROM snippet WHERE reportId = '$rep'";

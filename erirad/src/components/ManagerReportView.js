@@ -46,18 +46,22 @@ function ManagerReportView(props) {
     const [individualText, setIndividualtext] = useState([
 
     ])
-
+    const [employeeSnippet, setEmployeeSnippet] = useState({})
     //Just for mock data, replace this
     const [author, setAuthor] = useState({
         firstName: 'Jon',
         lastName: 'qweqw',
     });
+    const [snippetTags, setSnippetTags] = useState({
+
+    })
 
     const [textArray, setTextArray] = useState([]);
 
     const employee = useSelector(state => state.employee);
     const report = useSelector(state => state.report)
     const request = useSelector(state => state.requestSelected);
+
     const classes = useStyles();
 
 
@@ -96,6 +100,80 @@ function ManagerReportView(props) {
 
     }
 
+
+
+    
+
+    useEffect(() => {
+        axios({
+            method: 'post',
+            url: `http://localhost/ERIRADAPP/erirad/src/php/ManagerViewEmpInput.php`,
+            headers: { 'content-type': 'application/json' },
+            data: { requestId: request.requestId }
+          
+        })
+        .then (result => {
+            console.log(result.data)
+            //Spara första snippet-datan
+            const newArray = [];
+            result.data.map((snippet) =>
+                newArray.push({
+                    id: snippet.snippetId,
+                    firstName: snippet.firstName,
+                    lastName: snippet.lastName,
+                    text: snippet.snippetText,
+                    isChecked: false,
+                    tags: []
+                })
+            )
+
+            //mappa igenom nya result igen.
+            //Spara tagId, tagName för varje snippetId.
+            const tagsArray = []
+            //Först mappa array med 2 
+            newArray.map((snippet) => 
+                //sedan mappa array med 6
+                result.data.map((oldSnippet) => 
+                //Kolla om de har samma id. Isf, lägg till tagName och tagText.
+                snippet.id === oldSnippet.snippetId ? 
+                    tagsArray.push({
+                        snippetId: snippet.id,
+                        tagId: oldSnippet.tagId,
+                        tagName: oldSnippet.tagName
+                    })
+                    :
+                        null
+
+            ) )
+
+
+            //mappa igenom alla snippets 
+            console.log(getUnique(newArray, 'id'))
+            setEmployeeSnippet(getUnique(newArray, 'id'))
+            setIndividualtext(getUnique(newArray, 'id'))
+            console.log("Tags array")
+
+            const uniq = new Set(tagsArray.map(e => JSON.stringify(e)));
+            const res = Array.from(uniq).map(e => JSON.parse(e));
+            console.log(res)
+
+            console.log(getUnique(tagsArray, 'id'))
+            console.log(tagsArray)
+        
+
+            setSnippetTags(res)
+        })
+
+    }, [])
+
+    useEffect(()=>{
+        console.log("Logging employee snippet:")
+        console.log(employeeSnippet)
+    }, [employeeSnippet])
+
+
+
+
     const handleSubmit = () => {
         //Todo: Send into database.
         /*
@@ -110,12 +188,10 @@ function ManagerReportView(props) {
             url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
             headers: { 'content-type': 'application/json' },
             data: JSON.stringify(payload, null, 2)
-
             
         })
             .then(result => {
                 console.log(result.data)
-
             })
             .catch(error => console.log(error));
         */
@@ -161,7 +237,7 @@ function ManagerReportView(props) {
 
     //Mock data for merge and snippet post functionality. This request will be replaced with 
     //real individual reports when the PHP backend works.
-
+/*
     useEffect(() => {
         const payload = { tags: tags }
         console.log(payload)
@@ -191,7 +267,7 @@ function ManagerReportView(props) {
             })
             .catch(error => console.log(error));
     }, [])
-
+*/
     //create list to the right from the fetched text.
     useEffect(() => {
         const fetchReportCards = individualText.map((report) => (
