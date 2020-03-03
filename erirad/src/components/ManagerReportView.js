@@ -56,6 +56,8 @@ function ManagerReportView(props) {
 
     })
 
+    const [tagNames, setTagNames] = useState("");
+
     const [textArray, setTextArray] = useState([]);
 
     const employee = useSelector(state => state.employee);
@@ -85,10 +87,25 @@ function ManagerReportView(props) {
         //For every text
         setReportText("")
         individualText.map((report) => {
-        
+        const tagNames = "";
+       
             if (report.isChecked===true){
+                
+
+                
                 console.log(report.text)
-                setReportText(prevState => prevState  + report.firstName + " " + report.lastName +"\n" + report.text + "\n\n")
+                setReportText(prevState => 
+                    prevState 
+                     +               
+                       snippetTags.map((tagList) => {
+                        if (tagList.snippetId === report.id ){
+                            return tagList.tagName + " "
+                        } 
+                    }).join('')  
+                     + "\n" + report.firstName + " "
+                     + report.lastName +"\n"
+                     + report.text +
+                       "\n\n")
             }
         })
 
@@ -207,7 +224,8 @@ function ManagerReportView(props) {
         individualText.map((oldSnippet) => {
            
             if (oldSnippet.id === snippet.id) {
-               
+           
+
                 stateArray.push({
                     id: oldSnippet.id,
                     firstName: oldSnippet.firstName,
