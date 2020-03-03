@@ -86,11 +86,10 @@ function SentRequests(props) {
 
         const fetchReportCards = reportList.map((report) => (
 
-            
             <div 
           
             className= {
-                report.isSubmitted ?
+                report.isSubmitted === 'true' ?
                 "finished"
                 :
                 "notFinished"
