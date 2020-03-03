@@ -8,39 +8,14 @@ $_POST = json_decode($rest_json, true);
 
 $requestId = '59';
 $submitted = 'true';
-$sqlGetEmpInputReportId = "SELECT employeeId, reportId, submitted, submittedDate FROM employeeinput WHERE submitted = '$submitted' AND requestId = '$requestId'";
+$sqlGetEmpInputReportId = "SELECT tag.tagId, tag.tagName, employeeinput.employeeId, snippet.snippetId, snippet.snippetText, employee.firstName, employee.lastName FROM reportrequest JOIN employeeinput ON employeeinput.requestId = reportrequest.requestId JOIN report ON report.reportId = employeeinput.reportId JOIN snippet ON snippet.reportId = report.reportId JOIN employee ON employee.employeeId = employeeinput.employeeId JOIN snippettag ON snippet.snippetId = snippettag.snippetId JOIN tag ON tag.tagId = snippettag.tagId WHERE reportrequest.requestId = '$requestId' AND employeeinput.submitted = '$submitted'";
 $resultEmpInputReportId = mysqli_query($connection, $sqlGetEmpInputReportId);
+while($rowEmpInput = mysqli_fetch_array($resultEmpInputReportId)){
+    $list[] = $rowEmpInput;
 
-while($rowEmpInput = mysqli_fetch_assoc($resultEmpInputReportId)){
-    $reportId = $rowEmpInput['reportId'];
     
-    $sqlGetSnippetText = "SELECT snippetText, snippetId FROM snippet WHERE reportId = '$reportId'";
-    $resultSnippetText = mysqli_query($connection, $sqlGetSnippetText);
-    
-    while($rowSnipp = mysqli_fetch_assoc($resultSnippetText)){
-        $snippetTextList[] = $rowSnipp;
-        $snippetId = $rowSnipp['snippetId'];
-        
-        
-        $sqlGetTags = "SELECT tagId FROM snippettag WHERE snippetId = '$snippetId'";
-        $resultTags = mysqli_query($connection, $sqlGetTags);
 
-        while($rowTags = mysqli_fetch_assoc($resultTags)){
-            $tagId = $rowTags['tagId'];
-
-            $sqlGetTagName = "SELECT tagName FROM tag WHERE tagId = '$tagId'";
-            $resultTagName = mysqli_query($connection, $sqlGetTagName);
-
-            while($rowTagName = mysqli_fetch_assoc($resultTagName)){
-                $tagNameList[] = $rowTagName;
-                //print_r($tagNameList);
-                array_push($snippetTextList, $tagNameList);
-            }
-        }
-        
-        
-    }
- 
 }
-//print_r($snippetTextList);
-echo json_encode($snippetTextList);
+echo json_encode($list);
+
+

@@ -4,6 +4,7 @@ require 'DBConnection.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
+
 $sqlFetch = "SELECT * FROM tag";
 $result = mysqli_query($connection, $sqlFetch);
 
