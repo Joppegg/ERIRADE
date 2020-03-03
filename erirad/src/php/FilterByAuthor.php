@@ -19,25 +19,29 @@ if($resultEmployeeId != null){
     $sqlFindReportId = "SELECT reportId FROM report WHERE employeeId = '$employeeId'";
     $resultFindReportId = mysqli_query($connection, $sqlFindReportId);
     
-    while($rowReportId = mysqli_fetch_array($resultFindReportId)){
-        $reportId = $rowReportId['reportId'];
+    $countReportId = myqsli_num_rows($resultFindReportId);
 
-        $sqlFindSnippetText = "SELECT snippetText FROM snippet WHERE reportId = '$reportId'";
-        $resultFindSnippetText = mysqli_query($connection, $sqlFindSnippetText);
-        while($rowSnippetText = mysqli_fetch_assoc($resultFindSnippetText)){
-            $snippetText[] = $rowSnippetText;
-
-        
-            foreach($snippetText as $str){
-                array_push($arr, $str);
+    if($countReportId > 0){
+        while($rowReportId = mysqli_fetch_array($resultFindReportId)){
+            $reportId = $rowReportId['reportId'];
+    
+            $sqlFindSnippetText = "SELECT snippetText FROM snippet WHERE reportId = '$reportId'";
+            $resultFindSnippetText = mysqli_query($connection, $sqlFindSnippetText);
+            while($rowSnippetText = mysqli_fetch_assoc($resultFindSnippetText)){
+                $snippetText[] = $rowSnippetText;
+    
+            
+                foreach($snippetText as $str){
+                    array_push($arr, $str);
+                }
+    
             }
-
         }
+        echo json_encode($arr);
+    }else{
+        $noReports = 'The selected employee has not made any reports yet';
+        echo json_encode($noReports);
     }
-    echo json_encode($arr);
-    
-    
-
 }
 else{
     $empNotExists = 'The employee does not exist';
