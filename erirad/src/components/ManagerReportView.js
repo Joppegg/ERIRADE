@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
 
 
 function ManagerReportView(props) {
+    const [mockTags, setMockTags] = useState([
+
+    ])
 
     const [tags, setTags] = useState([
         "5",
@@ -90,8 +93,6 @@ function ManagerReportView(props) {
         const tagNames = "";
        
             if (report.isChecked===true){
-                
-
                 
                 console.log(report.text)
                 setReportText(prevState => 
@@ -192,26 +193,23 @@ function ManagerReportView(props) {
 
 
     const handleSubmit = () => {
-        //Todo: Send into database.
-        /*
+        console.log(reportText)
         const payload = {
-            reportText: reportText,
-            employee: employee.employeeId,
-            report: report.reportId
-            
+            textValues: reportText,
+            employeeId: employee.employeeId,
         }
         axios({
             method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/SnippetPost.php`,
+            url: `http://localhost/ERIRADAPP/erirad/src/php/PostManagerReport.php`,
             headers: { 'content-type': 'application/json' },
             data: JSON.stringify(payload, null, 2)
-            
+       
         })
             .then(result => {
                 console.log(result.data)
+
             })
             .catch(error => console.log(error));
-        */
     }
 
     //When a checkbox is clicked, push or remove the id and text into textArray
@@ -253,39 +251,6 @@ function ManagerReportView(props) {
     }
 
 
-    //Mock data for merge and snippet post functionality. This request will be replaced with 
-    //real individual reports when the PHP backend works.
-/*
-    useEffect(() => {
-        const payload = { tags: tags }
-        console.log(payload)
-        axios({
-            method: 'post',
-            url: `http://localhost/ERIRADAPP/erirad/src/php/SearchTags.php`,
-            headers: { 'content-type': 'application/json' },
-            data: JSON.stringify(payload, null, 2)
-
-        })
-            .then(result => {
-                console.log(result.data)
-                //Mappa igenom hela res.data, spara in variablerna i ny array.
-                const newArray = [];
-                result.data.map((snippet) =>
-                    newArray.push({
-                        id: snippet.snippetId,
-                        firstName: 'Jon',
-                        lastName: 'Grundtman',
-                        text: snippet.snippetText,
-                        isChecked: false
-                    })
-                )
-                console.log(getUnique(newArray, 'id'))
-                setIndividualtext(getUnique(newArray, 'id'))
-
-            })
-            .catch(error => console.log(error));
-    }, [])
-*/
     //create list to the right from the fetched text.
     useEffect(() => {
         const fetchReportCards = individualText.map((report) => (
