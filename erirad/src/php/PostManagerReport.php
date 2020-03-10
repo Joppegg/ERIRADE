@@ -10,15 +10,44 @@ $employeeId = mysqli_escape_string($connection, $_POST['employeeId']);
 $sqlCreateReport = "INSERT INTO report (employeeId, submitted) VALUES ('$employeeId','true')";
 mysqli_query($connection, $sqlCreateReport);
 
-echo($reportText);
+//splitting reportText into single strings and adding them to one array
+$arr = explode(' ', trim($reportText));
+
+//getting all tagNames
+$sqlGetTags = "SELECT tagName FROM tag";
+$resultTags = mysqli_query($connection, $sqlGetTags);
+while($row = mysqli_fetch_array($resultTags)){
+    $tags[] = $row['tagName'];
+}
+
+//looping through list of tagNames and checking if the strings in reportText matches the list of tags
+foreach($tags as $tagName){
+    if(in_array($tagName,$arr)){
+        $tag = $tagName;
+    }
+}
+
+$sqlGetTagId = "SELECT tagId FROM tag WHERE tagName = '$tag'";
+$resultTagId = mysqli_query($connection, $sqlGetTagId);
+$tagIdList = mysqli_fetch_assoc($resultTagId);
+$tagId = $tagIdList['tagId'];
+
+
 //ugly version to get report id
 $sqlGetReportId = "SELECT reportId FROM report WHERE employeeId = '$employeeId' ORDER BY reportId DESC LIMIT 1";
 $resultReportId = mysqli_query($connection, $sqlGetReportId);
 $list = mysqli_fetch_assoc($resultReportId);
 $reportId = $list['reportId'];
-echo ($reportId);
 
 $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$reportText')";
 $resultInsertedSnippet = mysqli_query($connection, $sqlInsertSnippet);
+
+$sqlGetSnippetId = "SELECT snippetId FROM snippet WHERE reportId = '$reportId'";
+$resultSnippetId = mysqli_query($connection, $sqlGetSnippetId);
+$snippetIdList = mysqli_fetch_assoc($resultSnippetId);
+$snippetId = $snippetIdList['snippetId'];
+
+$sqlInsertSnippettag = "INSERT INTO snippettag (snippetId, tagId) VALUES ('$snippetId','$tagId')";
+mysqli_query($connection, $sqlInsertSnippettag);
 
 ?>
