@@ -23,9 +23,16 @@ $timestamp = (date("Y/m/d H:i:s",$time));
 
 $isSubmitted = 'false';
 
-//inserting a request into DB
-$sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime, isSubmitted) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp', '$isSubmitted')";
-mysqli_query($connection, $sqlInsertReportRequest);
+//does not seem to work...
+if(!empty($authorId) || !empty($title) || !empty($description) || !empty($deadline) || !empty($time)){
+    //inserting a request into DB
+    $sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime, isSubmitted) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp', '$isSubmitted')";
+    mysqli_query($connection, $sqlInsertReportRequest);
+}else{
+    $message = "Please fill out the form before submitting";
+    echo json_encode($message);
+}
+
 
 //notice for that a report has been requested from a specific user 
 $sqlGetRequest = "SELECT * FROM reportrequest WHERE authorId = '$authorId'";

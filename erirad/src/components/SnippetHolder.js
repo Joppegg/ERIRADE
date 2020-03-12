@@ -157,8 +157,10 @@ function SnippetHolder({ employeeId }) {
             <div className="snippetContainer">
             <h3 className="text-center"> Report requested by {report.firstName} {report.lastName}
                      </h3>
+                <h3 className="text-center">Title of report:</h3>
                 <h3 className="text-center"> {report.title}
                      </h3>
+                     <h4 className="text-center">Description of report:</h4>
                      <h4 className="text-center">{report.description}</h4>
                 {newSnippets}</div>
             <div className="add-container">

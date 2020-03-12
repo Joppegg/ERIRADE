@@ -5,7 +5,7 @@ function Footer(props) {
         <div className="container">
             <div className="container-center">
             <p>
-            © 2020 Ericsson - A Johan Erdös production
+            © 2020 Ericsson - An Erdös & Grundtman production
             </p>
             <a href="#">Terms and Condition</a>
             </div>

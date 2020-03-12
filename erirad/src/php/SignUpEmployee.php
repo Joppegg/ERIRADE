@@ -10,7 +10,10 @@ $lastName = mysqli_escape_string($connection, $_POST['lastName']);
 $email = mysqli_escape_string($connection, $_POST['email']);
 $phoneNumber = mysqli_escape_string($connection, $_POST['phoneNumber']);
 $username = mysqli_escape_string($connection, $_POST['userName']);
+//must send role of user signed in
+$role = mysqli_escape_string($connection, $_POST['role']);
 $password = mysqli_escape_string($connection, $_POST['password']);
+
 
 
 
@@ -26,7 +29,7 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     }else{
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sqlSignUp = "INSERT INTO employee (firstName, lastName, email, phoneNumber, username, pwd) VALUES ('$firstName','$lastName','$email','$phoneNumber','$username','$hashedPassword')";
+        $sqlSignUp = "INSERT INTO employee (firstName, lastName, email, phoneNumber, username, pwd, empRole) VALUES ('$firstName','$lastName','$email','$phoneNumber','$username','$hashedPassword', '$role')";
         mysqli_query($connection, $sqlSignUp);
 
         echo 'sign up success';

@@ -27,6 +27,7 @@ foreach($tags as $tagName){
     }
 }
 
+//getting tagId from the tags that are in reportText
 $sqlGetTagId = "SELECT tagId FROM tag WHERE tagName = '$tag'";
 $resultTagId = mysqli_query($connection, $sqlGetTagId);
 $tagIdList = mysqli_fetch_assoc($resultTagId);
@@ -42,11 +43,13 @@ $reportId = $list['reportId'];
 $sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$reportText')";
 $resultInsertedSnippet = mysqli_query($connection, $sqlInsertSnippet);
 
+//getting snippetId 
 $sqlGetSnippetId = "SELECT snippetId FROM snippet WHERE reportId = '$reportId'";
 $resultSnippetId = mysqli_query($connection, $sqlGetSnippetId);
 $snippetIdList = mysqli_fetch_assoc($resultSnippetId);
 $snippetId = $snippetIdList['snippetId'];
 
+//inserting into snippettag based on the tags that are found in reporttext
 $sqlInsertSnippettag = "INSERT INTO snippettag (snippetId, tagId) VALUES ('$snippetId','$tagId')";
 mysqli_query($connection, $sqlInsertSnippettag);
 

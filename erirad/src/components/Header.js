@@ -140,6 +140,14 @@ function Header(props) {
                             />
                             <TextField
                                 margin="dense"
+                                value={user.role}
+                                onChange={e => setUser({ ...user, userRole: e.target.value })}
+                                label="Role"
+                                type="text"
+                                fullWidth
+                            />
+                            <TextField
+                                margin="dense"
                                 value={user.password}
                                 onChange={e => setUser({ ...user, password: e.target.value })}
                                 label="Password"

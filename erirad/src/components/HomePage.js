@@ -16,6 +16,7 @@ function HomePage(props) {
                 </div>
                 <div className="homePageIncomingRequests">
                     <h2>Your pending reports</h2>
+                    <p>Click on one of the items below to create the report</p>
                     <IncomingReportRequest />
                 </div>
             </div>

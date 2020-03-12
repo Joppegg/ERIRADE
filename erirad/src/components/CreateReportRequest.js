@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
+import clsx from 'clsx';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { green } from '@material-ui/core/colors';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
@@ -17,26 +20,51 @@ import {
 import Button from '@material-ui/core/Button';
 
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: 600,
-        },
-        selectEmployeeBox: {
-            width: 500,
-            '& > * + *': {
-                marginTop: theme.spacing(3),
-            },
-        }
-    },
-
-    
-}));
 
 //This function is responsible for creating a report group.
 function CreateReportRequest(props) {
-   
+    const [loading, setLoading] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [submittedText, setSubmittedText] = useState("Submit Report")
+    
+    const useStyles = makeStyles(theme => ({
+        root: {
+            '& .MuiTextField-root': {
+                margin: theme.spacing(1),
+                width: 600,
+            },
+            selectEmployeeBox: {
+                width: 500,
+                '& > * + *': {
+                    marginTop: theme.spacing(3),
+                },
+            },
+            buttonSuccess: {
+                backgroundColor: green[500],
+                '&:hover': {
+                    backgroundColor: green[700],
+                },
+            },
+            fabProgress: {
+                color: green[500],
+                position: 'absolute',
+                top: -6,
+                left: -6,
+                zIndex: 1,
+            },
+            buttonProgress: {
+                color: green[500],
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: -12,
+                marginLeft: -12,
+            },
+        },
+    
+        
+    }));
+    
     useEffect(() => {
         axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetAllEmployees.php')
             .then(res => {
@@ -79,7 +107,9 @@ function CreateReportRequest(props) {
     const handleChange = event => {
         setValue(event.target.value);
     };
-
+    const buttonClassname = clsx({
+        [classes.buttonSuccess]: success,
+    });
     //Get logged in employee
     const employee = useSelector(state => state.employee);
 
@@ -109,7 +139,7 @@ function CreateReportRequest(props) {
     return (
         <div className="search-column-layout">
             <div className="homepageContainer">
-                <h2> Hello</h2>
+                <h2>Submit a request to the people in your team</h2>
          
 
                 <form className={classes.root} noValidate autoComplete="off">
@@ -173,13 +203,22 @@ function CreateReportRequest(props) {
                     />
                 </div>
 
-                <Button variant="contained" color="primary"
-                onClick={handleSubmit}
-                >
-                Create report request
-                 </Button>
-
-    
+                <div className="form-row-submit">
+                    <div className={classes.root}>
+                        <div className={classes.wrapper}>
+                            <Button 
+                            variant="contained" 
+                            color="primary"
+                            className={buttonClassname}
+                            disabled={loading}
+                            onClick={handleSubmit}
+                            >
+                            {submittedText}
+                            </Button>
+                            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                        </div>
+                    </div>
+                </div>
             
 
             </div>

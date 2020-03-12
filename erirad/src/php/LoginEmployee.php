@@ -28,7 +28,7 @@ if($resultCheck < 1){
             isset($_SESSION['email']);
             isset($_SESSION['phoneNumber']);
             isset($_SESSION['userName']);
-            isset($_SESSION['role']);
+            isset($_SESSION['empRole']);
             //skriver inte ut variablerna.
             
             //Echo en array
@@ -37,7 +37,7 @@ if($resultCheck < 1){
                 'employeeId' => $row['employeeId'],
                 'firstName' => $row['firstName'],
                 'lastName' => $row['lastName'],
-                'role' => $row['role']
+                'empRole' => $row['empRole']
             );
             echo json_encode($jsonAnswer);
     
