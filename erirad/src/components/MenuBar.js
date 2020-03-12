@@ -44,8 +44,8 @@ function MenuBar(props) {
 
 
          {
-            employee.role === 'manager' ? 
-            <div className="menuBarColumn">
+            employee.empRole === 'manager' ? 
+            <div className="menuBarColumn"> 
                 <div className="menuBarColumn-button">
                     <Link  style={{ textDecoration: 'none', color: 'black' }}  to="/createreport">
                         <Button>Create report request

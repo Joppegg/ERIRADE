@@ -18,11 +18,12 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import Button from '@material-ui/core/Button';
-
+import {useToasts} from "react-toast-notifications";
 
 
 //This function is responsible for creating a report group.
 function CreateReportRequest(props) {
+    const {addToast} = useToasts()
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [submittedText, setSubmittedText] = useState("Submit Report")
@@ -96,6 +97,8 @@ function CreateReportRequest(props) {
             .then(result => {
                 console.log(JSON.stringify(payload, null, 2))
                 console.log(result.data)
+                addToast("Report request sent", {appearance:'success'})
+                
 
             })
             .catch(error => console.log(error));
@@ -139,7 +142,7 @@ function CreateReportRequest(props) {
     return (
         <div className="search-column-layout">
             <div className="homepageContainer">
-                <h2>Submit a request to the people in your team</h2>
+                <h2>Submit a report request </h2>
          
 
                 <form className={classes.root} noValidate autoComplete="off">

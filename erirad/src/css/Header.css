@@ -6,6 +6,18 @@ html, body {
   font-family: 'Open Sans';
 }
 
+.menuItemLogo{
+  flex: 15;
+  margin:auto;
+}
+
+.marginTopButton{
+margin-top: 10px;
+}
+
+.alignLeft{
+  text-align: start;
+}
 
 input {
   font-size: 14px;
@@ -13,7 +25,6 @@ input {
 }
 .nameInput{
   margin-bottom: 10px;
-
 }
 
 .finished{
@@ -196,7 +207,7 @@ display: flex;
 .overViewHomePageColumn{
   justify-content: center;
   width:auto;
-  flex: 1; 
+  flex: 2; 
 }
 
 .overViewManagerViewReport{
