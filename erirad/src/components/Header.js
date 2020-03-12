@@ -64,7 +64,7 @@ function Header(props) {
                     </a>
                 </div>
             
-                <div className="menuItem">
+                <div className="menuItemLogo">
                     <h1>ERIRAD</h1>
                  </div>
                 {
@@ -76,9 +76,7 @@ function Header(props) {
                 
            
                 }           
-                 <div className="logoItem">
-                  
-                </div>
+               
                 {/*
                 <div className="menuItem">
                     <CreateReport />
@@ -87,9 +85,9 @@ function Header(props) {
                  
                  {
                 <div className="menuItem">
-                    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                   { /*<Button variant="outlined" color="primary" onClick={handleClickOpen}>
                         Register user
-                   </Button>
+                   </Button>*/}
                   
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>

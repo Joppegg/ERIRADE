@@ -86,7 +86,7 @@ function SnippetHolder({ employeeId }) {
                 setSuccess(true);
                 setLoading(false);
                 setSubmittedText("Submitted");
-            }, 500);
+            }, 300);
         }
     };
 

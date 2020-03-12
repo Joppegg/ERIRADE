@@ -4,7 +4,7 @@ import LoginView from './components/LoginView'
 
 import ComponentRouter from './components/ComponentRouter';
 import Header from './components/Header'
-
+import { ToastProvider } from "react-toast-notifications";
 import {} from 'react-redux'
 
 //This handles rendering of the component router (the "Main application") based on successful login authentication
@@ -50,6 +50,7 @@ function App() {
 
   return (
     <div className="App">
+    <ToastProvider autoDismiss={true}>
       {
         isLoggedIn ?
           <ComponentRouter employeeId={employeeId} />
@@ -61,6 +62,7 @@ function App() {
             </div>
           </EmployeeContext.Provider>
       }
+      </ToastProvider>
     </div>
 
   );

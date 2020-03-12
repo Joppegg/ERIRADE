@@ -15,13 +15,14 @@ import { setReport } from '../actions';
 import { setRequest } from '../actions';
 import axios from 'axios';
 import Snippet from './Snippet';
-
+import {useToasts} from "react-toast-notifications";
 
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
+        margin: theme.spacing(2),
     },
     inline: {
         display: 'inline',
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 
 function ManagerReportView(props) {
+    const {addToast} = useToasts()
     const [mockTags, setMockTags] = useState([
 
     ])
@@ -207,6 +209,8 @@ function ManagerReportView(props) {
         })
             .then(result => {
                 console.log(result.data)
+                addToast("Report sent successfully!", {appearance:'success'})
+                setReportText("")
 
             })
             .catch(error => console.log(error));
@@ -295,9 +299,10 @@ function ManagerReportView(props) {
 
 
     return (
+        <div>
         <div className="ManagerReportContainer">
             <div className="overViewManagerViewReport">
-                <h2>Big reportWindow over here, where you can merge reports from the right.</h2>
+                <h2>Use the grid to the right to merge information into the document</h2>
                 <textarea
                     rows="24"
                     cols="140"
@@ -315,6 +320,7 @@ function ManagerReportView(props) {
                 
                 </List>
                 <div className="managerViewMerge">
+                    <div className="nameInput">
                     <div className={classes.root}>
                         <div className={classes.wrapper}>
                             <Button
@@ -326,6 +332,9 @@ function ManagerReportView(props) {
                         </Button>
 
                         </div>
+                        </div>
+                        </div>
+                        <div className="nameInput">
                         <div className={classes.wrapper}>
                             <Button
                                 variant="contained"
@@ -334,13 +343,17 @@ function ManagerReportView(props) {
                             >
                                 Submit the big document
                         </Button>
-
+                     
                         </div>
                     </div>
 
 
                 </div>
             </div>
+        </div>
+
+
+
         </div>
     );
 }
