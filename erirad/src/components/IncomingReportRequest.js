@@ -78,16 +78,24 @@ function IncomingReportRequest(props) {
     }
 
     const handleListItemClick =(event) => {
+        //HANDLE om det är här.
+        
         console.log(event)
         dispatch(setReport(event))
     }
   
+    //Här, kolla om rapporten är en manager report. I sådana fall, linka till Create Report Request, som laddas 
+    // in med tidigare props. Annars,
+    //L
     useEffect(() => {
         const fetchReportCards = reportList.map((report) => (
+
+
             <div >
             <Divider variant="inset" component="li" />
                 <ListItemLink>
-                <Link style={{ textDecoration: 'none', color: 'black' }} to="/report">
+                    
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={report.managerToManager == 'true' ? "/createreport" : "/report"}>
                     <ListItem 
                     onClick={event => handleListItemClick(report)}
                     button 

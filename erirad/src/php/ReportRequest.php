@@ -18,6 +18,7 @@ $authorId = mysqli_escape_string($connection, $_POST['requesterId']);
 $title = $report['title'];
 $description = $report['description'];
 $deadline = $report['deadline'];
+$parentRequest = $report['parentRequest'];
 $time = time();
 $timestamp = (date("Y/m/d H:i:s",$time));
 
@@ -26,7 +27,7 @@ $isSubmitted = 'false';
 //does not seem to work...
 if(!empty($authorId) || !empty($title) || !empty($description) || !empty($deadline) || !empty($time)){
     //inserting a request into DB
-    $sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime, isSubmitted) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp', '$isSubmitted')";
+    $sqlInsertReportRequest = "INSERT INTO reportrequest (authorId, title, description, deadline, creationTime, isSubmitted, parentRequestId) VALUES ('$authorId', '$title', '$description', '$deadline', '$timestamp', '$isSubmitted', '$parentRequest')";
     mysqli_query($connection, $sqlInsertReportRequest);
 }else{
     $message = "Please fill out the form before submitting";
