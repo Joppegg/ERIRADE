@@ -23,6 +23,7 @@ import {useToasts} from "react-toast-notifications";
 
 //This function is responsible for creating a report group.
 function CreateReportRequest(props) {
+    
     const {addToast} = useToasts()
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
@@ -67,6 +68,9 @@ function CreateReportRequest(props) {
     }));
     
     useEffect(() => {
+        console.log("parent report: " +  parentReport.requestId)
+        setCreateReport({...createReport, parentRequest: parentReport.requestId })
+    
         axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetAllEmployees.php')
             .then(res => {
                 //Mappa igenom hela res.data, spara in variablerna i ny array.
@@ -81,6 +85,9 @@ function CreateReportRequest(props) {
     }, [])
 
     const handleSubmit = () => {
+       console.log(parentReport)
+        ///TODO:
+        //Indikera om det är till en manager, i PHp filen
         const payload = {
             requesterId: employee.employeeId,
             report: createReport
@@ -115,6 +122,7 @@ function CreateReportRequest(props) {
     });
     //Get logged in employee
     const employee = useSelector(state => state.employee);
+    const parentReport = useSelector(state => state.reportSelected);
 
     const [selectedDate, setSelectedDate] = React.useState(new Date('2020-02-12T21:11:54'));
     const handleDateChange = date => {
@@ -128,6 +136,7 @@ function CreateReportRequest(props) {
         title: '',
         description: '',
         deadline: '',
+        parentRequest: 0,
         employees: [
 
         ]
