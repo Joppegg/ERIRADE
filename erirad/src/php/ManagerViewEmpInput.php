@@ -5,6 +5,7 @@ $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
 $requestId = mysqli_escape_string($connection, $_POST['requestId']);
+$managerTomanager = mysqli_escape_string($connection, $_POST['managerTomanager']);
 
 //$requestId = '59';
 $submitted = 'true';

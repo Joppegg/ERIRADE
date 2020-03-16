@@ -68,10 +68,18 @@ foreach($listOfEmployees as $employee){
     $resultReportId = mysqli_query($connection, $sqlGetReportId);
     $list = mysqli_fetch_assoc($resultReportId);
     $reportId = $list['reportId'];
-    $sqlInsertEmployeeInput = "INSERT INTO employeeinput (employeeid, requestid, reportid, submitted, accepted, submittedDate) VALUES ('$empId', '$requestId', '$reportId', '$submitted', '$accepted', '$submittedDate')";
-    mysqli_query($connection, $sqlInsertEmployeeInput);
+
+    $sqlCheckManager = "SELECT role FROM employee WHERE employeeid = '$empId'";
+    $resultMTM = mysqli_query($connection, $sqlCheckManager);
+    $mtm = mysqli_fetch_assoc($resultReport);
+    if($mtm = "manager"){
+        $isManager = "true";
+        $sqlInsertEmployeeInput = "INSERT INTO employeeinput (employeeid, requestid, reportid, submitted, accepted, submittedDate, managerTomanager) VALUES ('$empId', '$requestId', '$reportId', '$submitted', '$accepted', '$submittedDate', '$isManager')";
+        mysqli_query($connection, $sqlInsertEmployeeInput);
     }
+    
+    
+    
 
 
-
-
+}
