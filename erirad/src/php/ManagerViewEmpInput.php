@@ -5,9 +5,7 @@ $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 
 $requestId = mysqli_escape_string($connection, $_POST['requestId']);
-$managerTomanager = mysqli_escape_string($connection, $_POST['managerTomanager']);
 
-//$requestId = '59';
 $submitted = 'true';
 $sqlGetEmpInputReportId = "SELECT tag.tagId, tag.tagName, employeeinput.employeeId, snippet.snippetId, snippet.snippetText, employee.firstName, employee.lastName FROM reportrequest JOIN employeeinput ON employeeinput.requestId = reportrequest.requestId JOIN report ON report.reportId = employeeinput.reportId JOIN snippet ON snippet.reportId = report.reportId JOIN employee ON employee.employeeId = employeeinput.employeeId JOIN snippettag ON snippet.snippetId = snippettag.snippetId JOIN tag ON tag.tagId = snippettag.tagId WHERE reportrequest.requestId = '$requestId' AND employeeinput.submitted = '$submitted'";
 $resultEmpInputReportId = mysqli_query($connection, $sqlGetEmpInputReportId);
