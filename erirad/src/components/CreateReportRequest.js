@@ -66,10 +66,16 @@ function CreateReportRequest(props) {
     
         
     }));
+
+    useEffect(() => {
+        if (typeof parentReport.requestId != "undefined"){
+            console.log("parent report: " +  parentReport.requestId)
+            setCreateReport({...createReport, parentRequest: parentReport.requestId })
+        }
+    }, [])
     
     useEffect(() => {
-        console.log("parent report: " +  parentReport.requestId)
-        setCreateReport({...createReport, parentRequest: parentReport.requestId })
+ 
     
         axios.get('http://localhost/ERIRADAPP/erirad/src/php/GetAllEmployees.php')
             .then(res => {
@@ -82,6 +88,7 @@ function CreateReportRequest(props) {
             .catch(err => {
                 console.log(err)
             })
+        
     }, [])
 
     const handleSubmit = () => {
