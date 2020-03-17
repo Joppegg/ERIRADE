@@ -136,6 +136,7 @@ function ManagerReportView(props) {
             console.log(result.data)
             //Spara första snippet-datan
             const newArray = [];
+
             result.data.map((snippet) =>
                 newArray.push({
                     id: snippet.snippetId,
@@ -183,6 +184,7 @@ function ManagerReportView(props) {
 
             setSnippetTags(res)
         })
+        .catch(err => console.log(err))
 
     }, [])
 
