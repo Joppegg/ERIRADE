@@ -131,7 +131,7 @@ function CreateReportRequest(props) {
     const employee = useSelector(state => state.employee);
     const parentReport = useSelector(state => state.reportSelected);
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2020-02-12T21:11:54'));
+    const [selectedDate, setSelectedDate] = React.useState(new Date('2020-03-19T09:50:00'));
     const handleDateChange = date => {
         setSelectedDate(date);
         setCreateReport({ ...createReport, deadline: date });

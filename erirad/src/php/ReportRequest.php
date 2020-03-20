@@ -41,18 +41,19 @@ $resultRequest = mysqli_query($connection, $sqlGetRequest);
 $numberOfRows = mysqli_num_rows($resultRequest);
 
 if($numberOfRows > 0){
-    while($row = mysqli_fetch_assoc($resultRequest)){
+    while($row = mysqli_fetch_assoc($resultRequest)){  
         $requests[] = $row;
         $requestId = $row['requestId'];
-        echo json_encode($requests);
+    //    echo json_encode($requests);
     }
 }
 
 foreach($listOfEmployees as $employee){
 
-    print_r($employee);
+      print_r($employee);
     $empId = $employee->employeeId;
     echo $empId;
+
     $submitted = "false";
     $accepted = "false";
     $submittedDate = "null";
@@ -69,21 +70,28 @@ foreach($listOfEmployees as $employee){
     $list = mysqli_fetch_assoc($resultReportId);
     $reportId = $list['reportId'];
 
+   
     
 
-    $sqlCheckManager = "SELECT role FROM employee WHERE employeeid = '$empId'";
+    $sqlCheckManager = "SELECT empRole FROM employee WHERE employeeid = '$empId'";
     $resultMTM = mysqli_query($connection, $sqlCheckManager);
-    $mtm = mysqli_fetch_assoc($resultReport);
+    $mtm = mysqli_fetch_assoc($resultMTM);
+    $mtmString = $mtm['empRole'];
 
-    if($mtm = "manager"){
+    echo("THIS IS THE MTM BELOW");
+    echo($mtmString);
+
+    if($mtmString == "manager"){
         $isManager = "true";
         $sqlInsertEmployeeInput = "INSERT INTO employeeinput (employeeid, requestid, reportid, submitted, accepted, submittedDate, managerTomanager) VALUES ('$empId', '$requestId', '$reportId', '$submitted', '$accepted', '$submittedDate', '$isManager')";
         mysqli_query($connection, $sqlInsertEmployeeInput);
-        
-    }else if($mtm != "manager"){
+        echo ("Den som får rapport är manager");
+    }else if($mtmString != "manager"){
         $isManager = "false";
         $sqlInsertEmployeeInput = "INSERT INTO employeeinput (employeeid, requestid, reportid, submitted, accepted, submittedDate, managerTomanager) VALUES ('$empId', '$requestId', '$reportId', '$submitted', '$accepted', '$submittedDate', '$isManager')";
         mysqli_query($connection, $sqlInsertEmployeeInput);
+
+        echo ("Den som får rapport är INTE manager");
     }
         
    
