@@ -92,13 +92,28 @@ function CreateReportRequest(props) {
     }, [])
 
     const handleSubmit = () => {
-       console.log(parentReport)
+        let employeeInputId = 0;
+
+        if (typeof parentReport.inputId != "undefined"){
+            employeeInputId = parentReport.inputId
+            console.log("Input Id not undefined. set variable to input id.")
+            console.log(employeeInputId)
+        }
+
+        else{
+            employeeInputId = 0
+            console.log("Input id undefined. set variable to 0.")
+            console.log(employeeInputId)
+        }      
+
         ///TODO:
         //Indikera om det är till en manager, i PHp filen
         const payload = {
             requesterId: employee.employeeId,
-            report: createReport
+            report: createReport,
+            employeeInputId: employeeInputId
         }
+        console.log(payload)
 
         axios({
 

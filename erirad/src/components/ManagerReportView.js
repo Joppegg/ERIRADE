@@ -201,7 +201,10 @@ function ManagerReportView(props) {
         const payload = {
             textValues: reportText,
             employeeId: employee.employeeId,
+            employeeInputId: request.employeeInputId
         }
+        console.log("payload")
+        console.log(payload)
         axios({
             method: 'post',
             url: `http://localhost/ERIRADAPP/erirad/src/php/PostManagerReport.php`,

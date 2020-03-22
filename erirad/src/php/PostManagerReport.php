@@ -6,9 +6,20 @@ $_POST = json_decode($rest_json, true);
 
 $reportText = mysqli_escape_string($connection, $_POST['textValues']);
 $employeeId = mysqli_escape_string($connection, $_POST['employeeId']);
+$employeeInputId = mysqli_escape_string($connection, $_POST['employeeInputId']);
 
-$sqlCreateReport = "INSERT INTO report (employeeId, submitted) VALUES ('$employeeId','true')";
-mysqli_query($connection, $sqlCreateReport);
+$sqlGetReportId = "SELECT reportId FROM employeeInput WHERE inputId = '$employeeInputId'";
+$resultEmployeeId = mysqli_query($connection, $sqlGetReportId);
+$list = mysqli_fetch_assoc($resultEmployeeId);
+$inputId = $list['reportId'];
+
+//172 inputId.
+
+$sqlUpdateStatus = "UPDATE employeeInput SET submitted = 'true' WHERE inputId = '$employeeInputId'";
+mysqli_query($connection, $sqlUpdateStatus);
+
+$sqlSetTrue = "UPDATE report SET submitted = 'true' WHERE reportId = '$inputId'";
+mysqli_query($connection, $sqlSetTrue);
 
 //splitting reportText into single strings and adding them to one array
 $arr = explode(' ', trim($reportText));
@@ -35,16 +46,12 @@ $tagId = $tagIdList['tagId'];
 
 
 //ugly version to get report id
-$sqlGetReportId = "SELECT reportId FROM report WHERE employeeId = '$employeeId' ORDER BY reportId DESC LIMIT 1";
-$resultReportId = mysqli_query($connection, $sqlGetReportId);
-$list = mysqli_fetch_assoc($resultReportId);
-$reportId = $list['reportId'];
 
-$sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$reportId','$reportText')";
+$sqlInsertSnippet = "INSERT INTO snippet (reportId, snippetText) VALUES ('$inputId','$reportText')";
 $resultInsertedSnippet = mysqli_query($connection, $sqlInsertSnippet);
 
 //getting snippetId 
-$sqlGetSnippetId = "SELECT snippetId FROM snippet WHERE reportId = '$reportId'";
+$sqlGetSnippetId = "SELECT snippetId FROM snippet WHERE reportId = '$inputId'";
 $resultSnippetId = mysqli_query($connection, $sqlGetSnippetId);
 $snippetIdList = mysqli_fetch_assoc($resultSnippetId);
 $snippetId = $snippetIdList['snippetId'];
